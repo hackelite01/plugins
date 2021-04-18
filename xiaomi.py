@@ -13,7 +13,7 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     firmware = f"firmware"
-    skullevent = await edit_or_reply(event, "```Processing```")
+    marcusevent = await edit_or_reply(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
         try:
             response = conv.wait_event(
@@ -23,10 +23,10 @@ async def _(event):
             respond = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("```Unblock @XiaomiGeeksBot plox```")
+            await marcusevent.edit("```Unblock @XiaomiGeeksBot plox```")
             return
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
@@ -37,7 +37,7 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     vendor = f"vendor"
-    skullevent = await edit_or_reply(event, "```Processing```")
+    marcusevent = await edit_or_reply(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
         try:
             response = conv.wait_event(
@@ -47,10 +47,10 @@ async def _(event):
             respond = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("```Unblock @XiaomiGeeksBot plox```")
+            await marcusevent.edit("```Unblock @XiaomiGeeksBot plox```")
             return
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
@@ -61,7 +61,7 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     specs = f"specs"
-    skullevent = await edit_or_reply(event, "```Processing```")
+    marcusevent = await edit_or_reply(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
         try:
             response = conv.wait_event(
@@ -71,10 +71,10 @@ async def _(event):
             respond = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("```Unblock @XiaomiGeeksBot plox```")
+            await marcusevent.edit("```Unblock @XiaomiGeeksBot plox```")
             return
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
@@ -85,7 +85,7 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     fboot = f"fastboot"
-    skullevent = await edit_or_reply(event, "```Processing```")
+    marcusevent = await edit_or_reply(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
         try:
             response = conv.wait_event(
@@ -95,10 +95,10 @@ async def _(event):
             respond = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("```Unblock @XiaomiGeeksBot plox```")
+            await marcusevent.edit("```Unblock @XiaomiGeeksBot plox```")
             return
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
@@ -109,7 +109,7 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     recovery = f"recovery"
-    skullevent = await edit_or_reply(event, "```Processing```")
+    marcusevent = await edit_or_reply(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
         try:
             response = conv.wait_event(
@@ -119,10 +119,10 @@ async def _(event):
             respond = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("```Unblock @XiaomiGeeksBot plox```")
+            await marcusevent.edit("```Unblock @XiaomiGeeksBot plox```")
             return
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
@@ -133,7 +133,7 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     pitch = f"pb"
-    skullevent = await edit_or_reply(event, "```Processing```")
+    marcusevent = await edit_or_reply(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
         try:
             response = conv.wait_event(
@@ -143,10 +143,10 @@ async def _(event):
             respond = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("```Unblock @XiaomiGeeksBot plox```")
+            await marcusevent.edit("```Unblock @XiaomiGeeksBot plox```")
             return
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.forward_messages(event.chat_id, respond.message)
 
 
@@ -157,7 +157,7 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     ofox = f"of"
-    skullevent = await edit_or_reply(event, "```Processing```")
+    marcusevent = await edit_or_reply(event, "```Processing```")
     async with event.client.conversation("@XiaomiGeeksBot") as conv:
         try:
             response = conv.wait_event(
@@ -167,10 +167,10 @@ async def _(event):
             respond = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("```Unblock @XiaomiGeeksBot plox```")
+            await marcusevent.edit("```Unblock @XiaomiGeeksBot plox```")
             return
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.forward_messages(event.chat_id, respond.message)
 
 

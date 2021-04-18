@@ -15,22 +15,22 @@ from . import awooify, baguette, iphonex, lolice
 
 @bot.on(admin_cmd("mask$", outgoing=True))
 @bot.on(sudo_cmd(pattern="mask$", allow_sudo=True))
-async def _(skullbot):
-    reply_message = await skullbot.get_reply_message()
+async def _(marcusbot):
+    reply_message = await marcusbot.get_reply_message()
     if not reply_message.media or not reply_message:
-        await edit_or_reply(skullbot, "```reply to media message```")
+        await edit_or_reply(marcusbot, "```reply to media message```")
         return
     chat = "@hazmat_suit_bot"
     if reply_message.sender.bot:
-        await edit_or_reply(skullbot, "```Reply to actual users message.```")
+        await edit_or_reply(marcusbot, "```Reply to actual users message.```")
         return
-    event = await skullbot.edit("```Processing```")
-    async with skullbot.client.conversation(chat) as conv:
+    event = await marcusbot.edit("```Processing```")
+    async with marcusbot.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
                 events.NewMessage(incoming=True, from_users=905164246)
             )
-            await skullbot.client.send_message(chat, reply_message)
+            await marcusbot.client.send_message(chat, reply_message)
             response = await response
         except YouBlockedUserError:
             await event.edit("```Please unblock @hazmat_suit_bot and try again```")
@@ -40,31 +40,31 @@ async def _(skullbot):
                 "```can you kindly disable your forward privacy settings for good?```"
             )
         else:
-            await skullbot.client.send_file(event.chat_id, response.message.media)
+            await marcusbot.client.send_file(event.chat_id, response.message.media)
             await event.delete()
 
 
 @bot.on(admin_cmd(pattern="awooify$"))
 @bot.on(sudo_cmd(pattern="awooify$", allow_sudo=True))
-async def skullbot(skullmemes):
-    replied = await skullmemes.get_reply_message()
+async def marcusbot(marcusmemes):
+    replied = await marcusmemes.get_reply_message()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if not replied:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
     if replied.media:
-        skullevent = await edit_or_reply(skullmemes, "passing to telegraph...")
+        marcusevent = await edit_or_reply(marcusmemes, "passing to telegraph...")
     else:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
     try:
-        skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-        skull = Get(skull)
-        await skullmemes.client(skull)
+        marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        marcus = Get(marcus)
+        await marcusmemes.client(marcus)
     except BaseException:
         pass
-    download_location = await skullmemes.client.download_media(
+    download_location = await marcusmemes.client.download_media(
         replied, Config.TMP_DOWNLOAD_DIRECTORY
     )
     if download_location.endswith((".webp")):
@@ -72,50 +72,50 @@ async def skullbot(skullmemes):
     size = os.stat(download_location).st_size
     if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
         if size > 5242880:
-            await skullevent.edit(
+            await marcusevent.edit(
                 "the replied file size is not supported it must me below 5 mb"
             )
             os.remove(download_location)
             return
-        await skullevent.edit("generating image..")
+        await marcusevent.edit("generating image..")
     else:
-        await skullevent.edit("the replied file is not supported")
+        await marcusevent.edit("the replied file is not supported")
         os.remove(download_location)
         return
     try:
         response = upload_file(download_location)
         os.remove(download_location)
     except exceptions.TelegraphException as exc:
-        await skullevent.edit("ERROR: " + str(exc))
+        await marcusevent.edit("ERROR: " + str(exc))
         os.remove(download_location)
         return
-    skull = f"https://telegra.ph{response[0]}"
-    skull = await awooify(skull)
-    await skullevent.delete()
-    await skullmemes.client.send_file(skullmemes.chat_id, skull, reply_to=replied)
+    marcus = f"https://telegra.ph{response[0]}"
+    marcus = await awooify(marcus)
+    await marcusevent.delete()
+    await marcusmemes.client.send_file(marcusmemes.chat_id, marcus, reply_to=replied)
 
 
 @bot.on(admin_cmd(pattern="lolice$"))
 @bot.on(sudo_cmd(pattern="lolice$", allow_sudo=True))
-async def skullbot(skullmemes):
-    replied = await skullmemes.get_reply_message()
+async def marcusbot(marcusmemes):
+    replied = await marcusmemes.get_reply_message()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if not replied:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
     if replied.media:
-        skullevent = await edit_or_reply(skullmemes, "passing to telegraph...")
+        marcusevent = await edit_or_reply(marcusmemes, "passing to telegraph...")
     else:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
     try:
-        skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-        skull = Get(skull)
-        await skullmemes.client(skull)
+        marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        marcus = Get(marcus)
+        await marcusmemes.client(marcus)
     except BaseException:
         pass
-    download_location = await skullmemes.client.download_media(
+    download_location = await marcusmemes.client.download_media(
         replied, Config.TMP_DOWNLOAD_DIRECTORY
     )
     if download_location.endswith((".webp")):
@@ -123,50 +123,50 @@ async def skullbot(skullmemes):
     size = os.stat(download_location).st_size
     if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
         if size > 5242880:
-            await skullevent.edit(
+            await marcusevent.edit(
                 "the replied file size is not supported it must me below 5 mb"
             )
             os.remove(download_location)
             return
-        await skullevent.edit("generating image..")
+        await marcusevent.edit("generating image..")
     else:
-        await skullevent.edit("the replied file is not supported")
+        await marcusevent.edit("the replied file is not supported")
         os.remove(download_location)
         return
     try:
         response = upload_file(download_location)
         os.remove(download_location)
     except exceptions.TelegraphException as exc:
-        await skullevent.edit("ERROR: " + str(exc))
+        await marcusevent.edit("ERROR: " + str(exc))
         os.remove(download_location)
         return
-    skull = f"https://telegra.ph{response[0]}"
-    skull = await lolice(skull)
-    await skullevent.delete()
-    await skullmemes.client.send_file(skullmemes.chat_id, skull, reply_to=replied)
+    marcus = f"https://telegra.ph{response[0]}"
+    marcus = await lolice(marcus)
+    await marcusevent.delete()
+    await marcusmemes.client.send_file(marcusmemes.chat_id, marcus, reply_to=replied)
 
 
 @bot.on(admin_cmd(pattern="bun$"))
 @bot.on(sudo_cmd(pattern="bun$", allow_sudo=True))
-async def skullbot(skullmemes):
-    replied = await skullmemes.get_reply_message()
+async def marcusbot(marcusmemes):
+    replied = await marcusmemes.get_reply_message()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if not replied:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
     if replied.media:
-        skullevent = await edit_or_reply(skullmemes, "passing to telegraph...")
+        marcusevent = await edit_or_reply(marcusmemes, "passing to telegraph...")
     else:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
     try:
-        skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-        skull = Get(skull)
-        await skullmemes.client(skull)
+        marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        marcus = Get(marcus)
+        await marcusmemes.client(marcus)
     except BaseException:
         pass
-    download_location = await skullmemes.client.download_media(
+    download_location = await marcusmemes.client.download_media(
         replied, Config.TMP_DOWNLOAD_DIRECTORY
     )
     if download_location.endswith((".webp")):
@@ -174,50 +174,50 @@ async def skullbot(skullmemes):
     size = os.stat(download_location).st_size
     if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
         if size > 5242880:
-            await skullevent.edit(
+            await marcusevent.edit(
                 "the replied file size is not supported it must me below 5 mb"
             )
             os.remove(download_location)
             return
-        await skullevent.edit("generating image..")
+        await marcusevent.edit("generating image..")
     else:
-        await skullevent.edit("the replied file is not supported")
+        await marcusevent.edit("the replied file is not supported")
         os.remove(download_location)
         return
     try:
         response = upload_file(download_location)
         os.remove(download_location)
     except exceptions.TelegraphException as exc:
-        await skullevent.edit("ERROR: " + str(exc))
+        await marcusevent.edit("ERROR: " + str(exc))
         os.remove(download_location)
         return
-    skull = f"https://telegra.ph{response[0]}"
-    skull = await baguette(skull)
-    await skullevent.delete()
-    await skullmemes.client.send_file(skullmemes.chat_id, skull, reply_to=replied)
+    marcus = f"https://telegra.ph{response[0]}"
+    marcus = await baguette(marcus)
+    await marcusevent.delete()
+    await marcusmemes.client.send_file(marcusmemes.chat_id, marcus, reply_to=replied)
 
 
 @bot.on(admin_cmd(pattern="iphx$"))
 @bot.on(sudo_cmd(pattern="iphx$", allow_sudo=True))
-async def skullbot(skullmemes):
-    replied = await skullmemes.get_reply_message()
+async def marcusbot(marcusmemes):
+    replied = await marcusmemes.get_reply_message()
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if not replied:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
     if replied.media:
-        skullevent = await edit_or_reply(skullmemes, "passing to telegraph...")
+        marcusevent = await edit_or_reply(marcusmemes, "passing to telegraph...")
     else:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
     try:
-        skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-        skull = Get(skull)
-        await skullmemes.client(skull)
+        marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        marcus = Get(marcus)
+        await marcusmemes.client(marcus)
     except BaseException:
         pass
-    download_location = await skullmemes.client.download_media(
+    download_location = await marcusmemes.client.download_media(
         replied, Config.TMP_DOWNLOAD_DIRECTORY
     )
     if download_location.endswith((".webp")):
@@ -225,27 +225,27 @@ async def skullbot(skullmemes):
     size = os.stat(download_location).st_size
     if download_location.endswith((".jpg", ".jpeg", ".png", ".bmp", ".ico")):
         if size > 5242880:
-            await skullevent.edit(
+            await marcusevent.edit(
                 "the replied file size is not supported it must me below 5 mb"
             )
             os.remove(download_location)
             return
-        await skullevent.edit("generating image..")
+        await marcusevent.edit("generating image..")
     else:
-        await skullevent.edit("the replied file is not supported")
+        await marcusevent.edit("the replied file is not supported")
         os.remove(download_location)
         return
     try:
         response = upload_file(download_location)
         os.remove(download_location)
     except exceptions.TelegraphException as exc:
-        await skullevent.edit("ERROR: " + str(exc))
+        await marcusevent.edit("ERROR: " + str(exc))
         os.remove(download_location)
         return
-    skull = f"https://telegra.ph{response[0]}"
-    skull = await iphonex(skull)
-    await skullevent.delete()
-    await skullmemes.client.send_file(skullmemes.chat_id, skull, reply_to=replied)
+    marcus = f"https://telegra.ph{response[0]}"
+    marcus = await iphonex(marcus)
+    await marcusevent.delete()
+    await marcusmemes.client.send_file(marcusmemes.chat_id, marcus, reply_to=replied)
 
 
 CMD_HELP.update(

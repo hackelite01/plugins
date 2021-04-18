@@ -1,6 +1,6 @@
 # Thanks to @AvinashReddy3108 for this plugin
 # Instadl by @mayank1rajput
-# youtube plugin for skulluserbot
+# youtube plugin for marcususerbot
 # yts from https://github.com/rojserbest/VoiceChatPyroBot/blob/main/handlers/inline.py
 
 import asyncio
@@ -116,11 +116,11 @@ async def download_video(v_url):
         await v_url.edit(f"{str(type(e)): {str(e)}}")
         return
     s_time = time.time()
-    skullthumb = Path(f"{ytdl_data['id']}.jpg")
-    if not os.path.exists(skullthumb):
-        skullthumb = Path(f"{ytdl_data['id']}.webp")
-    if not os.path.exists(skullthumb):
-        skullthumb = None
+    marcusthumb = Path(f"{ytdl_data['id']}.jpg")
+    if not os.path.exists(marcusthumb):
+        marcusthumb = Path(f"{ytdl_data['id']}.webp")
+    if not os.path.exists(marcusthumb):
+        marcusthumb = None
     if song:
         await v_url.edit(
             f"`Preparing to upload song:`\
@@ -131,7 +131,7 @@ async def download_video(v_url):
             v_url.chat_id,
             f"{ytdl_data['id']}.mp3",
             supports_streaming=True,
-            thumb=skullthumb,
+            thumb=marcusthumb,
             reply_to=reply_to_id,
             attributes=[
                 DocumentAttributeAudio(
@@ -166,8 +166,8 @@ async def download_video(v_url):
             ),
         )
         os.remove(f"{ytdl_data['id']}.mp4")
-    if skullthumb:
-        os.remove(skullthumb)
+    if marcusthumb:
+        os.remove(marcusthumb)
     await v_url.delete()
 
 
@@ -213,7 +213,7 @@ async def kakashi(event):
         )
     else:
         start = datetime.now()
-        skullevent = await edit_or_reply(event, "**Downloading.....**")
+        marcusevent = await edit_or_reply(event, "**Downloading.....**")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -223,16 +223,16 @@ async def kakashi(event):
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("**Error:** `unblock` @instasavegrambot `and retry!`")
+            await marcusevent.edit("**Error:** `unblock` @instasavegrambot `and retry!`")
             return
-        await skullevent.delete()
-        skull = await event.client.send_file(
+        await marcusevent.delete()
+        marcus = await event.client.send_file(
             event.chat_id,
             video,
         )
         end = datetime.now()
         ms = (end - start).seconds
-        await skull.edit(
+        await marcus.edit(
             f"<b><i>➥ Video uploaded in {ms} seconds.</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
             parse_mode="html",
         )

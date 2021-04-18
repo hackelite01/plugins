@@ -21,7 +21,7 @@ async def _(event):
     if event.reply_to_msg_id:
         reply_to_id = await event.get_reply_message()
     chat = "@vixtbot"
-    skullevent = await edit_or_reply(event, "```Checking...```")
+    marcusevent = await edit_or_reply(event, "```Checking...```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -30,10 +30,10 @@ async def _(event):
             await event.client.send_message(chat, "{}".format(input_str))
             response = await response
         except YouBlockedUserError:
-            await skullevent.edit("Unblock @vixtbot")
+            await marcusevent.edit("Unblock @vixtbot")
             return
         if response.text.startswith("I can't find that"):
-            await skullevent.edit("sorry i can't find it")
+            await marcusevent.edit("sorry i can't find it")
         else:
             await event.delete()
             await event.client.send_file(

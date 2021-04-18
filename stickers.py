@@ -8,7 +8,7 @@ import random
 import urllib.request
 from os import remove
 
-import emoji as skullemoji
+import emoji as marcusemoji
 import requests
 from bs4 import BeautifulSoup as bs
 from PIL import Image
@@ -51,12 +51,12 @@ def verify_cond(catarray, text):
 
 def pack_name(userid, pack, is_anim):
     if is_anim:
-        return f"skulluserbot_{userid}_{pack}_anim"
-    return f"skulluserbot_{userid}_{pack}"
+        return f"marcususerbot_{userid}_{pack}_anim"
+    return f"marcususerbot_{userid}_{pack}"
 
 
 def char_is_emoji(character):
-    return character in skullemoji.UNICODE_EMOJI["en"]
+    return character in marcusemoji.UNICODE_EMOJI["en"]
 
 
 def pack_nick(username, pack, is_anim):
@@ -98,7 +98,7 @@ async def resize_photo(photo):
 
 
 async def newpacksticker(
-    skullevent,
+    marcusevent,
     conv,
     cmd,
     args,
@@ -116,7 +116,7 @@ async def newpacksticker(
     await args.client.send_read_acknowledge(conv.chat_id)
     await conv.send_message(packnick)
     await conv.get_response()
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     await args.client.send_read_acknowledge(conv.chat_id)
     if is_anim:
         await conv.send_file("AnimatedSticker.tgs")
@@ -126,7 +126,7 @@ async def newpacksticker(
         await conv.send_file(stfile, force_document=True)
     rsp = await conv.get_response()
     if not verify_cond(EMOJI_SEN, rsp.text):
-        await skullevent.edit(
+        await marcusevent.edit(
             f"Failed to add sticker, use @Stickers bot to add the sticker manually.\n**error :**{rsp}"
         )
         return
@@ -141,8 +141,8 @@ async def newpacksticker(
     await args.client.send_read_acknowledge(conv.chat_id)
     await conv.send_message("/skip")
     try:
-        skull = Get(skull)
-        await skullevent.client(skull)
+        marcus = Get(marcus)
+        await marcusevent.client(marcus)
     except BaseException:
         pass
     await args.client.send_read_acknowledge(conv.chat_id)
@@ -157,7 +157,7 @@ async def newpacksticker(
 
 
 async def add_to_pack(
-    skullevent,
+    marcusevent,
     conv,
     args,
     packname,
@@ -183,14 +183,14 @@ async def add_to_pack(
             pack = 1
         packname = pack_name(userid, pack, is_anim)
         packnick = pack_nick(username, pack, is_anim)
-        await skullevent.edit(
+        await marcusevent.edit(
             f"`Switching to Pack {str(pack)} due to insufficient space`"
         )
         await conv.send_message(packname)
         x = await conv.get_response()
         if x.text == "Invalid pack selected.":
             return await newpacksticker(
-                skullevent,
+                marcusevent,
                 conv,
                 cmd,
                 args,
@@ -211,7 +211,7 @@ async def add_to_pack(
         await conv.send_file(stfile, force_document=True)
     rsp = await conv.get_response()
     if not verify_cond(EMOJI_SEN, rsp.text):
-        await skullevent.edit(
+        await marcusevent.edit(
             f"Failed to add sticker, use @Stickers bot to add the sticker manually.\n**error :**{rsp}"
         )
         return
@@ -240,17 +240,17 @@ async def kang(args):
             user.first_name.encode("utf-8").decode("ascii")
             username = user.first_name
         except UnicodeDecodeError:
-            username = f"skull_{user.id}"
+            username = f"marcus_{user.id}"
     else:
         username = user.username
     userid = user.id
     if message and message.media:
         if isinstance(message.media, MessageMediaPhoto):
-            skullevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
+            marcusevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             photo = io.BytesIO()
             photo = await args.client.download_media(message.photo, photo)
         elif "image" in message.media.document.mime_type.split("/"):
-            skullevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
+            marcusevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             photo = io.BytesIO()
             await args.client.download_file(message.media.document, photo)
             if (
@@ -260,7 +260,7 @@ async def kang(args):
                 emoji = message.media.document.attributes[1].alt
                 emojibypass = True
         elif "tgsticker" in message.media.document.mime_type:
-            skullevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
+            marcusevent = await edit_or_reply(args, f"`{random.choice(KANGING_STR)}`")
             await args.client.download_file(
                 message.media.document, "AnimatedSticker.tgs"
             )
@@ -285,14 +285,14 @@ async def kang(args):
         if len(splat) == 2:
             if char_is_emoji(splat[0][0]):
                 if char_is_emoji(splat[1][0]):
-                    return await skullevent.edit("check `.info stickers`")
+                    return await marcusevent.edit("check `.info stickers`")
                 pack = splat[1]  # User sent both
                 emoji = splat[0]
             elif char_is_emoji(splat[1][0]):
                 pack = splat[0]  # User sent both
                 emoji = splat[1]
             else:
-                return await skullevent.edit("check `.info stickers`")
+                return await marcusevent.edit("check `.info stickers`")
         elif len(splat) == 1:
             if char_is_emoji(splat[0][0]):
                 emoji = splat[0]
@@ -318,7 +318,7 @@ async def kang(args):
         ):
             async with args.client.conversation("Stickers") as conv:
                 packname, emoji = await add_to_pack(
-                    skullevent,
+                    marcusevent,
                     conv,
                     args,
                     packname,
@@ -331,17 +331,17 @@ async def kang(args):
                     cmd,
                 )
             await edit_delete(
-                skullevent,
+                marcusevent,
                 f"`Sticker kanged successfully!\
                     \nYour Pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
                 parse_mode="md",
                 time=10,
             )
         else:
-            await skullevent.edit("`Brewing a new Pack...`")
+            await marcusevent.edit("`Brewing a new Pack...`")
             async with args.client.conversation("Stickers") as conv:
                 otherpack, packname, emoji = await newpacksticker(
-                    skullevent,
+                    marcusevent,
                     conv,
                     cmd,
                     args,
@@ -354,7 +354,7 @@ async def kang(args):
                 )
             if otherpack:
                 await edit_delete(
-                    skullevent,
+                    marcusevent,
                     f"`Sticker kanged to a Different Pack !\
                     \nAnd Newly created pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
                     parse_mode="md",
@@ -362,7 +362,7 @@ async def kang(args):
                 )
             else:
                 await edit_delete(
-                    skullevent,
+                    marcusevent,
                     f"`Sticker kanged successfully!\
                     \nYour Pack is` [here](t.me/addstickers/{packname}) `and emoji for the kanged sticker is {emoji}`",
                     parse_mode="md",
@@ -383,20 +383,20 @@ async def pack_kang(event):
             user.first_name.encode("utf-8").decode("ascii")
             username = user.first_name
         except UnicodeDecodeError:
-            username = f"skull_{user.id}"
+            username = f"marcus_{user.id}"
     photo = None
     userid = user.id
     is_anim = False
     emoji = None
     reply = await event.get_reply_message()
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if not reply or media_type(reply) is None or media_type(reply) != "Sticker":
         return await edit_delete(
             event, "`reply to any sticker to send all stickers in that pack`"
         )
     try:
         stickerset_attr = reply.document.attributes[1]
-        skullevent = await edit_or_reply(
+        marcusevent = await edit_or_reply(
             event, "`Fetching details of the sticker pack, please wait..`"
         )
     except BaseException:
@@ -414,7 +414,7 @@ async def pack_kang(event):
         )
     except Exception:
         return await edit_delete(
-            skullevent,
+            marcusevent,
             "`I guess this sticker is not part of any pack. So, i cant kang this sticker pack try kang for this sticker`",
         )
     kangst = 1
@@ -432,7 +432,7 @@ async def pack_kang(event):
     for message in reqd_sticker_set.documents:
         if "image" in message.mime_type.split("/"):
             await edit_or_reply(
-                skullevent,
+                marcusevent,
                 f"`This sticker pack is kanging now . Status of kang process : {kangst}/{noofst}`",
             )
             photo = io.BytesIO()
@@ -444,7 +444,7 @@ async def pack_kang(event):
                 emoji = message.attributes[1].alt
         elif "tgsticker" in message.mime_type:
             await edit_or_reply(
-                skullevent,
+                marcusevent,
                 f"`This sticker pack is kanging now . Status of kang process : {kangst}/{noofst}`",
             )
             await event.client.download_file(message, "AnimatedSticker.tgs")
@@ -455,7 +455,7 @@ async def pack_kang(event):
             is_anim = True
             photo = 1
         else:
-            await edit_delete(skullevent, "`Unsupported File!`")
+            await edit_delete(marcusevent, "`Unsupported File!`")
             return
         if photo:
             splat = ("".join(event.text.split(maxsplit=1)[1:])).split()
@@ -466,12 +466,12 @@ async def pack_kang(event):
                     pack = splat[0]
                 elif len(splat) > 1:
                     return await edit_delete(
-                        skullevent,
+                        marcusevent,
                         "`Sorry the given name cant be used for pack or there is no pack with that name`",
                     )
             try:
-                skull = Get(skull)
-                await event.client(skull)
+                marcus = Get(marcus)
+                await event.client(marcus)
             except BaseException:
                 pass
             packnick = pack_nick(username, pack, is_anim)
@@ -493,8 +493,8 @@ async def pack_kang(event):
                 in htmlstr
             ):
                 async with event.client.conversation("Stickers") as conv:
-                    pack, skullpackname = await newpacksticker(
-                        skullevent,
+                    pack, marcuspackname = await newpacksticker(
+                        marcusevent,
                         conv,
                         cmd,
                         event,
@@ -508,8 +508,8 @@ async def pack_kang(event):
                     )
             else:
                 async with event.client.conversation("Stickers") as conv:
-                    pack, skullpackname = await add_to_pack(
-                        skullevent,
+                    pack, marcuspackname = await add_to_pack(
+                        marcusevent,
                         conv,
                         event,
                         packname,
@@ -522,15 +522,15 @@ async def pack_kang(event):
                         cmd,
                         pkang=True,
                     )
-            if skullpackname not in blablapacks:
-                blablapacks.append(skullpackname)
+            if marcuspackname not in blablapacks:
+                blablapacks.append(marcuspackname)
                 blablapacknames.append(pack)
         kangst += 1
         await asyncio.sleep(2)
     result = "`This sticker pack is kanged into the following your sticker pack(s):`\n"
     for i in enumerate(blablapacks):
         result += f"  鈥�  [pack {blablapacknames[i]}](t.me/addstickers/{blablapacks[i]})"
-    await skullevent.edit(result)
+    await marcusevent.edit(result)
 
 
 @bot.on(admin_cmd(pattern="stkrinfo$", outgoing=True))
@@ -545,14 +545,14 @@ async def get_pack_info(event):
         return
     try:
         stickerset_attr = rep_msg.document.attributes[1]
-        skullevent = await edit_or_reply(
+        marcusevent = await edit_or_reply(
             event, "`Fetching details of the sticker pack, please wait..`"
         )
     except BaseException:
         await edit_delete(event, "`This is not a sticker. Reply to a sticker.`", 5)
         return
     if not isinstance(stickerset_attr, DocumentAttributeSticker):
-        await skullevent.edit("`This is not a sticker. Reply to a sticker.`")
+        await marcusevent.edit("`This is not a sticker. Reply to a sticker.`")
         return
     get_stickerset = await event.client(
         GetStickerSetRequest(
@@ -574,7 +574,7 @@ async def get_pack_info(event):
         f"**Stickers In Pack:** `{get_stickerset.set.count}`\n"
         f"**Emojis In Pack:**\n{' '.join(pack_emojis)}"
     )
-    await skullevent.edit(OUTPUT)
+    await marcusevent.edit(OUTPUT)
 
 
 @bot.on(admin_cmd(pattern="stickers ?(.*)", outgoing=True))
@@ -584,12 +584,12 @@ async def cb_sticker(event):
     if not split:
         await edit_delete(event, "`Provide some name to search for pack.`", 5)
         return
-    skullevent = await edit_or_reply(event, "`Searching sticker packs....`")
+    marcusevent = await edit_or_reply(event, "`Searching sticker packs....`")
     text = requests.get(combot_stickers_url + split).text
     soup = bs(text, "lxml")
     results = soup.find_all("div", {"class": "sticker-pack__header"})
     if not results:
-        await edit_delete(skullevent, "`No results found :(.`", 5)
+        await edit_delete(marcusevent, "`No results found :(.`", 5)
         return
     reply = f"**Sticker packs found for {split} are :**"
     for pack in results:
@@ -598,7 +598,7 @@ async def cb_sticker(event):
             packlink = (pack.a).get("href")
             packid = (pack.button).get("data-popup")
             reply += f"\n **鈥� ID: **`{packid}`\n [{packtitle}]({packlink})"
-    await skullevent.edit(reply)
+    await marcusevent.edit(reply)
 
 
 CMD_HELP.update(

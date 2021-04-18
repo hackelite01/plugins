@@ -4,11 +4,11 @@ from datetime import datetime
 
 import requests
 
-from skull.utils import admin_cmd, edit_or_reply, sudo_cmd
+from marcus.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 
-@skull.on(admin_cmd(pattern="currency (.*)", outgoing=True))
-@skull.on(sudo_cmd(pattern="currency (.*)", allow_sudo=True))
+@marcus.on(admin_cmd(pattern="currency (.*)", outgoing=True))
+@marcus.on(sudo_cmd(pattern="currency (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

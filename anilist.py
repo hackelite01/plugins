@@ -185,8 +185,8 @@ async def formatJSON(outData):
     msg += f"\n**Score** : {jsonData['averageScore']}"
     msg += f"\n**Duration** : {jsonData['duration']} min\n\n"
     # https://t.me/userbot_support/19496
-    skull = f"{jsonData['description']}"
-    msg += " __" + re.sub("<br>", "\n", skull) + "__"
+    marcus = f"{jsonData['description']}"
+    msg += " __" + re.sub("<br>", "\n", marcus) + "__"
     return msg
 
 

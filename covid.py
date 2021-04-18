@@ -1,4 +1,4 @@
-# corona virus stats for skulluserbot
+# corona virus stats for marcususerbot
 from covid import Covid
 
 from . import covidindia
@@ -11,7 +11,7 @@ async def corona(event):
         country = (event.pattern_match.group(1)).title()
     else:
         country = "World"
-    skullevent = await edit_or_reply(event, "`Collecting data...`")
+    marcusevent = await edit_or_reply(event, "`Collecting data...`")
     covid = Covid(source="worldometers")
     try:
         country_data = covid.get_status_by_country_name(country)
@@ -29,28 +29,28 @@ async def corona(event):
         data += f"\n💉 Total tests    : <code>{country_data['total_tests']}</code>"
         data += f"\n🥺 New Cases   : <code>{country_data['new_cases']}</code>"
         data += f"\n😟 New Deaths : <code>{country_data['new_deaths']}</code>"
-        await skullevent.edit(
+        await marcusevent.edit(
             "<b>Corona Virus Info of {}:\n{}</b>".format(country, data),
             parse_mode="html",
         )
     else:
         data = await covidindia(country)
         if data:
-            skull1 = int(data["new_positive"]) - int(data["positive"])
-            skull2 = int(data["new_death"]) - int(data["death"])
-            skull3 = int(data["new_cured"]) - int(data["cured"])
+            marcus1 = int(data["new_positive"]) - int(data["positive"])
+            marcus2 = int(data["new_death"]) - int(data["death"])
+            marcus3 = int(data["new_cured"]) - int(data["cured"])
             result = f"<b>Corona virus info of {data['state_name']}\
                 \n\n⚠️ Confirmed   : <code>{data['new_positive']}</code>\
                 \n😔 Active           : <code>{data['new_active']}</code>\
                 \n⚰️ Deaths         : <code>{data['new_death']}</code>\
                 \n😊 Recovered   : <code>{data['new_cured']}</code>\
-                \n🥺 New Cases   : <code>{skull1}</code>\
-                \n😟 New Deaths : <code>{skull2}</code>\
-                \n😃 New cured  : <code>{skull3}</code> </b>"
-            await skullevent.edit(result, parse_mode="html")
+                \n🥺 New Cases   : <code>{marcus1}</code>\
+                \n😟 New Deaths : <code>{marcus2}</code>\
+                \n😃 New cured  : <code>{marcus3}</code> </b>"
+            await marcusevent.edit(result, parse_mode="html")
         else:
             await edit_delete(
-                skullevent,
+                marcusevent,
                 "`Corona Virus Info of {} is not avaiable or unable to fetch`".format(
                     country
                 ),

@@ -31,7 +31,7 @@ async def _(event):
     if reply_message.sender.bot:
         await edit_or_reply(event, "```Reply to actual users message.```")
         return
-    skullevent = await edit_or_reply(event, " `Sliding my tip, of fingers over it`")
+    marcusevent = await edit_or_reply(event, " `Sliding my tip, of fingers over it`")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message("/start")
@@ -40,20 +40,20 @@ async def _(event):
             response1 = await conv.get_response()
             if response1.text:
                 await event.client.send_read_acknowledge(conv.chat_id)
-                return await skullevent.edit(response1.text, parse_mode=parse_pre)
+                return await marcusevent.edit(response1.text, parse_mode=parse_pre)
             await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
             response3 = await conv.get_response()
             response4 = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            return await skullevent.edit(
+            return await marcusevent.edit(
                 "`You blocked `@VS_Robot` Unblock it and give a try`"
             )
         if input_str == "scan":
-            await edit_or_reply(skullevent, response4.text)
+            await edit_or_reply(marcusevent, response4.text)
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.send_file(
                 event.chat_id, response3.media, reply_to=(await reply_id(event))
             )
@@ -101,7 +101,7 @@ async def parseqr(qr_e):
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "...")
+    marcusevent = await edit_or_reply(event, "...")
     start = datetime.now()
     input_str = event.pattern_match.group(1)
     message = "SYNTAX: `.barcode <long text to include>`"
@@ -137,13 +137,13 @@ async def _(event):
         )
         os.remove(filename)
     except Exception as e:
-        await skullevent.edit(str(e))
+        await marcusevent.edit(str(e))
         return
     end = datetime.now()
     ms = (end - start).seconds
-    await skullevent.edit("Created BarCode in {} seconds".format(ms))
+    await marcusevent.edit("Created BarCode in {} seconds".format(ms))
     await asyncio.sleep(5)
-    await skullevent.delete()
+    await marcusevent.delete()
 
 
 @bot.on(admin_cmd(pattern=r"makeqr(?: |$)([\s\S]*)", outgoing=True))
@@ -291,16 +291,16 @@ async def _(event):
             return False
         else:
             im = Image.new(mode="RGB", size=(1280, 720), color=usercolor)
-            im.save("skull.png", "PNG")
+            im.save("marcus.png", "PNG")
             input_str = input_str.replace("#", "#COLOR_")
             await event.client.send_file(
                 event.chat_id,
-                "skull.png",
+                "marcus.png",
                 force_document=False,
                 caption=input_str,
                 reply_to=message_id,
             )
-            os.remove("skull.png")
+            os.remove("marcus.png")
             await event.delete()
     else:
         await edit_or_reply(
@@ -313,7 +313,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "`processiong...........`")
+    marcusevent = await edit_or_reply(event, "`processiong...........`")
     input_str = event.pattern_match.group(1)
     xkcd_id = None
     if input_str:
@@ -350,9 +350,9 @@ Month: {}
 Year: {}""".format(
             img, input_str, xkcd_link, safe_title, alt, day, month, year
         )
-        await skullevent.edit(output_str, link_preview=True)
+        await marcusevent.edit(output_str, link_preview=True)
     else:
-        await skullevent.edit("xkcd n.{} not found!".format(xkcd_id))
+        await marcusevent.edit("xkcd n.{} not found!".format(xkcd_id))
 
 
 CMD_HELP.update(

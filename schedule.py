@@ -6,9 +6,9 @@ from asyncio import sleep
 async def _(event):
     if event.fwd_from:
         return
-    skull = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
-    message = skull[1]
-    ttl = int(skull[0])
+    marcus = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
+    message = marcus[1]
+    ttl = int(marcus[0])
     try:
         await event.delete()
     except Exception as e:

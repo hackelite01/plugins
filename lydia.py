@@ -26,7 +26,7 @@ async def lydia_disable_enable(event):
     if Config.LYDIA_API_KEY is None:
         await edit_delete(event, "`Please add required LYDIA_API_KEY env var`", 10)
         return
-    skullevent = await edit_or_reply(event, "`.....`")
+    marcusevent = await edit_or_reply(event, "`.....`")
     input_str = event.pattern_match.group(1)
     if event.reply_to_msg_id is not None:
         reply_msg = await event.get_reply_message()
@@ -45,10 +45,10 @@ async def lydia_disable_enable(event):
                     ",
                 )
             add_s(user_id, chat_id, session.id, session.expires)
-            await skullevent.edit(f"Hello")
+            await marcusevent.edit(f"Hello")
         elif input_str == "re":
             remove_s(user_id, chat_id)
-            await skullevent.edit(f"__[signal lost](tg://user?id={user_id})__")
+            await marcusevent.edit(f"__[signal lost](tg://user?id={user_id})__")
         else:
             lsts = get_all_s()
             if len(lsts) > 0:
@@ -69,7 +69,7 @@ async def lydia_disable_enable(event):
                         reply_to=event,
                     )
             else:
-                await skullevent.edit(output_str)
+                await marcusevent.edit(output_str)
     else:
         if input_str == "li":
             lsts = get_all_s()
@@ -91,10 +91,10 @@ async def lydia_disable_enable(event):
                         reply_to=event,
                     )
             else:
-                await skullevent.edit(output_str)
+                await marcusevent.edit(output_str)
         else:
             await edit_delete(
-                skullevent,
+                marcusevent,
                 "`Reply To A User's Message to Add / Remove them from Lydia Auto-Chat.`",
                 5,
             )

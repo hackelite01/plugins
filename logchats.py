@@ -1,4 +1,4 @@
-# pm and tagged messages logger for skulluserbot by @mayank1rajput
+# pm and tagged messages logger for marcususerbot by @mayank1rajput
 import asyncio
 
 from telethon import events

@@ -3,7 +3,7 @@ from collections import deque
 
 from . import ALIVE_NAME
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 
 
 @bot.on(admin_cmd(pattern="stupid$"))
@@ -82,7 +82,7 @@ async def _(event):
         "`Me: Hello Sir, Please Ban This Telegram Account.`",
         "`Pavel Durov : May I Know Who is This?`",
         f"`Me: Yo Brah, I Am` {DEFAULTUSER} ",
-        "`Pavel Durov : OMG!!! Long time no see, Wassup skull...\nI'll Make Sure That Guy Account Will Get Blocked Within 24Hrs.`",
+        "`Pavel Durov : OMG!!! Long time no see, Wassup marcus...\nI'll Make Sure That Guy Account Will Get Blocked Within 24Hrs.`",
         "`Me: Thanks, See You Later Brah.`",
         "`Pavel Durov : Please Don't Thank Brah, Telegram Is Our's. Just Gimme A Call When You Become Free.`",
         "`Me: Is There Any Issue/Emergency???`",

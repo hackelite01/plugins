@@ -11,7 +11,7 @@ from telethon import __version__
 from . import ALIVE_NAME
 
 # ================= CONSTANT =================
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 # ============================================
 
 
@@ -77,8 +77,8 @@ def get_size(inputbytes, suffix="B"):
 async def _(event):
     if event.fwd_from:
         return
-    cmd = "skull /proc/cpuinfo | grep 'model name'"
-    o = (await _skullutils.runcmd(cmd))[0]
+    cmd = "marcus /proc/cpuinfo | grep 'model name'"
+    o = (await _marcusutils.runcmd(cmd))[0]
     await edit_or_reply(
         event, f"**[Skull's](tg://need_update_for_some_feature/) CPU Model:**\n{o}"
     )
@@ -88,10 +88,10 @@ async def _(event):
 @bot.on(sudo_cmd(pattern=f"sysd$", allow_sudo=True))
 async def sysdetails(sysd):
     cmd = "git clone https://github.com/dylanaraps/neofetch.git"
-    await _skullutils.runcmd(cmd)
+    await _marcusutils.runcmd(cmd)
     neo = "neofetch/neofetch --off --color_blocks off --bold off --cpu_temp C \
                     --cpu_speed on --cpu_cores physical --kernel_shorthand off --stdout"
-    a, b, c, d = await _skullutils.runcmd(neo)
+    a, b, c, d = await _marcusutils.runcmd(neo)
     result = str(a) + str(b)
     await edit_or_reply(sysd, "Neofetch Result: `" + result + "`")
 

@@ -25,13 +25,13 @@ async def _(event):
     async with borg.conversation("@HK_tiktok_BOT") as conv:
           try:
                 await conv.send_message(d_link)
-                skull1 = await conv.get_response()
+                marcus1 = await conv.get_response()
                 details = await conv.get_response()
                 if details.text.startswith("Sorry"):
                      await borg.send_message(event.chat_id , "sorry . something went wrong" )
                      return
-                skull2 = await conv.get_response()
-                skull3 = await conv.get_response()
+                marcus2 = await conv.get_response()
+                marcus3 = await conv.get_response()
                 await borg.send_file(event.chat_id, details, caption = details.text)
                 await event.delete()
           except YouBlockedUserError:
@@ -53,14 +53,14 @@ async def _(event):
     async with borg.conversation("@HK_tiktok_BOT") as conv:
           try:
                 await conv.send_message(d_link)
-                skull1 = await conv.get_response()
+                marcus1 = await conv.get_response()
                 details = await conv.get_response()
                 if details.text.startswith("Sorry"):
                      await borg.send_message(event.chat_id , "sorry . something went wrong" )
                      return
-                skull2 = await conv.get_response()
-                skull3 = await conv.get_response()
-                await borg.send_file(event.chat_id, skull3)
+                marcus2 = await conv.get_response()
+                marcus3 = await conv.get_response()
+                await borg.send_file(event.chat_id, marcus3)
                 await event.delete()
           except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @HK_tiktok_BOT `and retry!`")
@@ -81,14 +81,14 @@ async def _(event):
     async with borg.conversation("@HK_tiktok_BOT") as conv:
           try:
                 await conv.send_message(d_link)
-                skull1 = await conv.get_response()
+                marcus1 = await conv.get_response()
                 details = await conv.get_response()
                 if details.text.startswith("Sorry"):
                      await borg.send_message(event.chat_id , "sorry . something went wrong" )
                      return
-                skull2 = await conv.get_response()
-                skull3 = await conv.get_response()
-                await borg.send_file(event.chat_id, skull2)
+                marcus2 = await conv.get_response()
+                marcus3 = await conv.get_response()
+                await borg.send_file(event.chat_id, marcus2)
                 await event.delete()
           except YouBlockedUserError:
             await event.edit("**Error:** `unblock` @HK_tiktok_BOT `and retry!`")

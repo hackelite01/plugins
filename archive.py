@@ -45,8 +45,8 @@ async def _(event):
                 directory_name
             )
             os.remove(directory_name)
-            skull = directory_name + ".zip"
-            await mone.edit(f"compressed successfully into `{skull}`")
+            marcus = directory_name + ".zip"
+            await mone.edit(f"compressed successfully into `{marcus}`")
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
     elif input_str:
@@ -164,7 +164,7 @@ async def _(event):
             await event.client.send_file(
                 event.chat_id,
                 directory_name + ".rar",
-                caption="rarred By skull",
+                caption="rarred By marcus",
                 force_document=True,
                 allow_cache=False,
                 reply_to=event.message.id,
@@ -216,7 +216,7 @@ async def _(event):
             await event.client.send_file(
                 event.chat_id,
                 output,
-                caption="TAR By skull",
+                caption="TAR By marcus",
                 force_document=True,
                 allow_cache=False,
                 reply_to=event.message.id,

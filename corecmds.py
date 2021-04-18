@@ -8,7 +8,7 @@ from . import ALIVE_NAME, CMD_LIST, SUDO_LIST
 
 DELETE_TIMEOUT = 5
 thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 
 
 @bot.on(admin_cmd(pattern="install$"))

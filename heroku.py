@@ -1,4 +1,4 @@
-# Heroku manager for your skulluserbot
+# Heroku manager for your marcususerbot
 
 # CC- @refundisillegal\nSyntax:-\n.get var NAME\n.del var NAME\n.set var NAME
 
@@ -44,15 +44,15 @@ async def variable(var):
     exe = var.pattern_match.group(1)
     heroku_var = app.config()
     if exe == "get":
-        skull = await edit_or_reply(var, "`Getting information...`")
+        marcus = await edit_or_reply(var, "`Getting information...`")
         await asyncio.sleep(1.0)
         try:
             variable = var.pattern_match.group(2).split()[0]
             if variable in heroku_var:
-                return await skull.edit(
+                return await marcus.edit(
                     "**ConfigVars**:" f"\n\n`{variable} = {heroku_var[variable]}`\n"
                 )
-            return await skull.edit(
+            return await marcus.edit(
                 "**ConfigVars**:" f"\n\n`Error:\n-> {variable} don't exists`"
             )
         except IndexError:
@@ -69,7 +69,7 @@ async def variable(var):
                         caption="`Output too large, sending it as a file`",
                     )
                 else:
-                    await skull.edit(
+                    await marcus.edit(
                         "`[HEROKU]` ConfigVars:\n\n"
                         "================================"
                         f"\n```{result}```\n"
@@ -79,32 +79,32 @@ async def variable(var):
             return
     elif exe == "set":
         variable = "".join(var.text.split(maxsplit=2)[2:])
-        skull = await edit_or_reply(var, "`Setting information...`")
+        marcus = await edit_or_reply(var, "`Setting information...`")
         if not variable:
-            return await skull.edit("`.set var <ConfigVars-name> <value>`")
+            return await marcus.edit("`.set var <ConfigVars-name> <value>`")
         value = "".join(variable.split(maxsplit=1)[1:])
         variable = "".join(variable.split(maxsplit=1)[0])
         if not value:
-            return await skull.edit("`.set var <ConfigVars-name> <value>`")
+            return await marcus.edit("`.set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await skull.edit(f"`{variable}` **successfully changed to  ->  **`{value}`")
+            await marcus.edit(f"`{variable}` **successfully changed to  ->  **`{value}`")
         else:
-            await skull.edit(
+            await marcus.edit(
                 f"`{variable}`**  successfully added with value`  ->  **{value}`"
             )
         heroku_var[variable] = value
     elif exe == "del":
-        skull = await edit_or_reply(var, "`Getting information to deleting variable...`")
+        marcus = await edit_or_reply(var, "`Getting information to deleting variable...`")
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
-            return await skull.edit("`Please specify ConfigVars you want to delete`")
+            return await marcus.edit("`Please specify ConfigVars you want to delete`")
         await asyncio.sleep(1.5)
         if variable not in heroku_var:
-            return await skull.edit(f"`{variable}`**  is not exists**")
+            return await marcus.edit(f"`{variable}`**  is not exists**")
 
-        await skull.edit(f"`{variable}`  **successfully deleted**")
+        await marcus.edit(f"`{variable}`  **successfully deleted**")
         del heroku_var[variable]
 
 

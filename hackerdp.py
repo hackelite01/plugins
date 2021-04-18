@@ -7,7 +7,7 @@ import urllib
 import requests
 from telethon.tl import functions
 
-from skull.utils import admin_cmd, edit_or_reply, sudo_cmd
+from marcus.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 COLLECTION_STRINGZ = ["hacker-background"]
 
@@ -40,8 +40,8 @@ async def animepp():
     urllib.request.urlretrieve(fy, "donottouch.jpg")
 
 
-@skull.on(admin_cmd(pattern="hackerdp ?(.*)", outgoing=True))
-@skull.on(sudo_cmd(pattern="hackerdp ?(.*)", allow_sudo=True))
+@marcus.on(admin_cmd(pattern="hackerdp ?(.*)", outgoing=True))
+@marcus.on(sudo_cmd(pattern="hackerdp ?(.*)", allow_sudo=True))
 async def main(event):
 
     await edit_or_reply(

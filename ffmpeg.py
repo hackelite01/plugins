@@ -7,7 +7,7 @@ from datetime import datetime
 
 from . import media_type, progress, reply_id
 
-FF_MPEG_DOWN_LOAD_MEDIA_PATH = "./downloads/skulluserbot.media.ffmpeg"
+FF_MPEG_DOWN_LOAD_MEDIA_PATH = "./downloads/marcususerbot.media.ffmpeg"
 
 
 @bot.on(admin_cmd(pattern="ffmpegsave$"))
@@ -22,22 +22,22 @@ async def ff_mpeg_trim_cmd(event):
             media = media_type(reply_message)
             if media not in ["Video", "Audio", "Voice", "Round Video", "Gif"]:
                 return await edit_delete(event, "`Only media files are supported`", 5)
-            skullevent = await edit_or_reply(event, "`Saving the file...`")
+            marcusevent = await edit_or_reply(event, "`Saving the file...`")
             try:
                 c_time = time.time()
                 downloaded_file_name = await event.client.download_media(
                     reply_message,
                     FF_MPEG_DOWN_LOAD_MEDIA_PATH,
                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                        progress(d, t, skullevent, c_time, "trying to download")
+                        progress(d, t, marcusevent, c_time, "trying to download")
                     ),
                 )
             except Exception as e:
-                await skullevent.edit(str(e))
+                await marcusevent.edit(str(e))
             else:
                 end = datetime.now()
                 ms = (end - start).seconds
-                await skullevent.edit(
+                await marcusevent.edit(
                     f"Saved file to `{downloaded_file_name}` in `{ms}` seconds."
                 )
         else:
@@ -61,7 +61,7 @@ async def ff_mpeg_trim_cmd(event):
         )
         return
     reply_to_id = await reply_id(event)
-    skullevent = await edit_or_reply(event, "`Triming the media......`")
+    marcusevent = await edit_or_reply(event, "`Triming the media......`")
     current_message_text = event.raw_text
     cmt = current_message_text.split(" ")
     start = datetime.now()
@@ -76,7 +76,7 @@ async def ff_mpeg_trim_cmd(event):
         )
         if o is None:
             return await edit_delete(
-                skullevent, f"**Error : **`Can't complete the process`"
+                marcusevent, f"**Error : **`Can't complete the process`"
             )
         try:
             c_time = time.time()
@@ -89,19 +89,19 @@ async def ff_mpeg_trim_cmd(event):
                 allow_cache=False,
                 reply_to=reply_to_id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, skullevent, c_time, "trying to upload")
+                    progress(d, t, marcusevent, c_time, "trying to upload")
                 ),
             )
             os.remove(o)
         except Exception as e:
-            return await edit_delete(skullevent, f"**Error : **`{e}`")
+            return await edit_delete(marcusevent, f"**Error : **`{e}`")
     elif len(cmt) == 2:
         # output should be image
         cmd, start_time = cmt
-        o = await _skulltools.take_screen_shot(FF_MPEG_DOWN_LOAD_MEDIA_PATH, start_time)
+        o = await _marcustools.take_screen_shot(FF_MPEG_DOWN_LOAD_MEDIA_PATH, start_time)
         if o is None:
             return await edit_delete(
-                skullevent, f"**Error : **`Can't complete the process`"
+                marcusevent, f"**Error : **`Can't complete the process`"
             )
         try:
             c_time = time.time()
@@ -114,18 +114,18 @@ async def ff_mpeg_trim_cmd(event):
                 allow_cache=False,
                 reply_to=event.message.id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, skullevent, c_time, "trying to upload")
+                    progress(d, t, marcusevent, c_time, "trying to upload")
                 ),
             )
             os.remove(o)
         except Exception as e:
-            return await edit_delete(skullevent, f"**Error : **`{e}`")
+            return await edit_delete(marcusevent, f"**Error : **`{e}`")
     else:
-        await edit_delete(skullevent, "RTFM")
+        await edit_delete(marcusevent, "RTFM")
         return
     end = datetime.now()
     ms = (end - start).seconds
-    await edit_delete(skullevent, f"`Completed Process in {ms} seconds`", 3)
+    await edit_delete(marcusevent, f"`Completed Process in {ms} seconds`", 3)
 
 
 @bot.on(admin_cmd(pattern="atrim"))
@@ -140,7 +140,7 @@ async def ff_mpeg_trim_cmd(event):
         )
         return
     reply_to_id = await reply_id(event)
-    skullevent = await edit_or_reply(event, "`Triming the media...........`")
+    marcusevent = await edit_or_reply(event, "`Triming the media...........`")
     current_message_text = event.raw_text
     cmt = current_message_text.split(" ")
     start = datetime.now()
@@ -159,7 +159,7 @@ async def ff_mpeg_trim_cmd(event):
         )
         if o is None:
             return await edit_delete(
-                skullevent, f"**Error : **`Can't complete the process`"
+                marcusevent, f"**Error : **`Can't complete the process`"
             )
         try:
             c_time = time.time()
@@ -172,18 +172,18 @@ async def ff_mpeg_trim_cmd(event):
                 allow_cache=False,
                 reply_to=reply_to_id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, skullevent, c_time, "trying to upload")
+                    progress(d, t, marcusevent, c_time, "trying to upload")
                 ),
             )
             os.remove(o)
         except Exception as e:
-            return await edit_delete(skullevent, f"**Error : **`{e}`")
+            return await edit_delete(marcusevent, f"**Error : **`{e}`")
     else:
-        await edit_delete(skullevent, "RTFM")
+        await edit_delete(marcusevent, "RTFM")
         return
     end = datetime.now()
     ms = (end - start).seconds
-    await edit_delete(skullevent, f"`Completed Process in {ms} seconds`", 3)
+    await edit_delete(marcusevent, f"`Completed Process in {ms} seconds`", 3)
 
 
 @bot.on(admin_cmd(pattern="ffmpegclear$"))

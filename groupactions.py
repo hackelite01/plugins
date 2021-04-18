@@ -61,7 +61,7 @@ async def _(event):
         return await edit_or_reply(
             event, "`It seems like you dont have ban users permission in this group.`"
         )
-    skullevent = await edit_or_reply(event, "`Kicking...`")
+    marcusevent = await edit_or_reply(event, "`Kicking...`")
     admins = await event.client.get_participants(
         event.chat_id, filter=ChannelParticipantsAdmins
     )
@@ -78,7 +78,7 @@ async def _(event):
         except Exception as e:
             LOGS.info(str(e))
             await sleep(0.5)
-    await skullevent.edit(
+    await marcusevent.edit(
         f"`Sucessfully i have completed kickall process with {success} members kicked out of {total} members`"
     )
 
@@ -108,7 +108,7 @@ async def _(event):
         return await edit_or_reply(
             event, "`It seems like you dont have ban users permission in this group.`"
         )
-    skullevent = await edit_or_reply(event, "`banning...`")
+    marcusevent = await edit_or_reply(event, "`banning...`")
     admins = await event.client.get_participants(
         event.chat_id, filter=ChannelParticipantsAdmins
     )
@@ -127,7 +127,7 @@ async def _(event):
         except Exception as e:
             LOGS.info(str(e))
             await sleep(0.5)
-    await skullevent.edit(
+    await marcusevent.edit(
         f"`Sucessfully i have completed banall process with {success} members banned out of {total} members`"
     )
 

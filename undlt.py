@@ -8,8 +8,8 @@ async def _(event):
         return
     if event.pattern_match.group(1):
         try:
-            skull = int(event.pattern_match.group(1))
-            input_str = skull
+            marcus = int(event.pattern_match.group(1))
+            input_str = marcus
         except Exception:
             input_str = 5
     else:

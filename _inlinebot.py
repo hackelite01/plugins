@@ -7,7 +7,7 @@ import time
 
 from telethon import Button, custom, events
 
-from . import CMD_LIST, skullalive
+from . import CMD_LIST, marcusalive
 
 SKULL_IMG = Config.ALIVE_PIC or None
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
@@ -21,30 +21,30 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         query = event.text
         hmm = re.compile("secret (.*) (.*)")
         match = re.findall(hmm, query)
-        if query.startswith("**skulluserbot") and event.query.user_id == bot.uid:
+        if query.startswith("**marcususerbot") and event.query.user_id == bot.uid:
             buttons = [
                 (
                     custom.Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/hackelite01/skull-userbot"),
+                    Button.url("Repo", "https://github.com/hackelite01/marcus-userbot"),
                 )
             ]
             if SKULL_IMG and SKULL_IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
                     SKULL_IMG,
-                    # title="Alive skull",
+                    # title="Alive marcus",
                     text=query,
                     buttons=buttons,
                 )
             elif SKULL_IMG:
                 result = builder.document(
                     SKULL_IMG,
-                    title="Alive skull",
+                    title="Alive marcus",
                     text=query,
                     buttons=buttons,
                 )
             else:
                 result = builder.article(
-                    title="Alive skull",
+                    title="Alive marcus",
                     text=query,
                     buttons=buttons,
                 )
@@ -161,7 +161,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please deploy your own skulluserbot, and don't use mine! Join @skulluserbot help"
+            reply_pop_up_alert = "Please deploy your own marcususerbot, and don't use mine! Join @marcususerbot help"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(
@@ -178,7 +178,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please deploy your own skulluserbot, and don't use mine! Join @skulluserbot help "
+            reply_pop_up_alert = "Please deploy your own marcususerbot, and don't use mine! Join @marcususerbot help "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"secret_(.*)")))
@@ -221,7 +221,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
             else:
                 reply_pop_up_alert = help_string
             reply_pop_up_alert += (
-                "Use .unload {} to remove this plugin ©skulluserbot".format(plugin_name)
+                "Use .unload {} to remove this plugin ©marcususerbot".format(plugin_name)
             )
             try:
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
@@ -237,7 +237,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                         caption=plugin_name,
                     )
         else:
-            reply_pop_up_alert = "Please deploy your own skulluserbot, and don't use mine! Join @skulluserbot help "
+            reply_pop_up_alert = "Please deploy your own marcususerbot, and don't use mine! Join @marcususerbot help "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
@@ -245,12 +245,12 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         if event.query.user_id == bot.uid:
             await event.edit("menu closed")
         else:
-            reply_pop_up_alert = "Please deploy your own skulluserbot, and don't use mine! Join @skulluserbot help "
+            reply_pop_up_alert = "Please deploy your own marcususerbot, and don't use mine! Join @marcususerbot help "
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats")))
     async def on_plug_in_callback_query_handler(event):
-        statstext = await skullalive()
+        statstext = await marcusalive()
         reply_pop_up_alert = statstext
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 

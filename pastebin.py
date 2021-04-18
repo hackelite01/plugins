@@ -1,4 +1,4 @@
-# pastebin for skulluserbot
+# pastebin for marcususerbot
 
 import os
 
@@ -24,7 +24,7 @@ def progress(current, total):
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "`pasting to del dog.....`")
+    marcusevent = await edit_or_reply(event, "`pasting to del dog.....`")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
         message = input_str
@@ -55,11 +55,11 @@ async def _(event):
     if r["isUrl"]:
         nurl = f"https://del.dog/v/{r['key']}"
         rawurl = f"https://del.dog/raw/{r['key']}"
-        await skullevent.edit(
+        await marcusevent.edit(
             f"**Pasted to dogbin : **[dog]({nurl}).\n**Raw url :** [raw link]({rawurl})\n**GoTo Original URL: **[link]({url})"
         )
     else:
-        await skullevent.edit(
+        await marcusevent.edit(
             f"**Pasted to dogbin : **[dog]({url})\n**Raw url :** [raw link](https://del.dog/raw/{r['key']})"
         )
 
@@ -69,7 +69,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "`pasting to neko bin.....`")
+    marcusevent = await edit_or_reply(event, "`pasting to neko bin.....`")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
         message = input_str
@@ -119,7 +119,7 @@ async def _(event):
         )
         url = f"https://nekobin.com/{key}"
     reply_text = f"**Pasted to Nekobin : **[neko]({url})\n**Raw url : **[Raw](https://nekobin.com/raw/{key})"
-    await skullevent.edit(reply_text)
+    await marcusevent.edit(reply_text)
 
 
 @bot.on(admin_cmd(pattern="iffuci(?: |$)(.*)", outgoing=True))
@@ -127,7 +127,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "`pasting to del dog.....`")
+    marcusevent = await edit_or_reply(event, "`pasting to del dog.....`")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
         message = input_str
@@ -157,11 +157,11 @@ async def _(event):
     url = f"https://iffuci.tk/{r['key']}"
     if r["isUrl"]:
         nurl = f"https://iffuci.tk/v/{r['key']}"
-        await skullevent.edit(
+        await marcusevent.edit(
             "code is pasted to {}. GoTo Original URL: {}".format(nurl, url)
         )
     else:
-        await skullevent.edit("code is pasted to {}".format(url))
+        await marcusevent.edit("code is pasted to {}".format(url))
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="getpaste(?: |$)(.*)"))
@@ -169,7 +169,7 @@ async def _(event):
 async def get_dogbin_content(dog_url):
     textx = await dog_url.get_reply_message()
     message = dog_url.pattern_match.group(1)
-    skullevent = await edit_or_reply(dog_url, "`Getting dogbin content...`")
+    marcusevent = await edit_or_reply(dog_url, "`Getting dogbin content...`")
     if not message and textx:
         message = str(textx.message)
     format_normal = "https://del.dog/"
@@ -182,21 +182,21 @@ async def get_dogbin_content(dog_url):
     elif message.startswith("del.dog/"):
         message = message[len("del.dog/") :]
     else:
-        await skullevent.edit("`Is that even a dogbin url?`")
+        await marcusevent.edit("`Is that even a dogbin url?`")
         return
     resp = get(f"https://del.dog/raw/{message}")
     try:
         resp.raise_for_status()
     except exceptions.HTTPError as HTTPErr:
-        await skullevent.edit(
+        await marcusevent.edit(
             "Request returned an unsuccessful status code.\n\n" + str(HTTPErr)
         )
         return
     except exceptions.Timeout as TimeoutErr:
-        await skullevent.edit("Request timed out." + str(TimeoutErr))
+        await marcusevent.edit("Request timed out." + str(TimeoutErr))
         return
     except exceptions.TooManyRedirects as RedirectsErr:
-        await skullevent.edit(
+        await marcusevent.edit(
             "Request exceeded the configured number of maximum redirections."
             + str(RedirectsErr)
         )
@@ -204,7 +204,7 @@ async def get_dogbin_content(dog_url):
     reply_text = (
         "`Fetched dogbin URL content successfully!`\n\n`Content:` \n" + resp.text
     )
-    await edit_or_reply(skullevent, reply_text)
+    await edit_or_reply(marcusevent, reply_text)
 
 
 @bot.on(admin_cmd(pattern="pcode(?: |$)(.*)"))
@@ -213,7 +213,7 @@ async def code_print(event):
     if event.fwd_from:
         return
     reply_to = await reply_id(event)
-    skullevent = await edit_or_reply(event, "`printing the text on blank page`")
+    marcusevent = await edit_or_reply(event, "`printing the text on blank page`")
     input_str = event.pattern_match.group(1)
     reply = await event.get_reply_message()
     text_to_print = ""
@@ -230,7 +230,7 @@ async def code_print(event):
             text_to_print = reply.message
         else:
             await edit_delete(
-                skullevent,
+                marcusevent,
                 "`Either reply to document or reply to text message or give text along with command`",
             )
     pygments.highlight(
@@ -244,8 +244,8 @@ async def code_print(event):
             event.chat_id, "out.png", force_document=False, reply_to=reply_to
         )
     except Exception as e:
-        await edit_delete(skullevent, str(e), parse_mode=parse_pre)
-    await skullevent.delete()
+        await edit_delete(marcusevent, str(e), parse_mode=parse_pre)
+    await marcusevent.delete()
     os.remove("out.png")
     os.remove(d_file_name)
 
@@ -255,7 +255,7 @@ async def code_print(event):
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "`pasting to del dog.....`")
+    marcusevent = await edit_or_reply(event, "`pasting to del dog.....`")
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     previous_message = None
     if input_str:
@@ -286,7 +286,7 @@ async def _(event):
     url = f"https://del.dog/{r['key']}"
     chat = "@chotamreaderbot"
     # This module is modded by @ViperAdnan #KeepCredit
-    await skullevent.edit("**Making instant view...**")
+    await marcusevent.edit("**Making instant view...**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -295,9 +295,9 @@ async def _(event):
             await event.client.send_message(chat, url)
             response = await response
         except YouBlockedUserError:
-            await skullevent.edit("```Please unblock me (@chotamreaderbot) u Nigga```")
+            await marcusevent.edit("```Please unblock me (@chotamreaderbot) u Nigga```")
             return
-        await skullevent.delete()
+        await marcusevent.delete()
         await event.client.send_message(
             event.chat_id, response.message, reply_to=previous_message
         )

@@ -38,11 +38,11 @@ async def fun(e):
 @bot.on(sudo_cmd(pattern="oof$", allow_sudo=True))
 async def Oof(e):
     t = "Oof"
-    skullevent = await edit_or_reply(e, t)
+    marcusevent = await edit_or_reply(e, t)
     for _ in range(15):
         await asyncio.sleep(0.5)
         t = t[:-1] + "of"
-        await skullevent.edit(t)
+        await marcusevent.edit(t)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="type (.*)"))
@@ -68,9 +68,9 @@ async def typewriter(typew):
 async def _(event):
     if event.fwd_from:
         return
-    skull = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
-    message = skull[1]
-    count = int(skull[0])
+    marcus = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
+    message = marcus[1]
+    count = int(marcus[0])
     repmessage = (f"{message} ") * count
     await asyncio.wait([event.respond(repmessage)])
     await event.delete()

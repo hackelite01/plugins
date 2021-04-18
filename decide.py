@@ -2,11 +2,11 @@
 Syntax: .decide"""
 import requests
 
-from skull.utils import admin_cmd, sudo_cmd
+from marcus.utils import admin_cmd, sudo_cmd
 
 
-@skull.on(admin_cmd("decide", outgoing=True))
-@skull.on(sudo_cmd("decide", allow_sudo=True))
+@marcus.on(admin_cmd("decide", outgoing=True))
+@marcus.on(sudo_cmd("decide", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

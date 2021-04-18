@@ -1,56 +1,56 @@
 import random
 
-from . import ALIVE_NAME, skullmemes
+from . import ALIVE_NAME, marcusmemes
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 
 
 @bot.on(admin_cmd(pattern="congo$"))
 @bot.on(sudo_cmd(pattern="congo$", allow_sudo=True))
 async def _(e):
-    txt = random.choice(skullmemes.CONGOREACTS)
+    txt = random.choice(marcusmemes.CONGOREACTS)
     await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="shg$"))
 @bot.on(sudo_cmd(pattern="shg$", allow_sudo=True))
 async def shrugger(e):
-    txt = random.choice(skullmemes.SHGS)
+    txt = random.choice(marcusmemes.SHGS)
     await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="runs$"))
 @bot.on(sudo_cmd(pattern="runs$", allow_sudo=True))
 async def runner_lol(e):
-    txt = random.choice(skullmemes.RUNSREACTS)
+    txt = random.choice(marcusmemes.RUNSREACTS)
     await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="noob$"))
 @bot.on(sudo_cmd(pattern="noob$", allow_sudo=True))
 async def metoo(e):
-    txt = random.choice(skullmemes.NOOBSTR)
+    txt = random.choice(marcusmemes.NOOBSTR)
     await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="insult$"))
 @bot.on(sudo_cmd(pattern="insult$", allow_sudo=True))
 async def insult(e):
-    txt = random.choice(skullmemes.INSULT_STRINGS)
+    txt = random.choice(marcusmemes.INSULT_STRINGS)
     await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="hey$"))
 @bot.on(sudo_cmd(pattern="hey$", allow_sudo=True))
 async def hoi(e):
-    txt = random.choice(skullmemes.HELLOSTR)
+    txt = random.choice(marcusmemes.HELLOSTR)
     await edit_or_reply(e, txt)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="pro$"))
 @bot.on(sudo_cmd(pattern="pro$", allow_sudo=True))
 async def proo(e):
-    txt = random.choice(skullmemes.PRO_STRINGS)
+    txt = random.choice(marcusmemes.PRO_STRINGS)
     await edit_or_reply(e, txt)
 
 
@@ -59,25 +59,25 @@ async def proo(e):
 async def _(e):
     input_str = e.pattern_match.group(1)
     if input_str in "happy":
-        emoticons = skullmemes.FACEREACTS[0]
+        emoticons = marcusmemes.FACEREACTS[0]
     elif input_str in "think":
-        emoticons = skullmemes.FACEREACTS[1]
+        emoticons = marcusmemes.FACEREACTS[1]
     elif input_str in "wave":
-        emoticons = skullmemes.FACEREACTS[2]
+        emoticons = marcusmemes.FACEREACTS[2]
     elif input_str in "wtf":
-        emoticons = skullmemes.FACEREACTS[3]
+        emoticons = marcusmemes.FACEREACTS[3]
     elif input_str in "love":
-        emoticons = skullmemes.FACEREACTS[4]
+        emoticons = marcusmemes.FACEREACTS[4]
     elif input_str in "confused":
-        emoticons = skullmemes.FACEREACTS[5]
+        emoticons = marcusmemes.FACEREACTS[5]
     elif input_str in "dead":
-        emoticons = skullmemes.FACEREACTS[6]
+        emoticons = marcusmemes.FACEREACTS[6]
     elif input_str in "sad":
-        emoticons = skullmemes.FACEREACTS[7]
+        emoticons = marcusmemes.FACEREACTS[7]
     elif input_str in "dog":
-        emoticons = skullmemes.FACEREACTS[8]
+        emoticons = marcusmemes.FACEREACTS[8]
     else:
-        emoticons = skullmemes.FACEREACTS[9]
+        emoticons = marcusmemes.FACEREACTS[9]
     txt = random.choice(emoticons)
     await edit_or_reply(e, txt)
 

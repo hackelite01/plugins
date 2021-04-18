@@ -14,8 +14,8 @@ async def spammer(event):
     if event.fwd_from:
         return
     mayank = await event.get_reply_message()
-    skull = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
-    counter = int(skull[0])
+    marcus = ("".join(event.text.split(maxsplit=1)[1:])).split(" ", 1)
+    counter = int(marcus[0])
     if counter > 50:
         sleeptimet = 0.5
         sleeptimem = 1
@@ -23,14 +23,14 @@ async def spammer(event):
         sleeptimet = 0.1
         sleeptimem = 0.3
     await event.delete()
-    await spam_function(event, mayank, skull, sleeptimem, sleeptimet)
+    await spam_function(event, mayank, marcus, sleeptimem, sleeptimet)
 
 
-async def spam_function(event, mayank, skull, sleeptimem, sleeptimet, DelaySpam=False):
+async def spam_function(event, mayank, marcus, sleeptimem, sleeptimet, DelaySpam=False):
     hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    counter = int(skull[0])
-    if len(skull) == 2:
-        spam_message = str(skull[1])
+    counter = int(marcus[0])
+    if len(marcus) == 2:
+        spam_message = str(marcus[1])
         for _ in range(counter):
             if event.reply_to_msg_id:
                 await mayank.reply(spam_message)
@@ -42,7 +42,7 @@ async def spam_function(event, mayank, skull, sleeptimem, sleeptimet, DelaySpam=
             mayank = await event.client.send_file(
                 event.chat_id, mayank, caption=mayank.text
             )
-            await _skullutils.unsavegif(event, mayank)
+            await _marcusutils.unsavegif(event, mayank)
             await asyncio.sleep(sleeptimem)
     elif event.reply_to_msg_id and mayank.text:
         spam_message = mayank.text
@@ -83,7 +83,7 @@ async def spam_function(event, mayank, skull, sleeptimem, sleeptimet, DelaySpam=
                     )
 
             mayank = await event.client.send_file(BOTLOG_CHATID, mayank)
-            await _skullutils.unsavegif(event, mayank)
+            await _marcusutils.unsavegif(event, mayank)
         return
     if BOTLOG:
         if DelaySpam is not True:
@@ -131,7 +131,7 @@ async def stickerpack_spam(event):
     hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     try:
         stickerset_attr = reply.document.attributes[1]
-        skullevent = await edit_or_reply(
+        marcusevent = await edit_or_reply(
             event, "`Fetching details of the sticker pack, please wait..`"
         )
     except BaseException:
@@ -148,7 +148,7 @@ async def stickerpack_spam(event):
         )
     except Exception:
         return await edit_delete(
-            skullevent,
+            marcusevent,
             "`I guess this sticker is not part of any pack so i cant kang this sticker pack try kang for this sticker`",
         )
     try:
@@ -236,9 +236,9 @@ async def spammer(event):
     reply = await event.get_reply_message()
     input_str = "".join(event.text.split(maxsplit=1)[1:]).split(" ", 2)
     sleeptimet = sleeptimem = float(input_str[0])
-    skull = input_str[1:]
+    marcus = input_str[1:]
     await event.delete()
-    await spam_function(event, reply, skull, sleeptimem, sleeptimet, DelaySpam=True)
+    await spam_function(event, reply, marcus, sleeptimem, sleeptimet, DelaySpam=True)
 
 
 CMD_HELP.update(

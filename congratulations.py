@@ -1,6 +1,6 @@
 import random
 
-from skull.utils import admin_cmd, edit_or_reply, sudo_cmd
+from marcus.utils import admin_cmd, edit_or_reply, sudo_cmd
 
 RUNSREACTS = [
     "`Congratulations and BRAVO!`",
@@ -16,8 +16,8 @@ RUNSREACTS = [
 ]
 
 
-@skull.on(admin_cmd(pattern="congo", outgoing=True))
-@skull.on(sudo_cmd(pattern="congo", allow_sudo=True))
+@marcus.on(admin_cmd(pattern="congo", outgoing=True))
+@marcus.on(sudo_cmd(pattern="congo", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return

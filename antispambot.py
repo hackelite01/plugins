@@ -1,5 +1,5 @@
 #    Copyright (C) 2021 mayank
-# baning spmmers plugin for skulluserbot by @mayank1rajput
+# baning spmmers plugin for marcususerbot by @mayank1rajput
 # included both cas(combot antispam service) and spamwatch (need to add more feaututres)
 
 from requests import get
@@ -19,10 +19,10 @@ if Config.ANTISPAMBOT_BAN:
             return
         chat = event.chat_id
         user = await event.get_user()
-        skulladmin = await is_admin(bot, chat, bot.uid)
-        if not skulladmin:
+        marcusadmin = await is_admin(bot, chat, bot.uid)
+        if not marcusadmin:
             return
-        skullbanned = None
+        marcusbanned = None
         adder = None
         ignore = None
         if event.user_added:
@@ -39,10 +39,10 @@ if Config.ANTISPAMBOT_BAN:
         if ignore:
             return
         if is_gbanned(user.id):
-            skullgban = get_gbanuser(user.id)
-            if skullgban.reason:
+            marcusgban = get_gbanuser(user.id)
+            if marcusgban.reason:
                 hmm = await event.reply(
-                    f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{skullgban.reason}`"
+                    f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{marcusgban.reason}`"
                 )
             else:
                 hmm = await event.reply(
@@ -50,10 +50,10 @@ if Config.ANTISPAMBOT_BAN:
                 )
             try:
                 await bot.edit_permissions(chat, user.id, view_messages=False)
-                skullbanned = True
+                marcusbanned = True
             except Exception as e:
                 LOGS.info(e)
-        if spamwatch and not skullbanned:
+        if spamwatch and not marcusbanned:
             ban = spamwatch.get_ban(user.id)
             if ban:
                 hmm = await event.reply(
@@ -61,10 +61,10 @@ if Config.ANTISPAMBOT_BAN:
                 )
                 try:
                     await bot.edit_permissions(chat, user.id, view_messages=False)
-                    skullbanned = True
+                    marcusbanned = True
                 except Exception as e:
                     LOGS.info(e)
-        if not skullbanned:
+        if not marcusbanned:
             try:
                 casurl = "https://api.cas.chat/check?user_id={}".format(user.id)
                 data = get(casurl).json()
@@ -80,10 +80,10 @@ if Config.ANTISPAMBOT_BAN:
                 )
                 try:
                     await bot.edit_permissions(chat, user.id, view_messages=False)
-                    skullbanned = True
+                    marcusbanned = True
                 except Exception as e:
                     LOGS.info(e)
-        if BOTLOG and skullbanned:
+        if BOTLOG and marcusbanned:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#ANTISPAMBOT\n"
@@ -96,7 +96,7 @@ if Config.ANTISPAMBOT_BAN:
 @bot.on(admin_cmd(pattern="cascheck$"))
 @bot.on(sudo_cmd(pattern="cascheck$", allow_sudo=True))
 async def caschecker(cas):
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         cas,
         "`checking any cas(combot antispam service) banned users here, this may take several minutes too......`",
     )
@@ -125,12 +125,12 @@ async def caschecker(cas):
         if not cas_count:
             text = "No CAS Banned users found!"
     except ChatAdminRequiredError as carerr:
-        await skullevent.edit("`CAS check failed: Admin privileges are required`")
+        await marcusevent.edit("`CAS check failed: Admin privileges are required`")
         return
     except BaseException as be:
-        await skullevent.edit("`CAS check failed`")
+        await marcusevent.edit("`CAS check failed`")
         return
-    await skullevent.edit(text)
+    await marcusevent.edit(text)
 
 
 @bot.on(admin_cmd(pattern="spamcheck$"))
@@ -138,7 +138,7 @@ async def caschecker(cas):
 async def caschecker(cas):
     text = ""
     chat = cas.chat_id
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         cas,
         "`checking any spamwatch banned users here, this may take several minutes too......`",
     )
@@ -165,12 +165,12 @@ async def caschecker(cas):
         if not cas_count:
             text = "No spamwatch Banned users found!"
     except ChatAdminRequiredError as carerr:
-        await skullevent.edit("`spamwatch check failed: Admin privileges are required`")
+        await marcusevent.edit("`spamwatch check failed: Admin privileges are required`")
         return
     except BaseException as be:
-        await skullevent.edit("`spamwatch check failed`")
+        await marcusevent.edit("`spamwatch check failed`")
         return
-    await skullevent.edit(text)
+    await marcusevent.edit(text)
 
 
 def banchecker(user_id):

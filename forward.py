@@ -3,13 +3,13 @@ import string
 from telethon.tl.types import Channel
 
 
-async def all_groups_id(skull):
-    skullgroups = []
-    async for dialog in skull.client.iter_dialogs():
+async def all_groups_id(marcus):
+    marcusgroups = []
+    async for dialog in marcus.client.iter_dialogs():
         entity = dialog.entity
         if isinstance(entity, Channel) and entity.megagroup:
-            skullgroups.append(entity.id)
-    return skullgroups
+            marcusgroups.append(entity.id)
+    return marcusgroups
 
 
 @bot.on(admin_cmd(pattern="frwd$"))

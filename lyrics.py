@@ -13,7 +13,7 @@ GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "wait dear..! I am searching your lyrics....`")
+    marcusevent = await edit_or_reply(event, "wait dear..! I am searching your lyrics....`")
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
@@ -23,7 +23,7 @@ async def _(event):
     elif reply.text:
         query = reply.message
     else:
-        await skullevent.edit("`What I am Supposed to find `")
+        await marcusevent.edit("`What I am Supposed to find `")
         return
     song = ""
     song = Song.find_song(query)
@@ -45,9 +45,9 @@ async def _(event):
                 caption=query,
                 reply_to=reply_to_id,
             )
-            await skullevent.delete()
+            await marcusevent.delete()
     else:
-        await skullevent.edit(reply)
+        await marcusevent.edit(reply)
 
 
 @bot.on(admin_cmd(outgoing=True, pattern="glyrics ?(.*)"))
@@ -84,7 +84,7 @@ async def lyrics(lyric):
     if len(args) < 1:
         await edit_or_reply(lyric, "`Please provide artist and song names`")
         return
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         lyric, f"`Searching lyrics for {artist} - {song}...`"
     )
     try:
@@ -92,10 +92,10 @@ async def lyrics(lyric):
     except TypeError:
         songs = None
     if songs is None:
-        await skullevent.edit(f"Song **{artist} - {song}** not found!")
+        await marcusevent.edit(f"Song **{artist} - {song}** not found!")
         return
     if len(songs.lyrics) > 4096:
-        await skullevent.edit("`Lyrics is too big, view the file to see it.`")
+        await marcusevent.edit("`Lyrics is too big, view the file to see it.`")
         with open("lyrics.txt", "w+") as f:
             f.write(f"Search query: \n{artist} - {song}\n\n{songs.lyrics}")
         await lyric.client.send_file(
@@ -105,7 +105,7 @@ async def lyrics(lyric):
         )
         os.remove("lyrics.txt")
     else:
-        await skullevent.edit(
+        await marcusevent.edit(
             f"**Search query**: \n`{artist} - {song}`\n\n```{songs.lyrics}```"
         )
     return

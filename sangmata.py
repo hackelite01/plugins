@@ -31,12 +31,12 @@ async def _(event):
     else:
         uid = reply_message.sender_id
     chat = "@SangMataInfo_bot"
-    skullevent = await edit_or_reply(event, "`Processing...`")
+    marcusevent = await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"/search_id {uid}")
         except YouBlockedUserError:
-            await edit_delete(skullevent, "`unblock @Sangmatainfo_bot and then try`")
+            await edit_delete(marcusevent, "`unblock @Sangmatainfo_bot and then try`")
         responses = []
         while True:
             try:
@@ -46,9 +46,9 @@ async def _(event):
             responses.append(response.text)
         await event.client.send_read_acknowledge(conv.chat_id)
     if not responses:
-        await edit_delete(skullevent, "`bot can't fetch results`")
+        await edit_delete(marcusevent, "`bot can't fetch results`")
     if "No records found" in responses:
-        await edit_delete(skullevent, "`The user doesn't have any record`")
+        await edit_delete(marcusevent, "`The user doesn't have any record`")
     names, usernames = await sanga_seperator(responses)
     cmd = event.pattern_match.group(1)
     if cmd == "sg":
@@ -58,7 +58,7 @@ async def _(event):
                 await event.reply(i, parse_mode=parse_pre)
             else:
                 mayank = True
-                await skullevent.edit(i, parse_mode=parse_pre)
+                await marcusevent.edit(i, parse_mode=parse_pre)
     elif cmd == "sgu":
         mayank = None
         for i in usernames:
@@ -66,7 +66,7 @@ async def _(event):
                 await event.reply(i, parse_mode=parse_pre)
             else:
                 mayank = True
-                await skullevent.edit(i, parse_mode=parse_pre)
+                await marcusevent.edit(i, parse_mode=parse_pre)
 
 
 CMD_HELP.update(

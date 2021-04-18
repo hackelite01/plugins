@@ -12,9 +12,9 @@ from cowpy import cow
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import ChannelParticipantsAdmins, MessageEntityMentionName
 
-from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, skullmemes
+from . import ALIVE_NAME, BOTLOG, BOTLOG_CHATID, marcusmemes
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 
 
 async def get_user(event):
@@ -105,7 +105,7 @@ async def _(event):
 @bot.on(sudo_cmd(pattern="slap(?: |$)(.*)", allow_sudo=True))
 async def who(event):
     replied_user = await get_user(event)
-    caption = await skullmemes.slap(replied_user, event, DEFAULTUSER)
+    caption = await marcusmemes.slap(replied_user, event, DEFAULTUSER)
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
         message_id_to_reply = None
@@ -130,7 +130,7 @@ async def decide(event):
     mayank = await event.client.send_message(
         event.chat_id, str(r["answer"]).upper(), reply_to=message_id, file=r["image"]
     )
-    await _skullutils.unsavegif(event, mayank)
+    await _marcusutils.unsavegif(event, mayank)
 
 
 @bot.on(admin_cmd(pattern=f"shout", outgoing=True))
@@ -166,9 +166,9 @@ async def faces(owo):
     reply_text = re.sub(r"(R|L)", "W", reply_text)
     reply_text = re.sub(r"n([aeiou])", r"ny\1", reply_text)
     reply_text = re.sub(r"N([aeiouAEIOU])", r"Ny\1", reply_text)
-    reply_text = re.sub(r"\!+", " " + random.choice(skullmemes.UWUS), reply_text)
+    reply_text = re.sub(r"\!+", " " + random.choice(marcusmemes.UWUS), reply_text)
     reply_text = reply_text.replace("ove", "uv")
-    reply_text += " " + random.choice(skullmemes.UWUS)
+    reply_text += " " + random.choice(marcusmemes.UWUS)
     await edit_or_reply(owo, reply_text)
 
 
@@ -251,8 +251,8 @@ async def wish_check(event):
 async def source(e):
     await edit_or_reply(
         e,
-        "Click [here](https://github.com/hackelite01/skulluserbot) to open this bot source code\
-        \nClick [here](https://github.com/hackelite01/skullpack) to open supported link for heroku",
+        "Click [here](https://github.com/hackelite01/marcususerbot) to open this bot source code\
+        \nClick [here](https://github.com/hackelite01/marcuspack) to open supported link for heroku",
     )
 
 
@@ -294,7 +294,7 @@ async def gbun(event):
     gbunVar = event.text
     gbunVar = gbunVar[6:]
     mentions = "`Warning!! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\n`"
-    skullevent = await edit_or_reply(event, "**Summoning out le Gungnir ❗️⚜️☠️**")
+    marcusevent = await edit_or_reply(event, "**Summoning out le Gungnir ❗️⚜️☠️**")
     await asyncio.sleep(3.5)
     chat = await event.get_input_chat()
     async for _ in event.client.iter_participants(
@@ -310,7 +310,7 @@ async def gbun(event):
         idd = reply_message.sender_id
         # make meself invulnerable cuz why not xD
         if idd == 997887920:
-            await skullevent.edit(
+            await marcusevent.edit(
                 "`Wait a second, This is my master!`\n**How dare you threaten to ban my master nigger!**\n\n__Your account has been hacked! Pay 69$ to my master__ [π.$](tg://user?id=997887920) __to release your account__😏"
             )
         else:
@@ -332,10 +332,10 @@ async def gbun(event):
             else:
                 no_reason = "__Reason: Potential spammer. __"
                 jnl += no_reason
-            await skullevent.edit(jnl)
+            await marcusevent.edit(jnl)
     else:
         mention = "`Warning!! User 𝙂𝘽𝘼𝙉𝙉𝙀𝘿 By Admin...\nReason: Potential spammer. `"
-        await skullevent.edit(mention)
+        await marcusevent.edit(mention)
 
 
 CMD_HELP.update(
@@ -362,7 +362,7 @@ CMD_HELP.update(
         \n\n  •  **Syntax :** `.wish <reply/text>`\
         \n  •  **Function : **Shows the chance of your success inspired from @CalsiBot.\
         \n\n  •  **Syntax :** `.repo`\
-        \n  •  **Function : **Shows to source code link of skulluserbot.\
+        \n  •  **Function : **Shows to source code link of marcususerbot.\
         \n\n  •  **Syntax :** `.lfy <query>`\
         \n  •  **Function : **Let me Google that for you real quick !!\
         \n\n  •  **Syntax :** `.gbun <reason>`\

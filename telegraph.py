@@ -1,4 +1,4 @@
-# telegraph utils for skulluserbot
+# telegraph utils for marcususerbot
 
 import os
 from datetime import datetime
@@ -20,7 +20,7 @@ auth_url = r["auth_url"]
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "`processing........`")
+    marcusevent = await edit_or_reply(event, "`processing........`")
     if not os.path.isdir(Config.TEMP_DIR):
         os.makedirs(Config.TEMP_DIR)
     if BOTLOG:
@@ -41,7 +41,7 @@ async def _(event):
             )
             end = datetime.now()
             ms = (end - start).seconds
-            await skullevent.edit(
+            await marcusevent.edit(
                 f"`Downloaded to {downloaded_file_name} in {ms} seconds.`"
             )
             if downloaded_file_name.endswith((".webp")):
@@ -50,13 +50,13 @@ async def _(event):
                 start = datetime.now()
                 media_urls = upload_file(downloaded_file_name)
             except exceptions.TelegraphException as exc:
-                await skullevent.edit("**Error : **" + str(exc))
+                await marcusevent.edit("**Error : **" + str(exc))
                 os.remove(downloaded_file_name)
             else:
                 end = datetime.now()
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
-                await skullevent.edit(
+                await marcusevent.edit(
                     "**link : **[telegraph](https://telegra.ph{})\
                     \n**Time Taken : **`{} seconds.`".format(
                         media_urls[0], (ms + ms_two)
@@ -86,14 +86,14 @@ async def _(event):
             response = telegraph.create_page(title_of_page, html_content=page_content)
             end = datetime.now()
             ms = (end - start).seconds
-            skull = f"https://telegra.ph/{response['path']}"
-            await skullevent.edit(
-                f"**link : ** [telegraph]({skull})\
+            marcus = f"https://telegra.ph/{response['path']}"
+            await marcusevent.edit(
+                f"**link : ** [telegraph]({marcus})\
                  \n**Time Taken : **`{ms} seconds.`",
                 link_preview=True,
             )
     else:
-        await skullevent.edit(
+        await marcusevent.edit(
             "`Reply to a message to get a permanent telegra.ph link. (Inspired by @ControllerBot)`",
         )
 

@@ -34,7 +34,7 @@ async def gps(event):
 
     await event.edit("finding")
 
-    geolocator = Nominatim(user_agent="skulluserbot")
+    geolocator = Nominatim(user_agent="marcususerbot")
     geoloc = geolocator.geocode(input_str)
 
     if geoloc:
@@ -60,9 +60,9 @@ async def gps(event):
     if not input_str:
         return await event.reply("what should I find give me location.")
 
-    skull = await event.reply("finding")
+    marcus = await event.reply("finding")
 
-    geolocator = Nominatim(user_agent="skulluserbot")
+    geolocator = Nominatim(user_agent="marcususerbot")
     geoloc = geolocator.geocode(input_str)
 
     if geoloc:
@@ -71,9 +71,9 @@ async def gps(event):
         await reply_to_id.reply(
             input_str, file=types.InputMediaGeoPoint(types.InputGeoPoint(lat, lon))
         )
-        await skull.delete()
+        await marcus.delete()
     else:
-        await skull.edit("i coudn't find it")
+        await marcus.edit("i coudn't find it")
 
 
 CMD_HELP.update(

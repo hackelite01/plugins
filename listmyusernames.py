@@ -4,10 +4,10 @@
 from telethon.tl.functions.channels import GetAdminedPublicChannelsRequest
 from uniborg.util import friday_on_cmd
 
-from skulluserbot import CMD_HELP
+from marcususerbot import CMD_HELP
 
 
-@skull.on(skull_on_cmd("listmyusernames"))
+@marcus.on(marcus_on_cmd("listmyusernames"))
 async def mine(event):
     if event.fwd_from:
         return

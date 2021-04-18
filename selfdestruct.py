@@ -4,9 +4,9 @@ from asyncio import sleep
 @bot.on(admin_cmd(pattern="sdm (\d*) (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="sdm (\d*) (.*)", allow_sudo=True))
 async def selfdestruct(destroy):
-    skull = ("".join(destroy.text.split(maxsplit=1)[1:])).split(" ", 1)
-    message = skull[1]
-    ttl = int(skull[0])
+    marcus = ("".join(destroy.text.split(maxsplit=1)[1:])).split(" ", 1)
+    message = marcus[1]
+    ttl = int(marcus[0])
     try:
         await destroy.delete()
     except Exception as e:
@@ -19,9 +19,9 @@ async def selfdestruct(destroy):
 @bot.on(admin_cmd(pattern="selfdm (\d*) (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="selfdm (\d*) (.*)", allow_sudo=True))
 async def selfdestruct(destroy):
-    skull = ("".join(destroy.text.split(maxsplit=1)[1:])).split(" ", 1)
-    message = skull[1]
-    ttl = int(skull[0])
+    marcus = ("".join(destroy.text.split(maxsplit=1)[1:])).split(" ", 1)
+    message = marcus[1]
+    ttl = int(marcus[0])
     text = (
         message + f"\n\n`This message shall be self-destructed in {str(ttl)} seconds`"
     )

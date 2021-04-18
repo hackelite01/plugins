@@ -1,4 +1,4 @@
-# file summary plugin for skulluserbot  by @mayank1rajput
+# file summary plugin for marcususerbot  by @mayank1rajput
 
 import time
 
@@ -53,7 +53,7 @@ async def _(event):
             link = chatdata.title
     else:
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event,
         f"<code>Counting files and file size of </code><b>{link}</b>\n<code>This may take some time also depends on number of group messages</code>",
         parse_mode="HTML",
@@ -114,7 +114,7 @@ async def _(event):
     result += f"<code>{str(x)}</code>\n"
     result += f"{largest}"
     result += line + totalstring + line + runtimestring + line
-    await skullevent.edit(result, parse_mode="HTML", link_preview=False)
+    await marcusevent.edit(result, parse_mode="HTML", link_preview=False)
 
 
 @borg.on(admin_cmd(pattern="userfs ?(.*)", outgoing=True))
@@ -167,7 +167,7 @@ async def _(event):
             link = chatdata.title
     else:
         link = f"<a href='tg://user?id={chatdata.id}'>{chatdata.first_name}</a>"
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event,
         f"<code>Counting files and file size by </code>{_format.htmlmentionuser(userdata.first_name,userdata.id)}<code> in Group </code><b>{link}</b>\n<code>This may take some time also depends on number of user messages</code>",
         parse_mode="HTML",
@@ -231,7 +231,7 @@ async def _(event):
     result += f"<code>{str(x)}</code>\n"
     result += f"{largest}"
     result += line + totalstring + line + runtimestring + line
-    await skullevent.edit(result, parse_mode="HTML", link_preview=False)
+    await marcusevent.edit(result, parse_mode="HTML", link_preview=False)
 
 
 CMD_HELP.update(

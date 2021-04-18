@@ -53,7 +53,7 @@ async def wiki(wiki_q):
 @bot.on(admin_cmd(pattern="imdb (.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="imdb (.*)", allow_sudo=True))
 async def imdb(e):
-    skullevent = await edit_or_reply(e, "`searching........")
+    marcusevent = await edit_or_reply(e, "`searching........")
     try:
         movie_name = e.pattern_match.group(1)
         remove_space = movie_name.split(" ")
@@ -114,7 +114,7 @@ async def imdb(e):
                 mov_rating = r.strong["title"]
         else:
             mov_rating = "Not available"
-        await skullevent.edit(
+        await marcusevent.edit(
             "<a href=" + poster + ">&#8203;</a>"
             "<b>Title : </b><code>"
             + mov_title
@@ -140,7 +140,7 @@ async def imdb(e):
             parse_mode="HTML",
         )
     except IndexError:
-        await skullevent.edit("Plox enter **Valid movie name** kthx")
+        await marcusevent.edit("Plox enter **Valid movie name** kthx")
 
 
 CMD_HELP.update(

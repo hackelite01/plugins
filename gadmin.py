@@ -44,19 +44,19 @@ UNBAN_RIGHTS = ChatBannedRights(
 
 @bot.on(admin_cmd(pattern=r"gban(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern=r"gban(?: |$)(.*)", allow_sudo=True))
-async def skullgban(event):
+async def marcusgban(event):
     if event.fwd_from:
         return
-    skulle = await edit_or_reply(event, "`gbanning.......`")
+    marcuse = await edit_or_reply(event, "`gbanning.......`")
     start = datetime.now()
-    user, reason = await get_user_from_event(event, skulle)
+    user, reason = await get_user_from_event(event, marcuse)
     if not user:
         return
     if user.id == (await event.client.get_me()).id:
-        await skulle.edit("why would I ban myself")
+        await marcuse.edit("why would I ban myself")
         return
     if user.id in SKULL_ID:
-        await skulle.edit("why would I ban my dev")
+        await marcuse.edit("why would I ban my dev")
         return
     try:
         hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -64,19 +64,19 @@ async def skullgban(event):
     except BaseException:
         pass
     if gban_sql.is_gbanned(user.id):
-        await skulle.edit(
+        await marcuse.edit(
             f"`the `[user](tg://user?id={user.id})` is already in gbanned list any way checking again`"
         )
     else:
-        gban_sql.skullgban(user.id, reason)
+        gban_sql.marcusgban(user.id, reason)
     san = []
     san = await admin_groups(event)
     count = 0
     sandy = len(san)
     if sandy == 0:
-        await skulle.edit("`you are not admin of atleast one group` ")
+        await marcuse.edit("`you are not admin of atleast one group` ")
         return
-    await skulle.edit(
+    await marcuse.edit(
         f"`initiating gban of the `[user](tg://user?id={user.id}) `in {len(san)} groups`"
     )
     for i in range(sandy):
@@ -90,14 +90,14 @@ async def skullgban(event):
                 f"`You don't have required permission in :`\n**Chat :** {event.chat.title}(`{event.chat_id}`)\n`For banning here`",
             )
     end = datetime.now()
-    skulltaken = (end - start).seconds
+    marcustaken = (end - start).seconds
     if reason:
-        await skulle.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {count} groups in {skulltaken} seconds`!!\n**Reason :** `{reason}`"
+        await marcuse.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {count} groups in {marcustaken} seconds`!!\n**Reason :** `{reason}`"
         )
     else:
-        await skulle.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {count} groups in {skulltaken} seconds`!!"
+        await marcuse.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was gbanned in {count} groups in {marcustaken} seconds`!!"
         )
 
     if BOTLOG and count != 0:
@@ -111,7 +111,7 @@ async def skullgban(event):
                 \n**ID : **`{user.id}`\
                 \n**Reason :** `{reason}`\
                 \n__Banned in {count} groups__\
-                \n**Time taken : **`{skulltaken} seconds`",
+                \n**Time taken : **`{marcustaken} seconds`",
             )
         else:
             await event.client.send_message(
@@ -121,7 +121,7 @@ async def skullgban(event):
                 \n**User : **[{user.first_name}](tg://user?id={user.id})\
                 \n**ID : **`{user.id}`\
                 \n__Banned in {count} groups__\
-                \n**Time taken : **`{skulltaken} seconds`",
+                \n**Time taken : **`{marcustaken} seconds`",
             )
         try:
             if reply:
@@ -133,18 +133,18 @@ async def skullgban(event):
 
 @bot.on(admin_cmd(pattern=r"ungban(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern=r"ungban(?: |$)(.*)", allow_sudo=True))
-async def skullgban(event):
+async def marcusgban(event):
     if event.fwd_from:
         return
-    skulle = await edit_or_reply(event, "`ungbanning.....`")
+    marcuse = await edit_or_reply(event, "`ungbanning.....`")
     start = datetime.now()
-    user, reason = await get_user_from_event(event, skulle)
+    user, reason = await get_user_from_event(event, marcuse)
     if not user:
         return
     if gban_sql.is_gbanned(user.id):
-        gban_sql.skullungban(user.id)
+        gban_sql.marcusungban(user.id)
     else:
-        await skulle.edit(
+        await marcuse.edit(
             f"the [user](tg://user?id={user.id}) `is not in your gbanned list`"
         )
         return
@@ -153,9 +153,9 @@ async def skullgban(event):
     count = 0
     sandy = len(san)
     if sandy == 0:
-        await skulle.edit("`you are not even admin of atleast one group `")
+        await marcuse.edit("`you are not even admin of atleast one group `")
         return
-    await skulle.edit(
+    await marcuse.edit(
         f"initiating ungban of the [user](tg://user?id={user.id}) in `{len(san)}` groups"
     )
     for i in range(sandy):
@@ -169,14 +169,14 @@ async def skullgban(event):
                 f"`You don't have required permission in :`\n**Chat : **{event.chat.title}(`{event.chat_id}`)\n`For unbaning here`",
             )
     end = datetime.now()
-    skulltaken = (end - start).seconds
+    marcustaken = (end - start).seconds
     if reason:
-        await skulle.edit(
-            f"[{user.first_name}](tg://user?id={user.id}`) was ungbanned in {count} groups in {skulltaken} seconds`!!\n**Reason :** `{reason}`"
+        await marcuse.edit(
+            f"[{user.first_name}](tg://user?id={user.id}`) was ungbanned in {count} groups in {marcustaken} seconds`!!\n**Reason :** `{reason}`"
         )
     else:
-        await skulle.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was ungbanned in {count} groups in {skulltaken} seconds`!!"
+        await marcuse.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was ungbanned in {count} groups in {marcustaken} seconds`!!"
         )
 
     if BOTLOG and count != 0:
@@ -189,7 +189,7 @@ async def skullgban(event):
                 \n**ID : **`{user.id}`\
                 \n**Reason :** `{reason}`\
                 \n__Unbanned in {count} groups__\
-                \n**Time taken : **`{skulltaken} seconds`",
+                \n**Time taken : **`{marcustaken} seconds`",
             )
         else:
             await event.client.send_message(
@@ -199,7 +199,7 @@ async def skullgban(event):
                 \n**User : **[{user.first_name}](tg://user?id={user.id})\
                 \n**ID : **`{user.id}`\
                 \n__Unbanned in {count} groups__\
-                \n**Time taken : **`{skulltaken} seconds`",
+                \n**Time taken : **`{marcustaken} seconds`",
             )
 
 
@@ -348,19 +348,19 @@ async def watcher(event):
 
 @bot.on(admin_cmd(pattern=r"gkick(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern=r"gkick(?: |$)(.*)", allow_sudo=True))
-async def skullgkick(event):
+async def marcusgkick(event):
     if event.fwd_from:
         return
-    skulle = await edit_or_reply(event, "`gkicking.......`")
+    marcuse = await edit_or_reply(event, "`gkicking.......`")
     start = datetime.now()
-    user, reason = await get_user_from_event(event, skulle)
+    user, reason = await get_user_from_event(event, marcuse)
     if not user:
         return
     if user.id == (await event.client.get_me()).id:
-        await skulle.edit("why would I kick myself")
+        await marcuse.edit("why would I kick myself")
         return
     if user.id in SKULL_ID:
-        await skulle.edit("why would I kick my dev")
+        await marcuse.edit("why would I kick my dev")
         return
     try:
         hmm = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
@@ -372,9 +372,9 @@ async def skullgkick(event):
     count = 0
     sandy = len(san)
     if sandy == 0:
-        await skulle.edit("`you are not admin of atleast one group` ")
+        await marcuse.edit("`you are not admin of atleast one group` ")
         return
-    await skulle.edit(
+    await marcuse.edit(
         f"`initiating gkick of the `[user](tg://user?id={user.id}) `in {len(san)} groups`"
     )
     for i in range(sandy):
@@ -388,14 +388,14 @@ async def skullgkick(event):
                 f"`You don't have required permission in :`\n**Chat :** {event.chat.title}(`{event.chat_id}`)\n`For kicking there`",
             )
     end = datetime.now()
-    skulltaken = (end - start).seconds
+    marcustaken = (end - start).seconds
     if reason:
-        await skulle.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {skulltaken} seconds`!!\n**Reason :** `{reason}`"
+        await marcuse.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {marcustaken} seconds`!!\n**Reason :** `{reason}`"
         )
     else:
-        await skulle.edit(
-            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {skulltaken} seconds`!!"
+        await marcuse.edit(
+            f"[{user.first_name}](tg://user?id={user.id}) `was gkicked in {count} groups in {marcustaken} seconds`!!"
         )
 
     if BOTLOG and count != 0:
@@ -409,7 +409,7 @@ async def skullgkick(event):
                 \n**ID : **`{user.id}`\
                 \n**Reason :** `{reason}`\
                 \n__Kicked in {count} groups__\
-                \n**Time taken : **`{skulltaken} seconds`",
+                \n**Time taken : **`{marcustaken} seconds`",
             )
         else:
             await event.client.send_message(
@@ -419,7 +419,7 @@ async def skullgkick(event):
                 \n**User : **[{user.first_name}](tg://user?id={user.id})\
                 \n**ID : **`{user.id}`\
                 \n__Kicked in {count} groups__\
-                \n**Time taken : **`{skulltaken} seconds`",
+                \n**Time taken : **`{marcustaken} seconds`",
             )
         if reply:
             await reply.forward_to(BOTLOG_CHATID)

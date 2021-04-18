@@ -128,17 +128,17 @@ async def promote(promt):
         delete_messages=True,
         pin_messages=True,
     )
-    skullevent = await edit_or_reply(promt, "`Promoting...`")
-    user, rank = await get_user_from_event(promt, skullevent)
+    marcusevent = await edit_or_reply(promt, "`Promoting...`")
+    user, rank = await get_user_from_event(promt, marcusevent)
     if not rank:
         rank = "Admin"
     if not user:
         return
     try:
         await promt.client(EditAdminRequest(promt.chat_id, user.id, new_rights, rank))
-        await skullevent.edit("`Promoted Successfully! Now gib Money`")
+        await marcusevent.edit("`Promoted Successfully! Now gib Money`")
     except BadRequestError:
-        await skullevent.edit(NO_PERM)
+        await marcusevent.edit(NO_PERM)
         return
     if BOTLOG:
         await promt.client.send_message(
@@ -164,9 +164,9 @@ async def demote(dmod):
     if not admin and not creator:
         await edit_or_reply(dmod, NO_ADMIN)
         return
-    skullevent = await edit_or_reply(dmod, "`Demoting...`")
+    marcusevent = await edit_or_reply(dmod, "`Demoting...`")
     rank = "admeme"
-    user = await get_user_from_event(dmod, skullevent)
+    user = await get_user_from_event(dmod, marcusevent)
     user = user[0]
     if not user:
         return
@@ -181,9 +181,9 @@ async def demote(dmod):
     try:
         await dmod.client(EditAdminRequest(dmod.chat_id, user.id, newrights, rank))
     except BadRequestError:
-        await skullevent.edit(NO_PERM)
+        await marcusevent.edit(NO_PERM)
         return
-    await skullevent.edit("`Demoted Successfully! Betterluck next time`")
+    await marcusevent.edit("`Demoted Successfully! Betterluck next time`")
     if BOTLOG:
         await dmod.client.send_message(
             BOTLOG_CHATID,
@@ -208,30 +208,30 @@ async def ban(bon):
     if not admin and not creator:
         await edit_or_reply(bon, NO_ADMIN)
         return
-    skullevent = await edit_or_reply(bon, "`Whacking the pest!`")
-    user, reason = await get_user_from_event(bon, skullevent)
+    marcusevent = await edit_or_reply(bon, "`Whacking the pest!`")
+    user, reason = await get_user_from_event(bon, marcusevent)
     if not user:
         return
     try:
         await bon.client(EditBannedRequest(bon.chat_id, user.id, BANNED_RIGHTS))
     except BadRequestError:
-        await skullevent.edit(NO_PERM)
+        await marcusevent.edit(NO_PERM)
         return
     try:
         reply = await bon.get_reply_message()
         if reply:
             await reply.delete()
     except BadRequestError:
-        await skullevent.edit(
+        await marcusevent.edit(
             "`I dont have message nuking rights! But still he is banned!`"
         )
         return
     if reason:
-        await skullevent.edit(
+        await marcusevent.edit(
             f"{_format.mentionuser(user.first_name ,user.id)}` is banned !!`\n**Reason : **`{reason}`"
         )
     else:
-        await skullevent.edit(
+        await marcusevent.edit(
             f"{_format.mentionuser(user.first_name ,user.id)} `is banned !!`"
         )
     if BOTLOG:
@@ -258,14 +258,14 @@ async def nothanos(unbon):
     if not admin and not creator:
         await edit_or_reply(unbon, NO_ADMIN)
         return
-    skullevent = await edit_or_reply(unbon, "`Unbanning...`")
-    user = await get_user_from_event(unbon, skullevent)
+    marcusevent = await edit_or_reply(unbon, "`Unbanning...`")
+    user = await get_user_from_event(unbon, marcusevent)
     user = user[0]
     if not user:
         return
     try:
         await unbon.client(EditBannedRequest(unbon.chat_id, user.id, UNBAN_RIGHTS))
-        await skullevent.edit(
+        await marcusevent.edit(
             f"{_format.mentionuser(user.first_name ,user.id)} `is Unbanned Successfully. Granting another chance.`"
         )
         if BOTLOG:
@@ -276,7 +276,7 @@ async def nothanos(unbon):
                 f"CHAT: {unbon.chat.title}(`{unbon.chat_id}`)",
             )
     except UserIdInvalidError:
-        await skullevent.edit("`Uh oh my unban logic broke!`")
+        await marcusevent.edit("`Uh oh my unban logic broke!`")
 
 
 @bot.on(admin_cmd(incoming=True))
@@ -472,19 +472,19 @@ async def kick(usr):
     user, reason = await get_user_from_event(usr)
     if not user:
         return
-    skullevent = await edit_or_reply(usr, "`Kicking...`")
+    marcusevent = await edit_or_reply(usr, "`Kicking...`")
     try:
         await usr.client.kick_participant(usr.chat_id, user.id)
         await sleep(0.5)
     except Exception as e:
-        await skullevent.edit(NO_PERM + f"\n{str(e)}")
+        await marcusevent.edit(NO_PERM + f"\n{str(e)}")
         return
     if reason:
-        await skullevent.edit(
+        await marcusevent.edit(
             f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`\nReason: {reason}"
         )
     else:
-        await skullevent.edit(f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
+        await marcusevent.edit(f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
     if BOTLOG:
         await usr.client.send_message(
             BOTLOG_CHATID,

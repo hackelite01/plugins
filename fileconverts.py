@@ -20,13 +20,13 @@ if not os.path.isdir("./temp"):
 
 @bot.on(admin_cmd(pattern="stoi$"))
 @bot.on(sudo_cmd(pattern="stoi$", allow_sudo=True))
-async def _(skull):
-    if skull.fwd_from:
+async def _(marcus):
+    if marcus.fwd_from:
         return
-    reply_to_id = skull.message.id
-    if skull.reply_to_msg_id:
-        reply_to_id = skull.reply_to_msg_id
-    event = await edit_or_reply(skull, "Converting.....")
+    reply_to_id = marcus.message.id
+    if marcus.reply_to_msg_id:
+        reply_to_id = marcus.reply_to_msg_id
+    event = await edit_or_reply(marcus, "Converting.....")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -35,11 +35,11 @@ async def _(skull):
         reply_message = await event.get_reply_message()
         to_download_directory = Config.TMP_DOWNLOAD_DIRECTORY
         downloaded_file_name = os.path.join(to_download_directory, file_name)
-        downloaded_file_name = await skull.client.download_media(
+        downloaded_file_name = await marcus.client.download_media(
             reply_message, downloaded_file_name
         )
         if os.path.exists(downloaded_file_name):
-            caat = await skull.client.send_file(
+            caat = await marcus.client.send_file(
                 event.chat_id,
                 downloaded_file_name,
                 force_document=False,
@@ -55,13 +55,13 @@ async def _(skull):
 
 @bot.on(admin_cmd(pattern="itos$"))
 @bot.on(sudo_cmd(pattern="itos$", allow_sudo=True))
-async def _(skull):
-    if skull.fwd_from:
+async def _(marcus):
+    if marcus.fwd_from:
         return
-    reply_to_id = skull.message.id
-    if skull.reply_to_msg_id:
-        reply_to_id = skull.reply_to_msg_id
-    event = await edit_or_reply(skull, "Converting.....")
+    reply_to_id = marcus.message.id
+    if marcus.reply_to_msg_id:
+        reply_to_id = marcus.reply_to_msg_id
+    event = await edit_or_reply(marcus, "Converting.....")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -70,11 +70,11 @@ async def _(skull):
         reply_message = await event.get_reply_message()
         to_download_directory = Config.TMP_DOWNLOAD_DIRECTORY
         downloaded_file_name = os.path.join(to_download_directory, file_name)
-        downloaded_file_name = await skull.client.download_media(
+        downloaded_file_name = await marcus.client.download_media(
             reply_message, downloaded_file_name
         )
         if os.path.exists(downloaded_file_name):
-            caat = await skull.client.send_file(
+            caat = await marcus.client.send_file(
                 event.chat_id,
                 downloaded_file_name,
                 force_document=False,
@@ -117,7 +117,7 @@ async def get(event):
 @bot.on(sudo_cmd(pattern="ftoi$", allow_sudo=True))
 async def on_file_to_photo(event):
     target = await event.get_reply_message()
-    skull = await edit_or_reply(event, "Converting.....")
+    marcus = await edit_or_reply(event, "Converting.....")
     try:
         image = target.media.document
     except AttributeError:
@@ -144,7 +144,7 @@ async def on_file_to_photo(event):
         )
     except PhotoInvalidDimensionsError:
         return
-    await skull.delete()
+    await marcus.delete()
 
 
 @bot.on(admin_cmd(pattern="gif(?: |$)(.*)"))
@@ -177,11 +177,11 @@ async def _(event):
                 quality = loc[0].strip()
             else:
                 return await edit_delete(event, "Use quality of range 0 to 721")
-    skullreply = await event.get_reply_message()
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    if not skullreply or not skullreply.media or not skullreply.media.document:
+    marcusreply = await event.get_reply_message()
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    if not marcusreply or not marcusreply.media or not marcusreply.media.document:
         return await edit_or_reply(event, "`Stupid!, This is not animated sticker.`")
-    if skullreply.media.document.mime_type != "application/x-tgsticker":
+    if marcusreply.media.document.mime_type != "application/x-tgsticker":
         return await edit_or_reply(event, "`Stupid!, This is not animated sticker.`")
     catevent = await edit_or_reply(
         event,
@@ -189,8 +189,8 @@ async def _(event):
         parse_mode=parse_pre,
     )
     try:
-        skull = Get(skull)
-        await event.client(skull)
+        marcus = Get(marcus)
+        await event.client(marcus)
     except BaseException:
         pass
     reply_to_id = await reply_id(event)

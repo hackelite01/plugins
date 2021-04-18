@@ -8,7 +8,7 @@ import asyncio
 
 from . import ALIVE_NAME
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 
 
 @bot.on(admin_cmd(pattern="imp(|n) (.*)", outgoing=True))
@@ -59,42 +59,42 @@ async def _(event):
     stcr4 = await event.client.send_file(
         event.chat_id, "CAADAQADLwADnjOcH-wxu-ehy6NRAg"
     )
-    skullevent = await event.reply(f"{name} is ejected.......")
+    marcusevent = await event.reply(f"{name} is ejected.......")
     await asyncio.sleep(2)
-    await skullevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
+    await marcusevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤඞㅤㅤㅤㅤ ㅤㅤㅤ")
+    await marcusevent.edit("ㅤඞㅤㅤㅤㅤ ㅤㅤㅤ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤㅤ ඞㅤㅤㅤㅤㅤㅤ")
+    await marcusevent.edit("ㅤㅤ ඞㅤㅤㅤㅤㅤㅤ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤㅤㅤ ඞㅤㅤㅤㅤㅤ")
+    await marcusevent.edit("ㅤㅤㅤ ඞㅤㅤㅤㅤㅤ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤㅤㅤㅤ ඞㅤㅤㅤㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤ ඞㅤㅤㅤㅤ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤㅤㅤㅤㅤ ඞㅤㅤㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤ ඞㅤㅤㅤ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤㅤㅤㅤㅤㅤ ඞㅤㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤㅤ ඞㅤㅤ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤㅤㅤㅤㅤㅤㅤ ඞㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤㅤㅤ ඞㅤ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ඞ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ඞ")
     await asyncio.sleep(0.5)
-    await skullevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ㅤ")
     await asyncio.sleep(0.2)
     await stcr4.delete()
     if cmd == "":
-        await skullevent.edit(
+        await marcusevent.edit(
             f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ{name} was an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         0 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
         )
         await asyncio.sleep(4)
-        await skullevent.delete()
+        await marcusevent.delete()
         await event.client.send_file(event.chat_id, "CAADAQADLQADnjOcH39IqwyR6Q_0Ag")
     elif cmd == "n":
-        await skullevent.edit(
+        await marcusevent.edit(
             f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ{name} was not an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         1 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
         )
         await asyncio.sleep(4)
-        await skullevent.delete()
+        await marcusevent.delete()
         await event.client.send_file(event.chat_id, "CAADAQADQAADnjOcH-WOkB8DEctJAg")
 
 
@@ -105,34 +105,34 @@ async def _(event):
         return
     name = event.pattern_match.group(2)
     cmd = event.pattern_match.group(1).lower()
-    skullevent = await edit_or_reply(event, f"{name} is ejected.......")
+    marcusevent = await edit_or_reply(event, f"{name} is ejected.......")
     await asyncio.sleep(2)
-    await skullevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
+    await marcusevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤඞㅤㅤㅤㅤ ㅤㅤㅤ")
+    await marcusevent.edit("ㅤඞㅤㅤㅤㅤ ㅤㅤㅤ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤㅤ ඞㅤㅤㅤㅤㅤㅤ")
+    await marcusevent.edit("ㅤㅤ ඞㅤㅤㅤㅤㅤㅤ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤㅤㅤ ඞㅤㅤㅤㅤㅤ")
+    await marcusevent.edit("ㅤㅤㅤ ඞㅤㅤㅤㅤㅤ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤㅤㅤㅤ ඞㅤㅤㅤㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤ ඞㅤㅤㅤㅤ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤㅤㅤㅤㅤ ඞㅤㅤㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤ ඞㅤㅤㅤ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤㅤㅤㅤㅤㅤ ඞㅤㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤㅤ ඞㅤㅤ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤㅤㅤㅤㅤㅤㅤ ඞㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤㅤㅤ ඞㅤ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ඞ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ඞ")
     await asyncio.sleep(0.8)
-    await skullevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ㅤ")
+    await marcusevent.edit("ㅤㅤㅤㅤㅤㅤㅤㅤ ㅤ")
     await asyncio.sleep(0.2)
     if cmd == "":
-        await skullevent.edit(
+        await marcusevent.edit(
             f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ {name} was an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         0 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
         )
     elif cmd == "n":
-        await skullevent.edit(
+        await marcusevent.edit(
             f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ {name} was not an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         1 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
         )
 

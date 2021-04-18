@@ -91,7 +91,7 @@ async def _(event):
     editor = await edit_or_reply(event, "processing ...")
     input_str = event.pattern_match.group(1)
     selected_transfer = event.pattern_match.group(2)
-    skullcheck = None
+    marcuscheck = None
     if input_str:
         file_name = input_str
     else:
@@ -99,7 +99,7 @@ async def _(event):
         file_name = await event.client.download_media(
             reply.media, Config.TMP_DOWNLOAD_DIRECTORY
         )
-        skullcheck = True
+        marcuscheck = True
     # a dictionary containing the shell commands
     CMD_WEB = {
         "fileio": 'curl -F "file=@{full_file_path}" https://file.io',
@@ -143,7 +143,7 @@ async def _(event):
         await editor.edit(result)
     else:
         await editor.edit(error)
-    if skullcheck:
+    if marcuscheck:
         os.remove(file_name)
 
 

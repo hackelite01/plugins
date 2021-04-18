@@ -17,7 +17,7 @@ async def get_adzan(adzan):
         )
         return
     result = json.loads(request.text)
-    skullresult = f"<b>Islamic prayer times </b>\
+    marcusresult = f"<b>Islamic prayer times </b>\
             \n\n<b>City     : </b><i>{result['results']['location']['city']}</i>\
             \n<b>Country  : </b><i>{result['results']['location']['country']}</i>\
             \n<b>Date     : </b><i>{result['results']['datetime'][0]['date']['gregorian']}</i>\
@@ -32,7 +32,7 @@ async def get_adzan(adzan):
             \n<b>Isha     : </b><i>{result['results']['datetime'][0]['times']['Isha']}</i>\
             \n<b>Midnight : </b><i>{result['results']['datetime'][0]['times']['Midnight']}</i>\
     "
-    await edit_or_reply(adzan, skullresult, "html")
+    await edit_or_reply(adzan, marcusresult, "html")
 
 
 CMD_HELP.update(

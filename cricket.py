@@ -13,7 +13,7 @@ async def _(event):
         return
     chat = "@cricbuzz_bot"
     reply_to_id = event.message
-    skullevent = await edit_or_reply(event, "```Gathering info...```")
+    marcusevent = await edit_or_reply(event, "```Gathering info...```")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -22,12 +22,12 @@ async def _(event):
             respond = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("Unblock @cricbuzz_bot & try again")
+            await marcusevent.edit("Unblock @cricbuzz_bot & try again")
             return
         if respond.text.startswith("I can't find that"):
-            await skullevent.edit("sorry i can't find it")
+            await marcusevent.edit("sorry i can't find it")
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.send_message(
                 event.chat_id, respond.message, reply_to=reply_to_id
             )
@@ -44,7 +44,7 @@ async def _(event):
     details = event.pattern_match.group(1)
     chat = "@cricbuzz_bot"
     reply_to_id = event.message
-    skullevent = await edit_or_reply(event, "```Gathering info...```")
+    marcusevent = await edit_or_reply(event, "```Gathering info...```")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -53,12 +53,12 @@ async def _(event):
             respond = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit("Unblock @cricbuzz_bot & try again")
+            await marcusevent.edit("Unblock @cricbuzz_bot & try again")
             return
         if respond.text.startswith("I can't find that"):
-            await skullevent.edit("sorry i can't find it")
+            await marcusevent.edit("sorry i can't find it")
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.send_message(
                 event.chat_id, respond.message, reply_to=reply_to_id
             )

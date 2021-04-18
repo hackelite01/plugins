@@ -9,7 +9,7 @@ import requests
 async def quote_search(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "`Processing...`")
+    marcusevent = await edit_or_reply(event, "`Processing...`")
     input_str = event.pattern_match.group(1)
     if not input_str:
         api_url = "https://quotes.cwprojects.live/random"
@@ -24,9 +24,9 @@ async def quote_search(event):
         except Exception:
             response = None
     if response is not None:
-        await skullevent.edit(f"`{response['text']}`")
+        await marcusevent.edit(f"`{response['text']}`")
     else:
-        await edit_delete(skullevent, "`Sorry Zero results found`", 5)
+        await edit_delete(marcusevent, "`Sorry Zero results found`", 5)
 
 
 CMD_HELP.update(

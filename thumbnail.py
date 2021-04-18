@@ -15,7 +15,7 @@ thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(event, "Processing ...")
+    marcusevent = await edit_or_reply(event, "Processing ...")
     if not os.path.isdir(Config.TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -26,18 +26,18 @@ async def _(event):
             metadata = extractMetadata(createParser(downloaded_file_name))
             if metadata and metadata.has("duration"):
                 duration = metadata.get("duration").seconds
-            downloaded_file_name = await _skulltools.take_screen_shot(
+            downloaded_file_name = await _marcustools.take_screen_shot(
                 downloaded_file_name, duration
             )
         # https://stackoverflow.com/a/21669827/4723940
         Image.open(downloaded_file_name).convert("RGB").save(thumb_image_path, "JPEG")
         # https://pillow.readthedocs.io/en/3.1.x/reference/Image.html#create-thumbnails
         os.remove(downloaded_file_name)
-        await skullevent.edit(
+        await marcusevent.edit(
             "Custom video/file thumbnail saved. This image will be used in the upload, till `.clearthumb`."
         )
     else:
-        await skullevent.edit("Reply to a photo to save custom thumbnail")
+        await marcusevent.edit("Reply to a photo to save custom thumbnail")
 
 
 @bot.on(admin_cmd(pattern="clearthumb$"))

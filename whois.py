@@ -121,18 +121,18 @@ async def get_full_user(event):
 @bot.on(admin_cmd(pattern="whois(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="whois(?: |$)(.*)", allow_sudo=True))
 async def who(event):
-    skull = await edit_or_reply(event, "`Fetching userinfo wait....`")
+    marcus = await edit_or_reply(event, "`Fetching userinfo wait....`")
     if not os.path.isdir(TMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TMP_DOWNLOAD_DIRECTORY)
     replied_user = await get_user(event)
     if replied_user is None:
         return await edit_or_reply(
-            skull, "`Well that's an anonymous admin. I can't fetch details!`"
+            marcus, "`Well that's an anonymous admin. I can't fetch details!`"
         )
     try:
         photo, caption = await fetch_info(replied_user, event)
     except AttributeError:
-        await edit_or_reply(skull, "`Could not fetch info of that user.`")
+        await edit_or_reply(marcus, "`Could not fetch info of that user.`")
         return
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
@@ -149,9 +149,9 @@ async def who(event):
         )
         if not photo.startswith("http"):
             os.remove(photo)
-        await skull.delete()
+        await marcus.delete()
     except TypeError:
-        await skull.edit(caption, parse_mode="html")
+        await marcus.edit(caption, parse_mode="html")
 
 
 async def get_user(event):

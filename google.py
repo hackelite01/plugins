@@ -1,4 +1,4 @@
-# reverse search and google search  plugin for skull
+# reverse search and google search  plugin for marcus
 import io
 import os
 import re
@@ -21,7 +21,7 @@ opener.addheaders = [("User-agent", useragent)]
 @bot.on(admin_cmd(outgoing=True, pattern=r"gs (.*)"))
 @bot.on(sudo_cmd(allow_sudo=True, pattern=r"gs (.*)"))
 async def gsearch(q_event):
-    skullevent = await edit_or_reply(q_event, "`searching........`")
+    marcusevent = await edit_or_reply(q_event, "`searching........`")
     match = q_event.pattern_match.group(1)
     page = re.findall(r"page=\d+", match)
     try:
@@ -42,7 +42,7 @@ async def gsearch(q_event):
             msg += f"👉[{title}]({link})\n`{desc}`\n\n"
         except IndexError:
             break
-    await skullevent.edit(
+    await marcusevent.edit(
         "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
     )
     if BOTLOG:
@@ -60,7 +60,7 @@ async def _(event):
     start = datetime.now()
     OUTPUT_STR = "Reply to an image to do Google Reverse Search"
     if event.reply_to_msg_id:
-        skullevent = await edit_or_reply(event, "Pre Processing Media")
+        marcusevent = await edit_or_reply(event, "Pre Processing Media")
         previous_message = await event.get_reply_message()
         previous_message_text = previous_message.message
         BASE_URL = "http://www.google.com"
@@ -88,7 +88,7 @@ async def _(event):
             request_url = SEARCH_URL.format(BASE_URL, previous_message_text)
             google_rs_response = requests.get(request_url, allow_redirects=False)
             the_location = google_rs_response.headers.get("Location")
-        await skullevent.edit("Found Google Result. Pouring some soup on it!")
+        await marcusevent.edit("Found Google Result. Pouring some soup on it!")
         headers = {
             "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0"
         }
@@ -105,7 +105,7 @@ async def _(event):
             img_size = img_size_div.find_all("div")
         except Exception:
             return await edit_delete(
-                skullevent, "`Sorry. I am unable to find similar images`"
+                marcusevent, "`Sorry. I am unable to find similar images`"
             )
         end = datetime.now()
         ms = (end - start).seconds
@@ -115,7 +115,7 @@ async def _(event):
 <i>fetched in {ms} seconds</i>""".format(
             **locals()
         )
-    await skullevent.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
+    await marcusevent.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
 
 @bot.on(admin_cmd(pattern=r"reverse(?: |$)(\d*)", outgoing=True))
@@ -132,11 +132,11 @@ async def _(img):
         await edit_or_reply(img, "`Reply to photo or sticker nigger.`")
         return
     if photo:
-        skullevent = await edit_or_reply(img, "`Processing...`")
+        marcusevent = await edit_or_reply(img, "`Processing...`")
         try:
             image = Image.open(photo)
         except OSError:
-            await skullevent.edit("`Unsupported , most likely.`")
+            await marcusevent.edit("`Unsupported , most likely.`")
             return
         name = "okgoogle.png"
         image.save(name, "PNG")
@@ -152,16 +152,16 @@ async def _(img):
                 "\n`Parsing source now. Maybe.`"
             )
         else:
-            await skullevent.edit("`Google told me to fuck off.`")
+            await marcusevent.edit("`Google told me to fuck off.`")
             return
         os.remove(name)
         match = await ParseSauce(fetchUrl + "&preferences?hl=en&fg=1#languages")
         guess = match["best_guess"]
         imgspage = match["similar_images"]
         if guess and imgspage:
-            await skullevent.edit(f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
+            await marcusevent.edit(f"[{guess}]({fetchUrl})\n\n`Looking for this Image...`")
         else:
-            await skullevent.edit("`Can't find this piece of shit.`")
+            await marcusevent.edit("`Can't find this piece of shit.`")
             return
 
         lim = img.pattern_match.group(1) or 3
@@ -178,7 +178,7 @@ async def _(img):
             )
         except TypeError:
             pass
-        await skullevent.edit(
+        await marcusevent.edit(
             f"[{guess}]({fetchUrl})\n\n[Visually similar images]({imgspage})"
         )
 

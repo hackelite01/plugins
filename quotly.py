@@ -13,67 +13,67 @@ from . import convert_tosticker, process
 
 @bot.on(admin_cmd(pattern="q(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="q(?: |$)(.*)", allow_sudo=True))
-async def stickerchat(skullquotes):
-    if skullquotes.fwd_from:
+async def stickerchat(marcusquotes):
+    if marcusquotes.fwd_from:
         return
-    reply = await skullquotes.get_reply_message()
+    reply = await marcusquotes.get_reply_message()
     if not reply:
         await edit_or_reply(
-            skullquotes, "`I cant quote the message . reply to a message`"
+            marcusquotes, "`I cant quote the message . reply to a message`"
         )
         return
     fetchmsg = reply.message
     repliedreply = None
     if reply.media and reply.media.document.mime_type in ("mp4"):
-        await edit_or_reply(skullquotes, "`this format is not supported now`")
+        await edit_or_reply(marcusquotes, "`this format is not supported now`")
         return
-    skullevent = await edit_or_reply(skullquotes, "`Making quote...`")
+    marcusevent = await edit_or_reply(marcusquotes, "`Making quote...`")
     user = (
         await event.client.get_entity(reply.forward.sender)
         if reply.fwd_from
         else reply.sender
     )
-    res, skullmsg = await process(fetchmsg, user, skullquotes.client, reply, repliedreply)
+    res, marcusmsg = await process(fetchmsg, user, marcusquotes.client, reply, repliedreply)
     if not res:
         return
     outfi = os.path.join("./temp", "sticker.png")
-    skullmsg.save(outfi)
+    marcusmsg.save(outfi)
     endfi = convert_tosticker(outfi)
-    await skullquotes.client.send_file(skullquotes.chat_id, endfi, reply_to=reply)
-    await skullevent.delete()
+    await marcusquotes.client.send_file(marcusquotes.chat_id, endfi, reply_to=reply)
+    await marcusevent.delete()
     os.remove(endfi)
 
 
 @bot.on(admin_cmd(pattern="rq(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="rq(?: |$)(.*)", allow_sudo=True))
-async def stickerchat(skullquotes):
-    if skullquotes.fwd_from:
+async def stickerchat(marcusquotes):
+    if marcusquotes.fwd_from:
         return
-    reply = await skullquotes.get_reply_message()
+    reply = await marcusquotes.get_reply_message()
     if not reply:
         await edit_or_reply(
-            skullquotes, "`I cant quote the message . reply to a message`"
+            marcusquotes, "`I cant quote the message . reply to a message`"
         )
         return
     fetchmsg = reply.message
     repliedreply = await reply.get_reply_message()
     if reply.media and reply.media.document.mime_type in ("mp4"):
-        await edit_or_reply(skullquotes, "`this format is not supported now`")
+        await edit_or_reply(marcusquotes, "`this format is not supported now`")
         return
-    skullevent = await edit_or_reply(skullquotes, "`Making quote...`")
+    marcusevent = await edit_or_reply(marcusquotes, "`Making quote...`")
     user = (
         await event.client.get_entity(reply.forward.sender)
         if reply.fwd_from
         else reply.sender
     )
-    res, skullmsg = await process(fetchmsg, user, skullquotes.client, reply, repliedreply)
+    res, marcusmsg = await process(fetchmsg, user, marcusquotes.client, reply, repliedreply)
     if not res:
         return
     outfi = os.path.join("./temp", "sticker.png")
-    skullmsg.save(outfi)
+    marcusmsg.save(outfi)
     endfi = convert_tosticker(outfi)
-    await skullquotes.client.send_file(skullquotes.chat_id, endfi, reply_to=reply)
-    await skullevent.delete()
+    await marcusquotes.client.send_file(marcusquotes.chat_id, endfi, reply_to=reply)
+    await marcusevent.delete()
     os.remove(endfi)
 
 
@@ -109,7 +109,7 @@ async def _(event):
             event, "`Either reply to message or give input to function properly`"
         )
     chat = "@QuotLyBot"
-    skullevent = await edit_or_reply(event, "```Making a Quote```")
+    marcusevent = await edit_or_reply(event, "```Making a Quote```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -121,14 +121,14 @@ async def _(event):
                 await event.client.send_message(conv.chat_id, message)
             else:
                 return await edit_delete(
-                    skullevent, "`I guess you have used a invalid syntax`"
+                    marcusevent, "`I guess you have used a invalid syntax`"
                 )
             response = await response
         except YouBlockedUserError:
-            await skullevent.edit("```Please unblock me (@QuotLyBot) u Nigga```")
+            await marcusevent.edit("```Please unblock me (@QuotLyBot) u Nigga```")
             return
         await event.client.send_read_acknowledge(conv.chat_id)
-        await skullevent.delete()
+        await marcusevent.delete()
         await event.client.send_message(
             event.chat_id, response.message, reply_to=reply_to
         )

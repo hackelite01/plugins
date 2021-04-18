@@ -12,7 +12,7 @@ from validators.url import url
 from .. import *
 from ..Config import Config
 from ..helpers import *
-from ..helpers import _skulltools, _skullutils, _format
+from ..helpers import _marcustools, _marcusutils, _format
 
 # =================== CONSTANT ===================
 
@@ -20,7 +20,7 @@ USERID = bot.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
 ALIVE_NAME = Config.ALIVE_NAME
 AUTONAME = Config.AUTONAME
 DEFAULT_BIO = Config.DEFAULT_BIO
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 BOT_USERNAME = Config.TG_BOT_USERNAME
 # mention user
 mention = f"[{DEFAULTUSER}](tg://user?id={USERID})"
@@ -59,10 +59,10 @@ if Config.SPAMWATCH_API:
 else:
     spamwatch = None
 
-skull_users = [bot.uid]
+marcus_users = [bot.uid]
 if Config.SUDO_USERS:
     for user in Config.SUDO_USERS:
-        skull_users.append(user)
+        marcus_users.append(user)
 
 
 # ================================================
@@ -82,11 +82,11 @@ if Config.THUMB_IMAGE is not None:
             LOGS.info(str(e))
 
 
-def check(skull):
-    if "/start" in skull:
+def check(marcus):
+    if "/start" in marcus:
         return True
     try:
-        hi = re.search(skull.lower(), "(a|b|c|d)", flags=re.IGNORECASE)
+        hi = re.search(marcus.lower(), "(a|b|c|d)", flags=re.IGNORECASE)
     except Exception:
         hi = False
     return bool(hi)
@@ -134,7 +134,7 @@ def check_data_base_heal_th():
     return is_database_working, output
 
 
-async def skullalive():
+async def marcusalive():
     _, check_sgnirts = check_data_base_heal_th()
     sudo = "Enabled" if Config.SUDO_USERS else "Disabled"
     uptime = await get_readable_time((time.time() - StartTime))
@@ -190,7 +190,7 @@ async def make_gif(event, reply, quality=None, fps=None):
     result_p = os.path.join("temp", "animation.gif")
     animation = lottie.parsers.tgs.parse_tgs(reply)
     with open(result_p, "wb") as result:
-        await _skullutils.run_sync(
+        await _marcusutils.run_sync(
             lottie.exporters.gif.export_gif, animation, result, quality, fps
         )
     return result_p

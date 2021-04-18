@@ -17,8 +17,8 @@ async def _(event):
         )
     check = url(input_str)
     if not check:
-        skullstr = "http://" + input_str
-        check = url(skullstr)
+        marcusstr = "http://" + input_str
+        check = url(marcusstr)
     if not check:
         return await edit_delete(event, "`the given link is not supported`", 5)
     sample_url = f"https://da.gd/dns/{input_str}"
@@ -46,8 +46,8 @@ async def _(event):
         )
     check = url(input_str)
     if not check:
-        skullstr = f"http://" + input_str
-        check = url(skullstr)
+        marcusstr = f"http://" + input_str
+        check = url(marcusstr)
     if not check:
         return await edit_delete(event, "`the given link is not supported`", 5)
     if not input_str.startswith("http"):
@@ -77,8 +77,8 @@ async def _(event):
         )
     check = url(input_str)
     if not check:
-        skullstr = "http://" + input_str
-        check = url(skullstr)
+        marcusstr = "http://" + input_str
+        check = url(marcusstr)
     if not check:
         return await edit_delete(event, "`the given link is not supported`", 5)
     if not input_str.startswith("http"):
@@ -113,8 +113,8 @@ async def _(event):
         )
     check = url(input_str)
     if not check:
-        skullstr = "http://" + input_str
-        check = url(skullstr)
+        marcusstr = "http://" + input_str
+        check = url(marcusstr)
     if not check:
         return await edit_delete(event, "`the given link is not supported`", 5)
     await edit_or_reply(event, "[ㅤㅤㅤㅤㅤㅤㅤ](" + input_str + ")")

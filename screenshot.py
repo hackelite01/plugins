@@ -19,7 +19,7 @@ async def _(event):
     if Config.CHROME_BIN is None:
         await edit_or_reply(event, "Need to install Google Chrome. Module Stopping.")
         return
-    skullevent = await edit_or_reply(event, "`Processing ...`")
+    marcusevent = await edit_or_reply(event, "`Processing ...`")
     start = datetime.now()
     try:
         chrome_options = webdriver.ChromeOptions()
@@ -34,15 +34,15 @@ async def _(event):
         driver = webdriver.Chrome(chrome_options=chrome_options)
         input_str = event.pattern_match.group(1)
         inputstr = input_str
-        skullurl = url(inputstr)
-        if not skullurl:
+        marcusurl = url(inputstr)
+        if not marcusurl:
             inputstr = "http://" + input_str
-            skullurl = url(inputstr)
-        if not skullurl:
-            await skullevent.edit("`The given input is not supported url`")
+            marcusurl = url(inputstr)
+        if not marcusurl:
+            await marcusevent.edit("`The given input is not supported url`")
             return
         driver.get(inputstr)
-        await skullevent.edit("`Calculating Page Dimensions`")
+        await marcusevent.edit("`Calculating Page Dimensions`")
         height = driver.execute_script(
             "return Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);"
         )
@@ -54,7 +54,7 @@ async def _(event):
         # for good measure to make the scroll bars disappear
         im_png = driver.get_screenshot_as_png()
         # saves screenshot of entire page
-        await skullevent.edit("`Stoppping Chrome Bin`")
+        await marcusevent.edit("`Stoppping Chrome Bin`")
         driver.close()
         message_id = None
         if event.reply_to_msg_id:
@@ -62,7 +62,7 @@ async def _(event):
         end = datetime.now()
         ms = (end - start).seconds
         hmm = f"**url : **{input_str} \n**Time :** `{ms} seconds`"
-        await skullevent.delete()
+        await marcusevent.delete()
         with io.BytesIO(im_png) as out_file:
             out_file.name = input_str + ".PNG"
             await event.client.send_file(
@@ -75,7 +75,7 @@ async def _(event):
                 silent=True,
             )
     except Exception:
-        await skullevent.edit(f"`{traceback.format_exc()}`")
+        await marcusevent.edit(f"`{traceback.format_exc()}`")
 
 
 @bot.on(admin_cmd(pattern="scapture (.*)"))
@@ -90,16 +90,16 @@ async def _(event):
             "`Need to get an API key from https://screenshotlayer.com/product and need to set it SCREEN_SHOT_LAYER_ACCESS_KEY !`",
         )
         return
-    skullevent = await edit_or_reply(event, "`Processing ...`")
+    marcusevent = await edit_or_reply(event, "`Processing ...`")
     sample_url = "https://api.screenshotlayer.com/api/capture?access_key={}&url={}&fullpage={}&viewport={}&format={}&force={}"
     input_str = event.pattern_match.group(1)
     inputstr = input_str
-    skullurl = url(inputstr)
-    if not skullurl:
+    marcusurl = url(inputstr)
+    if not marcusurl:
         inputstr = "http://" + input_str
-        skullurl = url(inputstr)
-    if not skullurl:
-        await skullevent.edit("`The given input is not supported url`")
+        marcusurl = url(inputstr)
+    if not marcusurl:
+        await marcusevent.edit("`The given input is not supported url`")
         return
     response_api = requests.get(
         sample_url.format(
@@ -122,11 +122,11 @@ async def _(event):
                     force_document=True,
                     reply_to=event.message.reply_to_msg_id,
                 )
-                await skullevent.delete()
+                await marcusevent.delete()
             except Exception as e:
-                await skullevent.edit(str(e))
+                await marcusevent.edit(str(e))
     else:
-        await skullevent.edit(f"`{response_api.text}`")
+        await marcusevent.edit(f"`{response_api.text}`")
 
 
 CMD_HELP.update(

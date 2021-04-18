@@ -6,7 +6,7 @@ from . import BASE, SESSION
 
 
 class SkullBroadcast(BASE):
-    __tablename__ = "skullbroadcast"
+    __tablename__ = "marcusbroadcast"
     keywoard = Column(UnicodeText, primary_key=True)
     group_id = Column(String(14), primary_key=True, nullable=False)
 

@@ -18,8 +18,8 @@ PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 CACHE = {}
 PMPERMIT_PIC = Config.PMPERMIT_PIC
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
-USER_BOT_WARN_ZERO = "You were spamming my ultra legend pro master's inbox, henceforth you are blocked by my master's @skulluserbot. **Now GTFO, i'm watching webseries** "
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
+USER_BOT_WARN_ZERO = "You were spamming my ultra legend pro master's inbox, henceforth you are blocked by my master's @marcususerbot. **Now GTFO, i'm watching webseries** "
 
 
 if Config.PRIVATE_GROUP_ID != 0:

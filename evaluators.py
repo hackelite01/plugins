@@ -17,21 +17,21 @@ async def _(event):
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
         return await edit_delete(event, "`What should i execute?..`")
-    skullevent = await edit_or_reply(event, "`Executing.....`")
+    marcusevent = await edit_or_reply(event, "`Executing.....`")
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
     stdout, stderr = await process.communicate()
     result = str(stdout.decode().strip()) + str(stderr.decode().strip())
-    skulluser = await event.client.get_me()
-    curruser = skulluser.username or "skulluserbot"
+    marcususer = await event.client.get_me()
+    curruser = marcususer.username or "marcususerbot"
     uid = os.geteuid()
     if uid == 0:
         cresult = f"`{curruser}:~#` `{cmd}`\n`{result}`"
     else:
         cresult = f"`{curruser}:~$` `{cmd}`\n`{result}`"
     await edit_or_reply(
-        skullevent,
+        marcusevent,
         text=cresult,
         aslink=True,
         linktext=f"**•  Exec : **\n`{cmd}` \n\n**•  Result : **\n",
@@ -51,7 +51,7 @@ async def _(event):
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
         return await edit_delete(event, "`What should i run ?..`")
-    skullevent = await edit_or_reply(event, "`Running ...`")
+    marcusevent = await edit_or_reply(event, "`Running ...`")
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
@@ -76,7 +76,7 @@ async def _(event):
         evaluation = "Success"
     final_output = f"**•  Eval : **\n`{cmd}` \n\n**•  Result : **\n`{evaluation}` \n"
     await edit_or_reply(
-        skullevent,
+        marcusevent,
         text=final_output,
         aslink=True,
         linktext=f"**•  Eval : **\n`{cmd}` \n\n**•  Result : **\n",
@@ -107,7 +107,7 @@ CMD_HELP.update(
         \n\n  •  **Synatax : **`.eval <expr>`:\
         \n  •  **Function : **__Execute Python script.__\
         \n\n  •  **Synatax : **`.exec <command>`:\
-        \n  •  **Function : **__Execute a Terminal command on skulluserbot server and shows details.__\
+        \n  •  **Function : **__Execute a Terminal command on marcususerbot server and shows details.__\
      "
     }
 )

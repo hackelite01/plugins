@@ -1,7 +1,7 @@
 # Edit credit @mayank1rajput
 from . import ALIVE_NAME
 
-DEF = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEF = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 
 
 @bot.on(admin_cmd(pattern="ded (.*)"))

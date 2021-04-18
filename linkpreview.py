@@ -15,7 +15,7 @@ async def _(event):
         await edit_or_reply(event, "```Reply to a Link```")
         return
     chat = "@chotamreaderbot"
-    skullevent = await edit_or_reply(event, "```Processing```")
+    marcusevent = await edit_or_reply(event, "```Processing```")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -25,14 +25,14 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await skullevent.edit(
+            await marcusevent.edit(
                 "`RIP Check Your Blacklist Boss and unblock @chotamreaderbot`"
             )
             return
         if response.text.startswith(""):
-            await skullevent.edit("Am I Dumb Or Am I Dumb?")
+            await marcusevent.edit("Am I Dumb Or Am I Dumb?")
         else:
-            await skullevent.delete()
+            await marcusevent.delete()
             await event.client.send_message(event.chat_id, response.message)
 
 

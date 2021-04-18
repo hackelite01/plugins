@@ -1,4 +1,4 @@
-# collage plugin for skulluserbot by @mayank1rajput
+# collage plugin for marcususerbot by @mayank1rajput
 
 # Copyright (C) 2020 Alfiananda P.A
 #
@@ -12,64 +12,64 @@ from . import make_gif
 
 @bot.on(admin_cmd(pattern="collage(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="collage(?: |$)(.*)", allow_sudo=True))
-async def collage(skull):
-    if skull.fwd_from:
+async def collage(marcus):
+    if marcus.fwd_from:
         return
-    skullinput = skull.pattern_match.group(1)
-    reply = await skull.get_reply_message()
-    skullid = skull.reply_to_msg_id
-    skull = await edit_or_reply(
-        skull, "```collaging this may take several minutes too..... 😁```"
+    marcusinput = marcus.pattern_match.group(1)
+    reply = await marcus.get_reply_message()
+    marcusid = marcus.reply_to_msg_id
+    marcus = await edit_or_reply(
+        marcus, "```collaging this may take several minutes too..... 😁```"
     )
     if not (reply and (reply.media)):
-        await skull.edit("`Media not found...`")
+        await marcus.edit("`Media not found...`")
         return
     if not os.path.isdir("./temp/"):
         os.mkdir("./temp/")
-    skullsticker = await reply.download_media(file="./temp/")
-    if not skullsticker.endswith((".mp4", ".mkv", ".tgs")):
-        os.remove(skullsticker)
-        await skull.edit("`Media format is not supported...`")
+    marcussticker = await reply.download_media(file="./temp/")
+    if not marcussticker.endswith((".mp4", ".mkv", ".tgs")):
+        os.remove(marcussticker)
+        await marcus.edit("`Media format is not supported...`")
         return
-    if skullinput:
-        if not skullinput.isdigit():
-            os.remove(skullsticker)
-            await skull.edit("`You input is invalid, check help`")
+    if marcusinput:
+        if not marcusinput.isdigit():
+            os.remove(marcussticker)
+            await marcus.edit("`You input is invalid, check help`")
             return
-        skullinput = int(skullinput)
-        if not 0 < skullinput < 10:
-            os.remove(skullsticker)
-            await skull.edit(
+        marcusinput = int(marcusinput)
+        if not 0 < marcusinput < 10:
+            os.remove(marcussticker)
+            await marcus.edit(
                 "`Why too big grid you cant see images, use size of grid between 1 to 9`"
             )
             return
     else:
-        skullinput = 3
-    if skullsticker.endswith(".tgs"):
-        hmm = await make_gif(skull, skullsticker)
+        marcusinput = 3
+    if marcussticker.endswith(".tgs"):
+        hmm = await make_gif(marcus, marcussticker)
         if hmm.endswith(("@tgstogifbot")):
-            os.remove(skullsticker)
-            return await skull.edit(hmm)
+            os.remove(marcussticker)
+            return await marcus.edit(hmm)
         collagefile = hmm
     else:
-        collagefile = skullsticker
+        collagefile = marcussticker
     endfile = "./temp/collage.png"
-    skullcmd = f"vcsi -g {skullinput}x{skullinput} '{collagefile}' -o {endfile}"
-    stdout, stderr = (await _skullutils.runcmd(skullcmd))[:2]
+    marcuscmd = f"vcsi -g {marcusinput}x{marcusinput} '{collagefile}' -o {endfile}"
+    stdout, stderr = (await _marcusutils.runcmd(marcuscmd))[:2]
     if not os.path.exists(endfile):
-        for files in (skullsticker, collagefile):
+        for files in (marcussticker, collagefile):
             if files and os.path.exists(files):
                 os.remove(files)
         return await edit_delete(
-            skull, f"`media is not supported or try with smaller grid size`", 5
+            marcus, f"`media is not supported or try with smaller grid size`", 5
         )
-    await skull.client.send_file(
-        skull.chat_id,
+    await marcus.client.send_file(
+        marcus.chat_id,
         endfile,
-        reply_to=skullid,
+        reply_to=marcusid,
     )
-    await skull.delete()
-    for files in (skullsticker, collagefile, endfile):
+    await marcus.delete()
+    for files in (marcussticker, collagefile, endfile):
         if files and os.path.exists(files):
             os.remove(files)
 

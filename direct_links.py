@@ -21,7 +21,7 @@ from humanize import naturalsize
 @bot.on(sudo_cmd(allow_sudo=True, pattern=r"direct(?: |$)([\s\S]*)"))
 async def direct_link_generator(request):
     """ direct links generator """
-    skullevent = await edit_or_reply(request, "`Processing...`")
+    marcusevent = await edit_or_reply(request, "`Processing...`")
     textx = await request.get_reply_message()
     message = request.pattern_match.group(1)
     if message:
@@ -29,13 +29,13 @@ async def direct_link_generator(request):
     elif textx:
         message = textx.text
     else:
-        await skullevent.edit("`Usage: .direct <url>`")
+        await marcusevent.edit("`Usage: .direct <url>`")
         return
     reply = ""
     links = re.findall(r"\bhttps?://.*\.\S+", message)
     if not links:
         reply = "`No links found!`"
-        await skullevent.edit(reply)
+        await marcusevent.edit(reply)
     for link in links:
         if "drive.google.com" in link:
             reply += gdrive(link)
@@ -59,7 +59,7 @@ async def direct_link_generator(request):
             reply += androidfilehost(link)
         else:
             reply += re.findall(r"\bhttps?://(.*?[^/]+)", link)[0] + "is not supported"
-    await skullevent.edit(reply)
+    await marcusevent.edit(reply)
 
 
 def gdrive(url: str) -> str:

@@ -67,7 +67,7 @@ HEROKU_APIKEY = os.environ.get("HEROKU_APIKEY", None)
 Heroku = heroku3.from_key(HEROKU_API_KEY)
 GIT_REPO_NAME = "SkullUserbot"
 heroku_api = "https://api.heroku.com"
-UPSTREAM_REPO_URL="https://github.com/hackelite01/skull-userbot"
+UPSTREAM_REPO_URL="https://github.com/hackelite01/marcus-userbot"
 
 # ================= CONSTANT =================
 JAVES_NNAME = str(HEROKU_APPNAME)

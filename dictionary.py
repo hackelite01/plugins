@@ -1,4 +1,4 @@
-# Urban Dictionary for skulluserbot by @mayank1rajput
+# Urban Dictionary for marcususerbot by @mayank1rajput
 from PyDictionary import PyDictionary
 
 from . import AioHttp
@@ -38,10 +38,10 @@ async def _(event):
         return
     word = event.pattern_match.group(1)
     dictionary = PyDictionary()
-    skull = dictionary.meaning(word)
+    marcus = dictionary.meaning(word)
     output = f"**Word :** __{word}__\n\n"
     try:
-        for a, b in skull.items():
+        for a, b in marcus.items():
             output += f"**{a}**\n"
             for i in b:
                 output += f"☞__{i}__\n"

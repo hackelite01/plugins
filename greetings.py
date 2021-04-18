@@ -1,26 +1,26 @@
 import random
 
-from . import skullmemes
+from . import marcusmemes
 
 
 @bot.on(admin_cmd(pattern=f"gm$", outgoing=True))
 @bot.on(sudo_cmd(pattern="gm$", allow_sudo=True))
 async def morning(morning):
-    txt = random.choice(skullmemes.GDMORNING)
+    txt = random.choice(marcusmemes.GDMORNING)
     await edit_or_reply(morning, txt)
 
 
 @bot.on(admin_cmd(pattern=f"gnoon$", outgoing=True))
 @bot.on(sudo_cmd(pattern="gnoon$", allow_sudo=True))
 async def noon(noon):
-    txt = random.choice(skullmemes.GDNOON)
+    txt = random.choice(marcusmemes.GDNOON)
     await edit_or_reply(noon, txt)
 
 
 @bot.on(admin_cmd(pattern=f"gn$", outgoing=True))
 @bot.on(sudo_cmd(pattern="gn$", allow_sudo=True))
 async def night(night):
-    txt = random.choice(skullmemes.GDNIGHT)
+    txt = random.choice(marcusmemes.GDNIGHT)
     await edit_or_reply(night, txt)
 
 
@@ -49,12 +49,12 @@ async def gn(event):
 @bot.on(sudo_cmd(pattern=r"hi ?(.*)", allow_sudo=True))
 async def hi(event):
     giveVar = event.text
-    skull = giveVar[4:5]
-    if not skull:
-        skull = "🌺"
+    marcus = giveVar[4:5]
+    if not marcus:
+        marcus = "🌺"
     await edit_or_reply(
         event,
-        f"{skull}✨✨{skull}✨{skull}{skull}{skull}\n{skull}✨✨{skull}✨✨{skull}✨\n{skull}{skull}{skull}{skull}✨✨{skull}✨\n{skull}✨✨{skull}✨✨{skull}✨\n{skull}✨✨{skull}✨{skull}{skull}{skull}\n☁☁☁☁☁☁☁☁",
+        f"{marcus}✨✨{marcus}✨{marcus}{marcus}{marcus}\n{marcus}✨✨{marcus}✨✨{marcus}✨\n{marcus}{marcus}{marcus}{marcus}✨✨{marcus}✨\n{marcus}✨✨{marcus}✨✨{marcus}✨\n{marcus}✨✨{marcus}✨{marcus}{marcus}{marcus}\n☁☁☁☁☁☁☁☁",
     )
 
 

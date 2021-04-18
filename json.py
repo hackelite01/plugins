@@ -4,8 +4,8 @@
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await event.get_reply_message() if event.reply_to_msg_id else event
-    the_real_message = skullevent.stringify()
+    marcusevent = await event.get_reply_message() if event.reply_to_msg_id else event
+    the_real_message = marcusevent.stringify()
     await edit_or_reply(event, the_real_message, parse_mode=parse_pre)
 
 
@@ -14,8 +14,8 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await event.get_reply_message() if event.reply_to_msg_id else event
-    the_real_message = _format.yaml_format(skullevent)
+    marcusevent = await event.get_reply_message() if event.reply_to_msg_id else event
+    the_real_message = _format.yaml_format(marcusevent)
     await edit_or_reply(event, the_real_message, parse_mode=parse_pre)
 
 

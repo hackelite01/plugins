@@ -1,4 +1,4 @@
-# Afk plugin from skulluserbot ported from uniborg
+# Afk plugin from marcususerbot ported from uniborg
 import asyncio
 from datetime import datetime
 

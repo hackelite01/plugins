@@ -9,23 +9,23 @@ from .sql_helper import broadcast_sql as sql
 
 @bot.on(admin_cmd(pattern="sendto(?: |$)(.*)", command="sendto"))
 @bot.on(sudo_cmd(pattern="sendto(?: |$)(.*)", command="sendto", allow_sudo=True))
-async def skullbroadcast_send(event):
+async def marcusbroadcast_send(event):
     if event.fwd_from:
         return
-    skullinput_str = event.pattern_match.group(1)
-    if not skullinput_str:
+    marcusinput_str = event.pattern_match.group(1)
+    if not marcusinput_str:
         return await edit_delete(
             event, "To which category should i send this message", parse_mode=parse_pre
         )
     reply = await event.get_reply_message()
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if not reply:
         return await edit_delete(
             event, "what should i send to to this category ?", parse_mode=parse_pre
         )
-    keyword = skullinput_str.lower()
+    keyword = marcusinput_str.lower()
     no_of_chats = sql.num_broadcastlist_chat(keyword)
-    group_ = Get(skull)
+    group_ = Get(marcus)
     if no_of_chats == 0:
         return await edit_delete(
             event,
@@ -33,7 +33,7 @@ async def skullbroadcast_send(event):
             parse_mode=parse_pre,
         )
     chats = sql.get_chat_broadcastlist(keyword)
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event,
         "sending this message to all groups in the category",
         parse_mode=parse_pre,
@@ -53,7 +53,7 @@ async def skullbroadcast_send(event):
             LOGS.info(str(e))
         await sleep(0.5)
     resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in category {keyword}.`"
-    await skullevent.edit(resultext)
+    await marcusevent.edit(resultext)
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -64,23 +64,23 @@ async def skullbroadcast_send(event):
 
 @bot.on(admin_cmd(pattern="fwdto(?: |$)(.*)", command="fwdto"))
 @bot.on(sudo_cmd(pattern="fwdto(?: |$)(.*)", command="fwdto", allow_sudo=True))
-async def skullbroadcast_send(event):
+async def marcusbroadcast_send(event):
     if event.fwd_from:
         return
-    skullinput_str = event.pattern_match.group(1)
-    if not skullinput_str:
+    marcusinput_str = event.pattern_match.group(1)
+    if not marcusinput_str:
         return await edit_delete(
             event, "To which category should i send this message", parse_mode=parse_pre
         )
     reply = await event.get_reply_message()
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if not reply:
         return await edit_delete(
             event, "what should i send to to this category ?", parse_mode=parse_pre
         )
-    keyword = skullinput_str.lower()
+    keyword = marcusinput_str.lower()
     no_of_chats = sql.num_broadcastlist_chat(keyword)
-    group_ = Get(skull)
+    group_ = Get(marcus)
     if no_of_chats == 0:
         return await edit_delete(
             event,
@@ -88,7 +88,7 @@ async def skullbroadcast_send(event):
             parse_mode=parse_pre,
         )
     chats = sql.get_chat_broadcastlist(keyword)
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event,
         "sending this message to all groups in the category",
         parse_mode=parse_pre,
@@ -108,7 +108,7 @@ async def skullbroadcast_send(event):
             LOGS.info(str(e))
         await sleep(0.5)
     resultext = f"`The message was sent to {i} chats out of {no_of_chats} chats in category {keyword}.`"
-    await skullevent.edit(resultext)
+    await marcusevent.edit(resultext)
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -119,15 +119,15 @@ async def skullbroadcast_send(event):
 
 @bot.on(admin_cmd(pattern="addto(?: |$)(.*)", command="addto"))
 @bot.on(sudo_cmd(pattern="addto(?: |$)(.*)", command="addto", allow_sudo=True))
-async def skullbroadcast_add(event):
+async def marcusbroadcast_add(event):
     if event.fwd_from:
         return
-    skullinput_str = event.pattern_match.group(1)
-    if not skullinput_str:
+    marcusinput_str = event.pattern_match.group(1)
+    if not marcusinput_str:
         return await edit_delete(
             event, "In which category should i add this chat", parse_mode=parse_pre
         )
-    keyword = skullinput_str.lower()
+    keyword = marcusinput_str.lower()
     check = sql.is_in_broadcastlist(keyword, event.chat_id)
     if check:
         return await edit_delete(
@@ -157,15 +157,15 @@ async def skullbroadcast_add(event):
 
 @bot.on(admin_cmd(pattern="rmfrom(?: |$)(.*)", command="rmfrom"))
 @bot.on(sudo_cmd(pattern="rmfrom(?: |$)(.*)", command="rmfrom", allow_sudo=True))
-async def skullbroadcast_remove(event):
+async def marcusbroadcast_remove(event):
     if event.fwd_from:
         return
-    skullinput_str = event.pattern_match.group(1)
-    if not skullinput_str:
+    marcusinput_str = event.pattern_match.group(1)
+    if not marcusinput_str:
         return await edit_delete(
             event, "From which category should i remove this chat", parse_mode=parse_pre
         )
-    keyword = skullinput_str.lower()
+    keyword = marcusinput_str.lower()
     check = sql.is_in_broadcastlist(keyword, event.chat_id)
     if not check:
         return await edit_delete(
@@ -195,17 +195,17 @@ async def skullbroadcast_remove(event):
 
 @bot.on(admin_cmd(pattern="list(?: |$)(.*)", command="list"))
 @bot.on(sudo_cmd(pattern="list(?: |$)(.*)", command="list", allow_sudo=True))
-async def skullbroadcast_list(event):
+async def marcusbroadcast_list(event):
     if event.fwd_from:
         return
-    skullinput_str = event.pattern_match.group(1)
-    if not skullinput_str:
+    marcusinput_str = event.pattern_match.group(1)
+    if not marcusinput_str:
         return await edit_delete(
             event,
             "Which category Chats should i list ?\nCheck .listall",
             parse_mode=parse_pre,
         )
-    keyword = skullinput_str.lower()
+    keyword = marcusinput_str.lower()
     no_of_chats = sql.num_broadcastlist_chat(keyword)
     if no_of_chats == 0:
         return await edit_delete(
@@ -214,7 +214,7 @@ async def skullbroadcast_list(event):
             parse_mode=parse_pre,
         )
     chats = sql.get_chat_broadcastlist(keyword)
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event, f"Fetching info of the category {keyword}", parse_mode=parse_pre
     )
     resultlist = f"**The category '{keyword}' have '{no_of_chats}' chats and these are listed below :**\n\n"
@@ -233,12 +233,12 @@ async def skullbroadcast_list(event):
             errorlist += f" 👉 __This id {int(chat)} in database probably you may left the chat/channel or may be invalid id.\
                             \nRemove this id from the database by using this command__ `.frmfrom {keyword} {int(chat)}` \n\n"
     finaloutput = resultlist + errorlist
-    await edit_or_reply(skullevent, finaloutput)
+    await edit_or_reply(marcusevent, finaloutput)
 
 
 @bot.on(admin_cmd(pattern="listall$", command="listall"))
 @bot.on(sudo_cmd(pattern="listall$", command="listall", allow_sudo=True))
-async def skullbroadcast_list(event):
+async def marcusbroadcast_list(event):
     if event.fwd_from:
         return
     if sql.num_broadcastlist_chats() == 0:
@@ -256,15 +256,15 @@ async def skullbroadcast_list(event):
 
 @bot.on(admin_cmd(pattern="frmfrom(?: |$)(.*)", command="frmfrom"))
 @bot.on(sudo_cmd(pattern="frmfrom(?: |$)(.*)", command="frmfrom", allow_sudo=True))
-async def skullbroadcast_remove(event):
+async def marcusbroadcast_remove(event):
     if event.fwd_from:
         return
-    skullinput_str = event.pattern_match.group(1)
-    if not skullinput_str:
+    marcusinput_str = event.pattern_match.group(1)
+    if not marcusinput_str:
         return await edit_delete(
             event, "From which category should i remove this chat", parse_mode=parse_pre
         )
-    args = skullinput_str.split(" ")
+    args = marcusinput_str.split(" ")
     if len(args) != 2:
         return await edit_delete(
             event,
@@ -316,22 +316,22 @@ async def skullbroadcast_remove(event):
 
 @bot.on(admin_cmd(pattern="delc(?: |$)(.*)", command="delc"))
 @bot.on(sudo_cmd(pattern="delc(?: |$)(.*)", command="delc", allow_sudo=True))
-async def skullbroadcast_delete(event):
+async def marcusbroadcast_delete(event):
     if event.fwd_from:
         return
-    skullinput_str = event.pattern_match.group(1)
-    check1 = sql.num_broadcastlist_chat(skullinput_str)
+    marcusinput_str = event.pattern_match.group(1)
+    check1 = sql.num_broadcastlist_chat(marcusinput_str)
     if check1 < 1:
         return await edit_delete(
             event,
-            f"Are you sure that there is category {skullinput_str}",
+            f"Are you sure that there is category {marcusinput_str}",
             parse_mode=parse_pre,
         )
     try:
-        sql.del_keyword_broadcastlist(skullinput_str)
+        sql.del_keyword_broadcastlist(marcusinput_str)
         await edit_or_reply(
             event,
-            f"Successfully deleted the category {skullinput_str}",
+            f"Successfully deleted the category {marcusinput_str}",
             parse_mode=parse_pre,
         )
     except Exception as e:

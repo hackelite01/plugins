@@ -235,10 +235,10 @@ async def digitalpicloop():
         current_time = datetime.now().strftime("%H:%M")
         img = Image.open(autophoto_path)
         drawn_text = ImageDraw.Draw(img)
-        skull = str(base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9kaWdpdGFsLnR0Zg=="))[
+        marcus = str(base64.b64decode("dXNlcmJvdC9oZWxwZXJzL3N0eWxlcy9kaWdpdGFsLnR0Zg=="))[
             2:36
         ]
-        fnt = ImageFont.truetype(skull, 200)
+        fnt = ImageFont.truetype(marcus, 200)
         drawn_text.text((350, 100), current_time, font=fnt, fill=(124, 252, 0))
         img.save(autophoto_path)
         file = await bot.upload_file(autophoto_path)

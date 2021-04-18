@@ -2,11 +2,11 @@
 
 from telethon import events
 
-from . import BOTLOG, BOTLOG_CHATID, skull_users
+from . import BOTLOG, BOTLOG_CHATID, marcus_users
 from .sql_helper.snip_sql import add_note, get_note, get_notes, rm_note
 
 
-@bot.on(events.NewMessage(pattern=r"\#(\S+)", from_users=skull_users))
+@bot.on(events.NewMessage(pattern=r"\#(\S+)", from_users=marcus_users))
 async def incom_note(getnt):
     try:
         if not (await getnt.get_sender()).bot:
@@ -107,8 +107,8 @@ async def on_snip_list(event):
 @bot.on(sudo_cmd(pattern=r"snipd (\S+)", allow_sudo=True))
 async def on_snip_delete(event):
     name = event.pattern_match.group(1)
-    skullsnip = get_note(name)
-    if skullsnip:
+    marcussnip = get_note(name)
+    if marcussnip:
         rm_note(name)
     else:
         return await edit_or_reply(

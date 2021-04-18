@@ -5,7 +5,7 @@ Available Commands:
 
 import asyncio
 
-from skulluserbot.utils import admin_cmd
+from marcususerbot.utils import admin_cmd
 
 
 @telebot.on(admin_cmd(pattern="(.*)"))

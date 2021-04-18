@@ -1,39 +1,39 @@
 import nekos
 
 
-@bot.on(admin_cmd(pattern="tskull$"))
-@bot.on(sudo_cmd(pattern="tskull$", allow_sudo=True))
-async def hmm(skull):
-    if skull.fwd_from:
+@bot.on(admin_cmd(pattern="tmarcus$"))
+@bot.on(sudo_cmd(pattern="tmarcus$", allow_sudo=True))
+async def hmm(marcus):
+    if marcus.fwd_from:
         return
-    reactskull = nekos.textskull()
-    await edit_or_reply(skull, reactskull)
+    reactmarcus = nekos.textmarcus()
+    await edit_or_reply(marcus, reactmarcus)
 
 
 @bot.on(admin_cmd(pattern="why$"))
 @bot.on(sudo_cmd(pattern="why$", allow_sudo=True))
-async def hmm(skull):
-    if skull.fwd_from:
+async def hmm(marcus):
+    if marcus.fwd_from:
         return
-    whyskull = nekos.why()
-    await edit_or_reply(skull, whyskull)
+    whymarcus = nekos.why()
+    await edit_or_reply(marcus, whymarcus)
 
 
 @bot.on(admin_cmd(pattern="fact$"))
 @bot.on(sudo_cmd(pattern="fact$", allow_sudo=True))
-async def hmm(skull):
-    if skull.fwd_from:
+async def hmm(marcus):
+    if marcus.fwd_from:
         return
-    factskull = nekos.fact()
-    await edit_or_reply(skull, factskull)
+    factmarcus = nekos.fact()
+    await edit_or_reply(marcus, factmarcus)
 
 
 CMD_HELP.update(
     {
         "funtxts": """**Plugin : **`funtxts`
 
-  •  **Syntax : **`.tskull`
-  •  **Function : **__Sens you some random skull facial text art__
+  •  **Syntax : **`.tmarcus`
+  •  **Function : **__Sens you some random marcus facial text art__
 
   •  **Syntax : **`.why`
   •  **Function : **__Asks some random Funny questions__

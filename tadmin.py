@@ -18,140 +18,140 @@ NO_PERM = "`I don't have sufficient permissions! This is so sed. Alexa play desp
 @bot.on(admin_cmd(pattern=r"tmute(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern=r"tmute(?: |$)(.*)", allow_sudo=True))
 @errors_handler
-async def tmuter(skully):
-    chat = await skully.get_chat()
+async def tmuter(marcusy):
+    chat = await marcusy.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
     # If not admin and not creator, return
     if not admin and not creator:
-        await edit_or_reply(skully, NO_ADMIN)
+        await edit_or_reply(marcusy, NO_ADMIN)
         return
-    skullevent = await edit_or_reply(skully, "`muting....`")
-    user, reason = await get_user_from_event(skully, skullevent)
+    marcusevent = await edit_or_reply(marcusy, "`muting....`")
+    user, reason = await get_user_from_event(marcusy, marcusevent)
     if not user:
         return
     if reason:
         reason = reason.split(" ", 1)
         hmm = len(reason)
-        skulltime = reason[0]
+        marcustime = reason[0]
         reason = reason[1] if hmm == 2 else None
     else:
-        await skullevent.edit("you haven't mentioned time, check `.info tadmin`")
+        await marcusevent.edit("you haven't mentioned time, check `.info tadmin`")
         return
-    self_user = await skully.client.get_me()
-    ctime = await extract_time(skully, skulltime)
+    self_user = await marcusy.client.get_me()
+    ctime = await extract_time(marcusy, marcustime)
     if not ctime:
-        await skullevent.edit(
-            f"Invalid time type specified. Expected m , h , d or w not as {skulltime}"
+        await marcusevent.edit(
+            f"Invalid time type specified. Expected m , h , d or w not as {marcustime}"
         )
         return
     if user.id == self_user.id:
-        await skullevent.edit(f"Sorry, I can't mute myself")
+        await marcusevent.edit(f"Sorry, I can't mute myself")
         return
     try:
-        await skullevent.client(
+        await marcusevent.client(
             EditBannedRequest(
-                skully.chat_id,
+                marcusy.chat_id,
                 user.id,
                 ChatBannedRights(until_date=ctime, send_messages=True),
             )
         )
         # Announce that the function is done
         if reason:
-            await skullevent.edit(
-                f"{_format.mentionuser(user.first_name ,user.id)} was muted in {skully.chat.title}\n"
-                f"**Muted for : **{skulltime}\n"
+            await marcusevent.edit(
+                f"{_format.mentionuser(user.first_name ,user.id)} was muted in {marcusy.chat.title}\n"
+                f"**Muted for : **{marcustime}\n"
                 f"**Reason : **__{reason}__"
             )
             if BOTLOG:
-                await skully.client.send_message(
+                await marcusy.client.send_message(
                     BOTLOG_CHATID,
                     "#TMUTE\n"
                     f"**User : **[{user.first_name}](tg://user?id={user.id})\n"
-                    f"**Chat : **{skully.chat.title}(`{skully.chat_id}`)\n"
-                    f"**Muted for : **`{skulltime}`\n"
+                    f"**Chat : **{marcusy.chat.title}(`{marcusy.chat_id}`)\n"
+                    f"**Muted for : **`{marcustime}`\n"
                     f"**Reason : **`{reason}``",
                 )
         else:
-            await skullevent.edit(
-                f"{_format.mentionuser(user.first_name ,user.id)} was muted in {skully.chat.title}\n"
-                f"Muted for {skulltime}\n"
+            await marcusevent.edit(
+                f"{_format.mentionuser(user.first_name ,user.id)} was muted in {marcusy.chat.title}\n"
+                f"Muted for {marcustime}\n"
             )
             if BOTLOG:
-                await skully.client.send_message(
+                await marcusy.client.send_message(
                     BOTLOG_CHATID,
                     "#TMUTE\n"
                     f"**User : **[{user.first_name}](tg://user?id={user.id})\n"
-                    f"**Chat : **{skully.chat.title}(`{skully.chat_id}`)\n"
-                    f"**Muted for : **`{skulltime}`",
+                    f"**Chat : **{marcusy.chat.title}(`{marcusy.chat_id}`)\n"
+                    f"**Muted for : **`{marcustime}`",
                 )
         # Announce to logging group
     except UserIdInvalidError:
-        return await skullevent.edit("`Uh oh my mute logic broke!`")
+        return await marcusevent.edit("`Uh oh my mute logic broke!`")
     except UserAdminInvalidError:
-        return await skullevent.edit(
+        return await marcusevent.edit(
             "`Either you're not an admin or you tried to mute an admin that you didn't promote`"
         )
     except Exception as e:
-        return await skullevent.edit(f"`{str(e)}`")
+        return await marcusevent.edit(f"`{str(e)}`")
 
 
 @bot.on(admin_cmd(pattern="tban(?: |$)(.*)"))
 @bot.on(sudo_cmd(pattern="tban(?: |$)(.*)", allow_sudo=True))
 @errors_handler
-async def ban(skully):
-    chat = await skully.get_chat()
+async def ban(marcusy):
+    chat = await marcusy.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
     # If not admin and not creator, return
     if not admin and not creator:
-        await edit_or_reply(skully, NO_ADMIN)
+        await edit_or_reply(marcusy, NO_ADMIN)
         return
-    skullevent = await edit_or_reply(skully, "`banning....`")
-    user, reason = await get_user_from_event(skully, skullevent)
+    marcusevent = await edit_or_reply(marcusy, "`banning....`")
+    user, reason = await get_user_from_event(marcusy, marcusevent)
     if not user:
         return
     if reason:
         reason = reason.split(" ", 1)
         hmm = len(reason)
-        skulltime = reason[0]
+        marcustime = reason[0]
         reason = reason[1] if hmm == 2 else None
     else:
-        await skullevent.edit("you haven't mentioned time, check `.info tadmin`")
+        await marcusevent.edit("you haven't mentioned time, check `.info tadmin`")
         return
-    self_user = await skully.client.get_me()
-    ctime = await extract_time(skully, skulltime)
+    self_user = await marcusy.client.get_me()
+    ctime = await extract_time(marcusy, marcustime)
     if not ctime:
-        await skullevent.edit(
-            f"Invalid time type specified. Expected m , h , d or w not as {skulltime}"
+        await marcusevent.edit(
+            f"Invalid time type specified. Expected m , h , d or w not as {marcustime}"
         )
         return
     if user.id == self_user.id:
-        await skullevent.edit(f"Sorry, I can't ban myself")
+        await marcusevent.edit(f"Sorry, I can't ban myself")
         return
-    await skullevent.edit("`Whacking the pest!`")
+    await marcusevent.edit("`Whacking the pest!`")
     try:
-        await skully.client(
+        await marcusy.client(
             EditBannedRequest(
-                skully.chat_id,
+                marcusy.chat_id,
                 user.id,
                 ChatBannedRights(until_date=ctime, view_messages=True),
             )
         )
     except UserAdminInvalidError:
-        return await skullevent.edit(
+        return await marcusevent.edit(
             "`Either you're not an admin or you tried to ban an admin that you didn't promote`"
         )
     except BadRequestError:
-        await skullevent.edit(NO_PERM)
+        await marcusevent.edit(NO_PERM)
         return
     # Helps ban group join spammers more easily
     try:
-        reply = await skully.get_reply_message()
+        reply = await marcusy.get_reply_message()
         if reply:
             await reply.delete()
     except BadRequestError:
-        await skullevent.edit(
+        await marcusevent.edit(
             "`I dont have message nuking rights! But still he was banned!`"
         )
         return
@@ -159,32 +159,32 @@ async def ban(skully):
     # is done gracefully
     # Shout out the ID, so that fedadmins can fban later
     if reason:
-        await skullevent.edit(
-            f"{_format.mentionuser(user.first_name ,user.id)} was banned in {skully.chat.title}\n"
-            f"banned for {skulltime}\n"
+        await marcusevent.edit(
+            f"{_format.mentionuser(user.first_name ,user.id)} was banned in {marcusy.chat.title}\n"
+            f"banned for {marcustime}\n"
             f"Reason:`{reason}`"
         )
         if BOTLOG:
-            await skully.client.send_message(
+            await marcusy.client.send_message(
                 BOTLOG_CHATID,
                 "#TBAN\n"
                 f"**User : **[{user.first_name}](tg://user?id={user.id})\n"
-                f"**Chat : **{skully.chat.title}(`{skully.chat_id}`)\n"
-                f"**Banned untill : **`{skulltime}`\n"
+                f"**Chat : **{marcusy.chat.title}(`{marcusy.chat_id}`)\n"
+                f"**Banned untill : **`{marcustime}`\n"
                 f"**Reason : **__{reason}__",
             )
     else:
-        await skullevent.edit(
-            f"{_format.mentionuser(user.first_name ,user.id)} was banned in {skully.chat.title}\n"
-            f"banned for {skulltime}\n"
+        await marcusevent.edit(
+            f"{_format.mentionuser(user.first_name ,user.id)} was banned in {marcusy.chat.title}\n"
+            f"banned for {marcustime}\n"
         )
         if BOTLOG:
-            await skully.client.send_message(
+            await marcusy.client.send_message(
                 BOTLOG_CHATID,
                 "#TBAN\n"
                 f"**User : **[{user.first_name}](tg://user?id={user.id})\n"
-                f"**Chat : **{skully.chat.title}(`{skully.chat_id}`)\n"
-                f"**Banned untill : **`{skulltime}`",
+                f"**Chat : **{marcusy.chat.title}(`{marcusy.chat_id}`)\n"
+                f"**Banned untill : **`{marcustime}`",
             )
 
 

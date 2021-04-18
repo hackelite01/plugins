@@ -15,17 +15,17 @@ from . import humanbytes
 @bot.on(admin_cmd(pattern="ls ?(.*)", command="ls"))
 @bot.on(sudo_cmd(pattern="ls ?(.*)", allow_sudo=True, command="ls"))
 async def lst(event):
-    skull = "".join(event.text.split(maxsplit=1)[1:])
-    path = skull or os.getcwd()
+    marcus = "".join(event.text.split(maxsplit=1)[1:])
+    path = marcus or os.getcwd()
     if not os.path.exists(path):
         await edit_or_reply(
             event,
-            f"there is no such directory or file with the name `{skull}` check again",
+            f"there is no such directory or file with the name `{marcus}` check again",
         )
         return
-    path = Path(skull) if skull else os.getcwd()
+    path = Path(marcus) if marcus else os.getcwd()
     if os.path.isdir(path):
-        if skull:
+        if marcus:
             msg = "Folders and Files in `{}` :\n".format(path)
         else:
             msg = "Folders and Files in Current Directory :\n"
@@ -33,9 +33,9 @@ async def lst(event):
         files = ""
         folders = ""
         for contents in sorted(lists):
-            skullpath = os.path.join(path, contents)
-            if not os.path.isdir(skullpath):
-                size = os.stat(skullpath).st_size
+            marcuspath = os.path.join(path, contents)
+            if not os.path.isdir(marcuspath):
+                size = os.stat(marcuspath).st_size
                 if str(contents).endswith((".mp3", ".flac", ".wav", ".m4a")):
                     files += "🎵" + f"`{contents}`\n"
                 if str(contents).endswith((".opus")):
@@ -96,24 +96,24 @@ async def lst(event):
 @bot.on(admin_cmd(pattern="rem (.*)", command="rem"))
 @bot.on(sudo_cmd(pattern="rem (.*)", command="rem", allow_sudo=True))
 async def lst(event):
-    skull = event.pattern_match.group(1)
-    if skull:
-        path = Path(skull)
+    marcus = event.pattern_match.group(1)
+    if marcus:
+        path = Path(marcus)
     else:
         await edit_or_reply(event, "what should i delete")
         return
     if not os.path.exists(path):
         await edit_or_reply(
             event,
-            f"there is no such directory or file with the name `{skull}` check again",
+            f"there is no such directory or file with the name `{marcus}` check again",
         )
         return
-    skullcmd = f"rm -rf {path}"
+    marcuscmd = f"rm -rf {path}"
     if os.path.isdir(path):
-        await _skullutils.runcmd(skullcmd)
+        await _marcusutils.runcmd(marcuscmd)
         await edit_or_reply(event, f"Succesfully removed `{path}` directory")
     else:
-        await _skullutils.runcmd(skullcmd)
+        await _marcusutils.runcmd(marcuscmd)
         await edit_or_reply(event, f"Succesfully removed `{path}` file")
 
 
@@ -142,7 +142,7 @@ async def _(event):
     )
     await asyncio.sleep(2)
     try:
-        await _skullutils.runcmd(f"mkdir {original}")
+        await _marcusutils.runcmd(f"mkdir {original}")
         await mone.edit(f"Successfully created the directory `{original}`")
     except Exception as e:
         await edit_delete(mone, str(e), parse_mode=parse_pre)
@@ -172,13 +172,13 @@ async def _(event):
     if not os.path.exists(original):
         await edit_delete(
             event,
-            f"there is no such directory or file with the name `{skull}` check again",
+            f"there is no such directory or file with the name `{marcus}` check again",
         )
         return
     mone = await edit_or_reply(event, "copying the file ...", parse_mode=parse_pre)
     await asyncio.sleep(2)
     try:
-        await _skullutils.runcmd(f"cp -r {original} {location}")
+        await _marcusutils.runcmd(f"cp -r {original} {location}")
         await mone.edit(f"Successfully copied the `{original}` to `{location}`")
     except Exception as e:
         await edit_delete(mone, str(e), parse_mode=parse_pre)
@@ -208,7 +208,7 @@ async def _(event):
     if not os.path.exists(original):
         await edit_delete(
             event,
-            f"there is no such directory or file with the name `{skull}` check again",
+            f"there is no such directory or file with the name `{marcus}` check again",
         )
         return
     mone = await edit_or_reply(event, "Moving the file ...", parse_mode=parse_pre)

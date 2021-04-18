@@ -12,8 +12,8 @@ BASE_URL = "https://headp.at/pats/{}"
 PAT_IMAGE = "pat.webp"
 
 
-@bot.on(admin_cmd(pattern="skull$"))
-@bot.on(sudo_cmd(pattern="skull$", allow_sudo=True))
+@bot.on(admin_cmd(pattern="marcus$"))
+@bot.on(sudo_cmd(pattern="marcus$", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -25,7 +25,7 @@ async def _(event):
     if event.reply_to_msg_id:
         reply_to_id = await event.get_reply_message()
     with open("temp.png", "wb") as f:
-        f.write(requests.get(nekos.skull()).content)
+        f.write(requests.get(nekos.marcus()).content)
     img = Image.open("temp.png")
     img.save("temp.webp", "webp")
     img.seek(0)
@@ -125,7 +125,7 @@ CMD_HELP.update(
         "randomsticker": """**Plugin : **`randomsticker`
 
 **Commands : **
-  •  `.skull`
+  •  `.marcus`
   •  `.dab`
   •  `.brain`
   •  `.pat`

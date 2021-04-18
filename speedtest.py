@@ -22,7 +22,7 @@ async def _(event):
         as_document = True
     elif input_str == "text":
         as_text = True
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event, "`Calculating my internet speed. Please wait!`"
     )
     start = datetime.now()
@@ -44,7 +44,7 @@ async def _(event):
         response = s.results.share()
         speedtest_image = response
         if as_text:
-            await skullevent.edit(
+            await marcusevent.edit(
                 """`SpeedTest completed in {} seconds`
 
 `Download: {}`
@@ -71,7 +71,7 @@ async def _(event):
             )
             await event.delete()
     except Exception as exc:
-        await skullevent.edit(
+        await marcusevent.edit(
             """**SpeedTest** completed in {} seconds
 Download: {}
 Upload: {}

@@ -12,7 +12,7 @@ import userbot.plugins.sql_helper.pmpermit_sql as pmpermit_sql
 
 from . import ALIVE_NAME, PM_START, PMMESSAGE_CACHE, set_key
 
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "skull"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "marcus"
 PREV_REPLY_MESSAGE = {}
 PM = f"""Hello. You are accessing the availabe menu of my master, {DEFAULTUSER}.
 __Let's make this smooth and let me know why you are here.__
@@ -22,7 +22,7 @@ __Let's make this smooth and let me know why you are here.__
 `b`. To spam my master's inbox.
 `c`. To enquire something
 `d`. To request something
-@skulluserbot\n"""
+@marcususerbot\n"""
 ONE = """__Okay. Your request has been registered. Do not spam my master's inbox.You can expect a reply within next few years. He/She is a busy man, unlike you probably.__
 
 **⚠️ You will be blocked and reported if you spam damn nub nibba. ⚠️**\n\n"""

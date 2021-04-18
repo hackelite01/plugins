@@ -20,7 +20,7 @@ async def _(event):
     if reply_message.sender.bot:
         await event.edit("Reply to actual users message.")
         return
-    skull = await edit_or_reply(event, "recognizeing this media")
+    marcus = await edit_or_reply(event, "recognizeing this media")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(
@@ -29,7 +29,7 @@ async def _(event):
             await event.client.forward_messages(chat, reply_message)
             response = await response
         except YouBlockedUserError:
-            await skull.edit("unblock @Rekognition_Bot and try again")
+            await marcus.edit("unblock @Rekognition_Bot and try again")
             return
         if response.text.startswith("See next message."):
             response = conv.wait_event(
@@ -37,9 +37,9 @@ async def _(event):
             )
             response = await response
             msg = response.message.message
-            await skull.edit(msg)
+            await marcus.edit(msg)
         else:
-            await skull.edit("sorry, I couldnt find it")
+            await marcus.edit("sorry, I couldnt find it")
 
         await event.client.send_read_acknowledge(conv.chat_id)
 

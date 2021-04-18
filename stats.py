@@ -23,7 +23,7 @@ GROUPS_OWNERSTR = "**The list of groups in which you are owner are here **\n\n"
 @bot.on(admin_cmd(pattern="stat$"))
 @bot.on(sudo_cmd(pattern="stat$", allow_sudo=True))
 async def stats(event):
-    skull = await edit_or_reply(event, STAT_INDICATION)
+    marcus = await edit_or_reply(event, STAT_INDICATION)
     start_time = time.time()
     private_chats = 0
     bots = 0
@@ -81,7 +81,7 @@ async def stats(event):
     response += f"**Unread:** {unread} \n"
     response += f"**Unread Mentions:** {unread_mentions} \n\n"
     response += f"📌 __It Took:__ {stop_time:.02f}s \n"
-    await skull.edit(response)
+    await marcus.edit(response)
 
 
 @bot.on(admin_cmd(pattern="stat (c|ca|co)$"))
@@ -89,10 +89,10 @@ async def stats(event):
 async def stats(event):
     if event.fwd_from:
         return
-    skullcmd = event.pattern_match.group(1)
-    skullevent = await edit_or_reply(event, STAT_INDICATION)
+    marcuscmd = event.pattern_match.group(1)
+    marcusevent = await edit_or_reply(event, STAT_INDICATION)
     start_time = time.time()
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     hi = []
     hica = []
     hico = []
@@ -104,33 +104,33 @@ async def stats(event):
                 hica.append([entity.title, entity.id])
             if entity.creator:
                 hico.append([entity.title, entity.id])
-    if skullcmd == "c":
+    if marcuscmd == "c":
         output = CHANNELS_STR
         for k, i in enumerate(hi, start=1):
             output += f"{k} .) [{i[0]}](https://t.me/c/{i[1]}/1)\n"
         caption = CHANNELS_STR
-    elif skullcmd == "ca":
+    elif marcuscmd == "ca":
         output = CHANNELS_ADMINSTR
         for k, i in enumerate(hica, start=1):
             output += f"{k} .) [{i[0]}](https://t.me/c/{i[1]}/1)\n"
         caption = CHANNELS_ADMINSTR
-    elif skullcmd == "co":
+    elif marcuscmd == "co":
         output = CHANNELS_OWNERSTR
         for k, i in enumerate(hico, start=1):
             output += f"{k} .) [{i[0]}](https://t.me/c/{i[1]}/1)\n"
         caption = CHANNELS_OWNERSTR
     stop_time = time.time() - start_time
     try:
-        skull = Get(skull)
-        await event.client(skull)
+        marcus = Get(marcus)
+        await event.client(marcus)
     except BaseException:
         pass
     output += f"\n**Time Taken : ** {stop_time:.02f}s"
     try:
-        await skullevent.edit(output)
+        await marcusevent.edit(output)
     except Exception:
         await edit_or_reply(
-            skullevent,
+            marcusevent,
             output,
             caption=caption,
         )
@@ -141,10 +141,10 @@ async def stats(event):
 async def stats(event):
     if event.fwd_from:
         return
-    skullcmd = event.pattern_match.group(1)
-    skullevent = await edit_or_reply(event, STAT_INDICATION)
+    marcuscmd = event.pattern_match.group(1)
+    marcusevent = await edit_or_reply(event, STAT_INDICATION)
     start_time = time.time()
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     hi = []
     higa = []
     higo = []
@@ -164,33 +164,33 @@ async def stats(event):
                 higa.append([entity.title, entity.id])
             if entity.creator:
                 higo.append([entity.title, entity.id])
-    if skullcmd == "g":
+    if marcuscmd == "g":
         output = GROUPS_STR
         for k, i in enumerate(hi, start=1):
             output += f"{k} .) [{i[0]}](https://t.me/c/{i[1]}/1)\n"
         caption = GROUPS_STR
-    elif skullcmd == "ga":
+    elif marcuscmd == "ga":
         output = GROUPS_ADMINSTR
         for k, i in enumerate(higa, start=1):
             output += f"{k} .) [{i[0]}](https://t.me/c/{i[1]}/1)\n"
         caption = GROUPS_ADMINSTR
-    elif skullcmd == "go":
+    elif marcuscmd == "go":
         output = GROUPS_OWNERSTR
         for k, i in enumerate(higo, start=1):
             output += f"{k} .) [{i[0]}](https://t.me/c/{i[1]}/1)\n"
         caption = GROUPS_OWNERSTR
     stop_time = time.time() - start_time
     try:
-        skull = Get(skull)
-        await event.client(skull)
+        marcus = Get(marcus)
+        await event.client(marcus)
     except BaseException:
         pass
     output += f"\n**Time Taken : ** {stop_time:.02f}s"
     try:
-        await skullevent.edit(output)
+        await marcusevent.edit(output)
     except Exception:
         await edit_or_reply(
-            skullevent,
+            marcusevent,
             output,
             caption=caption,
         )
@@ -222,15 +222,15 @@ async def _(event):
     else:
         uid = reply_message.sender_id
     chat = "@tgscanrobot"
-    skullevent = await edit_or_reply(event, "`Processing...`")
+    marcusevent = await edit_or_reply(event, "`Processing...`")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"{uid}")
         except Exception:
-            await edit_delete(skullevent, "`unblock `@tgscanrobot` and then try`")
+            await edit_delete(marcusevent, "`unblock `@tgscanrobot` and then try`")
         response = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
-        await skullevent.edit(response.text)
+        await marcusevent.edit(response.text)
 
 
 def inline_mention(user):

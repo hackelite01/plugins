@@ -1,4 +1,4 @@
-# https://github.com/hackelite01/skull-userbot credits to @mayank1rajput
+# https://github.com/hackelite01/marcus-userbot credits to @mayank1rajput
 
 import asyncio
 
@@ -86,12 +86,12 @@ async def _(event):
         "😧",
         "😡",
         "😢",
-        "‎**Repo of skulluserbot**",
+        "‎**Repo of marcususerbot**",
         "😁",
         "😧",
         "😡",
         "😢",
-        "__**[Good to see you guys....]**__(github.com/hackelite01/skull-userbot)",
+        "__**[Good to see you guys....]**__(github.com/hackelite01/marcus-userbot)",
     ]
     for i in animation_ttl:
         await asyncio.sleep(animation_interval)

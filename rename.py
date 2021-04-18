@@ -13,7 +13,7 @@ thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "thumb_image.jpg"
 async def _(event):
     if event.fwd_from:
         return
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event,
         "`Renaming in process 馃檮馃檱鈥嶁檪锔忦煓団�嶁檪锔忦煓団�嶁檧锔� It might take some time if file size is big`",
     )
@@ -31,19 +31,19 @@ async def _(event):
             reply_message,
             downloaded_file_name,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, skullevent, c_time, "trying to download", file_name)
+                progress(d, t, marcusevent, c_time, "trying to download", file_name)
             ),
         )
         end = datetime.now()
         ms = (end - start).seconds
         if os.path.exists(downloaded_file_name):
-            await skullevent.edit(
+            await marcusevent.edit(
                 f"**File Downloaded in {ms} seconds.**\n**File location : **`{downloaded_file_name}`"
             )
         else:
-            await skullevent.edit("Error Occurred\n {}".format(input_str))
+            await marcusevent.edit("Error Occurred\n {}".format(input_str))
     else:
-        await skullevent.edit(
+        await marcusevent.edit(
             "**Syntax : ** `.rename file.name` as reply to a Telegram media"
         )
 
@@ -56,7 +56,7 @@ async def _(event):
     thumb = None
     if os.path.exists(thumb_image_path):
         thumb = thumb_image_path
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event,
         "`Rename & Upload in process 馃檮馃檱鈥嶁檪锔忦煓団�嶁檪锔忦煓団�嶁檧锔� It might take some time if file size is big`",
     )
@@ -75,7 +75,7 @@ async def _(event):
             reply_message,
             downloaded_file_name,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, skullevent, c_time, "trying to download", file_name)
+                progress(d, t, marcusevent, c_time, "trying to download", file_name)
             ),
         )
         end = datetime.now()
@@ -103,15 +103,15 @@ async def _(event):
             end_two = datetime.now()
             os.remove(downloaded_file_name)
             ms_two = (end_two - end).seconds
-            await skullevent.edit(
+            await marcusevent.edit(
                 f"`Downloaded file in {ms_one} seconds.`\n`Uploaded in {ms_two} seconds.`"
             )
             await asyncio.sleep(3)
-            await skullevent.delete()
+            await marcusevent.delete()
         else:
-            await skullevent.edit("File Not Found {}".format(input_str))
+            await marcusevent.edit("File Not Found {}".format(input_str))
     else:
-        await skullevent.edit(
+        await marcusevent.edit(
             "**Syntax : **`.rnupload file.name` as reply to a Telegram media"
         )
 
@@ -124,7 +124,7 @@ async def _(event):
     thumb = None
     if os.path.exists(thumb_image_path):
         thumb = thumb_image_path
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event,
         "`Rename & Upload in process 馃檮馃檱鈥嶁檪锔忦煓団�嶁檪锔忦煓団�嶁檧锔� It might take some time if file size is big`",
     )
@@ -143,7 +143,7 @@ async def _(event):
             reply_message,
             downloaded_file_name,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, skullevent, c_time, "trying to download", file_name)
+                progress(d, t, marcusevent, c_time, "trying to download", file_name)
             ),
         )
         end = datetime.now()
@@ -171,15 +171,15 @@ async def _(event):
             end_two = datetime.now()
             os.remove(downloaded_file_name)
             ms_two = (end_two - end).seconds
-            await skullevent.edit(
+            await marcusevent.edit(
                 f"`Downloaded file in {ms_one} seconds.`\n`Uploaded in {ms_two} seconds.`"
             )
             await asyncio.sleep(3)
-            await skullevent.delete()
+            await marcusevent.delete()
         else:
-            await skullevent.edit("File Not Found {}".format(input_str))
+            await marcusevent.edit("File Not Found {}".format(input_str))
     else:
-        await skullevent.edit(
+        await marcusevent.edit(
             "**Syntax : **`.rnupload file.name` as reply to a Telegram media"
         )
 

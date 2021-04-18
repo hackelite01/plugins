@@ -171,7 +171,7 @@ async def create_app(gdrive):
     """ - Create google drive service app - """
     hmm = bot.uid
     creds = helper.get_credentials(str(hmm))
-    skull = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    marcus = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     if creds is not None:
         """ - Repack credential objects from strings - """
         creds = pickle.loads(base64.b64decode(creds.encode()))
@@ -187,8 +187,8 @@ async def create_app(gdrive):
             await gdrive.edit("`Credentials is empty, please generate it...`")
             return False
     try:
-        skull = Get(skull)
-        await gdrive.client(skull)
+        marcus = Get(marcus)
+        await gdrive.client(marcus)
     except BaseException:
         pass
     return build("drive", "v3", credentials=creds, cache_discovery=False)
@@ -243,11 +243,11 @@ async def download(event, gdrive, service, uri=None):
         try:
             from .torrentutils import aria2, check_metadata
 
-            skulltorrent = True
+            marcustorrent = True
         except Exception:
-            skulltorrent = False
+            marcustorrent = False
         full_path = os.path.join(os.getcwd(), TMP_DOWNLOAD_DIRECTORY)
-        if skulltorrent:
+        if marcustorrent:
             LOGS.info("torrentutils exists")
             if os.path.isfile(uri) and uri.endswith(".torrent"):
                 downloads = aria2.add_torrent(
@@ -262,7 +262,7 @@ async def download(event, gdrive, service, uri=None):
             LOGS.info("No torrentutils")
             await edit_or_reply(
                 gdrive,
-                "`To use torrent files or download files from link install torrentutils from` @skullplugins",
+                "`To use torrent files or download files from link install torrentutils from` @marcusplugins",
             )
             return "install torrentutils"
         from .torrentutils import aria2, check_metadata
@@ -423,8 +423,8 @@ async def copy_dir(service, file_id, dir_id):
     for file in files:
         if file["mimeType"] == "application/vnd.google-apps.folder":
             folder = await create_dir(service, file["name"], dir_id)
-            skulldir_id = folder.get("id")
-            new_id = await copy_dir(service, file["id"], skulldir_id)
+            marcusdir_id = folder.get("id")
+            new_id = await copy_dir(service, file["id"], marcusdir_id)
         else:
             await copy_file(service, file["id"], dir_id)
             await asyncio.sleep(0.5)
@@ -994,7 +994,7 @@ async def lists(gdrive):
         allow_sudo=True,
     )
 )
-async def skulllists(gdrive):
+async def marcuslists(gdrive):
     await lists(gdrive)
 
 
@@ -1537,16 +1537,16 @@ async def g_download(event):
     thumb = None
     cmd = event.pattern_match.group(1)
     drive_link = event.pattern_match.group(2)
-    skullevent = await edit_or_reply(
+    marcusevent = await edit_or_reply(
         event, "`Downloading Requested File from G-Drive...`"
     )
-    file_name, skullprocess = await gdrive_download(event, skullevent, service, drive_link)
-    if skullprocess is not None:
-        return await edit_delete(skullevent, file_name)
+    file_name, marcusprocess = await gdrive_download(event, marcusevent, service, drive_link)
+    if marcusprocess is not None:
+        return await edit_delete(marcusevent, file_name)
     if os.path.exists(thumb_image_path):
         thumb = thumb_image_path
     if not cmd:
-        await skullevent.edit("**File Downloaded.\nName : **`" + str(file_name) + "`")
+        await marcusevent.edit("**File Downloaded.\nName : **`" + str(file_name) + "`")
     else:
         c_time = time.time()
         await event.client.send_file(
@@ -1557,12 +1557,12 @@ async def g_download(event):
             force_document=False,
             supports_streaming=True,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, skullevent, c_time, "Uploading...", file_name)
+                progress(d, t, marcusevent, c_time, "Uploading...", file_name)
             ),
         )
         os.remove(file_name)
         await edit_delete(
-            skullevent,
+            marcusevent,
             "**File Downloaded and uploaded.\nName : **`" + str(file_name) + "`",
             5,
         )
@@ -1577,9 +1577,9 @@ async def gshare(event):
     if service is False:
         return None
     input_str = event.pattern_match.group(1)
-    skullevent = await edit_or_reply(event, "`Creating sharable link...`")
+    marcusevent = await edit_or_reply(event, "`Creating sharable link...`")
     await asyncio.sleep(2)
-    await share(service, skullevent, input_str)
+    await share(service, marcusevent, input_str)
 
 
 CMD_HELP.update(

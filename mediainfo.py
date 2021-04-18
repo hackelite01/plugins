@@ -15,7 +15,7 @@ async def post_to_telegraph(page_title, html_format_content):
     post_page = post_client.post(
         title=page_title,
         author=auth_name,
-        author_url="https://t.me/skulluserbot",
+        author_url="https://t.me/marcususerbot",
         text=html_format_content,
     )
     return post_page["url"]
@@ -70,13 +70,13 @@ async def mediainfo(event):
     if not reply.media:
         await edit_or_reply(event, "reply to media to get info")
         return
-    skullevent = await edit_or_reply(event, "`Gathering ...`")
+    marcusevent = await edit_or_reply(event, "`Gathering ...`")
     X_MEDIA = reply.file.mime_type
     if (not X_MEDIA) or (X_MEDIA.startswith(("text"))):
-        return await skullevent.edit("Reply To a supported Media Format")
+        return await marcusevent.edit("Reply To a supported Media Format")
     hmm = await file_data(reply)
     file_path = await reply.download_media(Config.TEMP_DIR)
-    out, err, ret, pid = await _skullutils.runcmd(f"mediainfo '{file_path}'")
+    out, err, ret, pid = await _marcusutils.runcmd(f"mediainfo '{file_path}'")
     if not out:
         out = "Not Supported"
     body_text = f"""
@@ -89,7 +89,7 @@ async def mediainfo(event):
 {out} 
 </code>"""
     link = await post_to_telegraph(f"{X_MEDIA}", body_text)
-    await skullevent.edit(
+    await marcusevent.edit(
         f"ℹ️  <b>MEDIA INFO:  <a href ='{link}' > {X_MEDIA}</a></b>",
         parse_mode="HTML",
         link_preview=True,

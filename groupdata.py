@@ -168,7 +168,7 @@ async def get_users(show):
             chat = await show.client.get_entity(input_str)
         except Exception as e:
             await edit_delete(show, f"`{str(e)}`", 10)
-    skullevent = await edit_or_reply(show, "`getting users list wait...`  ")
+    marcusevent = await edit_or_reply(show, "`getting users list wait...`  ")
     try:
         if not show.pattern_match.group(1):
             async for user in show.client.iter_participants(show.chat_id):
@@ -199,28 +199,28 @@ async def get_users(show):
                 caption="Users list",
                 reply_to=reply_to_id,
             )
-            await skullevent.delete()
+            await marcusevent.delete()
     else:
-        await skullevent.edit(mentions)
+        await marcusevent.edit(mentions)
 
 
 @bot.on(admin_cmd(pattern="chatinfo(?: |$)(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="chatinfo(?: |$)(.*)", allow_sudo=True))
 async def info(event):
-    skullevent = await edit_or_reply(event, "`Analysing the chat...`")
-    chat = await get_chatinfo(event, skullevent)
+    marcusevent = await edit_or_reply(event, "`Analysing the chat...`")
+    chat = await get_chatinfo(event, marcusevent)
     caption = await fetch_info(chat, event)
     try:
-        await skullevent.edit(caption, parse_mode="html")
+        await marcusevent.edit(caption, parse_mode="html")
     except Exception as e:
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID, f"**Error in chatinfo : **\n`{str(e)}`"
             )
-        await skullevent.edit("`An unexpected error has occurred.`")
+        await marcusevent.edit("`An unexpected error has occurred.`")
 
 
-async def get_chatinfo(event, skullevent):
+async def get_chatinfo(event, marcusevent):
     chat = event.pattern_match.group(1)
     chat_info = None
     if chat:
@@ -241,18 +241,18 @@ async def get_chatinfo(event, skullevent):
         try:
             chat_info = await event.client(GetFullChannelRequest(chat))
         except ChannelInvalidError:
-            await skullevent.edit("`Invalid channel/group`")
+            await marcusevent.edit("`Invalid channel/group`")
             return None
         except ChannelPrivateError:
-            await skullevent.edit(
+            await marcusevent.edit(
                 "`This is a private channel/group or I am banned from there`"
             )
             return None
         except ChannelPublicGroupNaError:
-            await skullevent.edit("`Channel or supergroup doesn't exist`")
+            await marcusevent.edit("`Channel or supergroup doesn't exist`")
             return None
         except (TypeError, ValueError) as err:
-            await skullevent.edit(str(err))
+            await marcusevent.edit(str(err))
             return None
     return chat_info
 

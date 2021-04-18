@@ -25,7 +25,7 @@ class UPLOAD:
 UPLOAD_ = UPLOAD()
 
 
-async def skulllst_of_files(path):
+async def marcuslst_of_files(path):
     files = []
     for dirname, dirnames, filenames in os.walk(path):
         # print path to all filenames.
@@ -59,21 +59,21 @@ def get_video_thumb(file, output=None, width=320):
 
 
 def sortthings(contents, path):
-    skullsort = []
+    marcussort = []
     contents.sort()
     for file in contents:
-        skullpath = os.path.join(path, file)
-        if os.path.isfile(skullpath):
-            skullsort.append(file)
+        marcuspath = os.path.join(path, file)
+        if os.path.isfile(marcuspath):
+            marcussort.append(file)
     for file in contents:
-        skullpath = os.path.join(path, file)
-        if os.path.isdir(skullpath):
-            skullsort.append(file)
-    return skullsort
+        marcuspath = os.path.join(path, file)
+        if os.path.isdir(marcuspath):
+            marcussort.append(file)
+    return marcussort
 
 
-async def upload(path, event, udir_event, skullflag=None):
-    skullflag = skullflag or False
+async def upload(path, event, udir_event, marcusflag=None):
+    marcusflag = marcusflag or False
     reply_to_id = await reply_id(event)
     if os.path.isdir(path):
         await event.client.send_message(
@@ -83,8 +83,8 @@ async def upload(path, event, udir_event, skullflag=None):
         Files = os.listdir(path)
         Files = sortthings(Files, path)
         for file in Files:
-            skullpath = os.path.join(path, file)
-            await upload(skullpath, event, udir_event)
+            marcuspath = os.path.join(path, file)
+            await upload(marcuspath, event, udir_event)
     elif os.path.isfile(path):
         caption_rts = os.path.basename(path)
         c_time = time.time()
@@ -96,7 +96,7 @@ async def upload(path, event, udir_event, skullflag=None):
                 event.chat_id,
                 path,
                 caption=f"**File Name : **`{caption_rts}`",
-                force_document=skullflag,
+                force_document=marcusflag,
                 thumb=thumb,
                 reply_to=reply_to_id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
@@ -119,7 +119,7 @@ async def upload(path, event, udir_event, skullflag=None):
                 path,
                 caption=f"**File Name : **`{caption_rts}`",
                 thumb=thumb,
-                force_document=skullflag,
+                force_document=marcusflag,
                 reply_to=reply_to_id,
                 supports_streaming=True,
                 attributes=[
@@ -189,7 +189,7 @@ async def uploadir(event):
     if os.path.isdir(path):
         await edit_or_reply(udir_event, f"`Gathering file details in directory {path}`")
         UPLOAD_.uploaded = 0
-        await upload(path, event, udir_event, skullflag=True)
+        await upload(path, event, udir_event, marcusflag=True)
         end = datetime.now()
         ms = (end - start).seconds
         await udir_event.edit(
@@ -198,7 +198,7 @@ async def uploadir(event):
     else:
         await edit_or_reply(udir_event, f"`Uploading.....`")
         UPLOAD_.uploaded = 0
-        await upload(path, event, udir_event, skullflag=True)
+        await upload(path, event, udir_event, marcusflag=True)
         end = datetime.now()
         ms = (end - start).seconds
         await udir_event.edit(
@@ -210,7 +210,7 @@ async def uploadir(event):
 
 @bot.on(admin_cmd(pattern="circle ?(.*)", outgoing=True))
 @bot.on(sudo_cmd(pattern="circle ?(.*)", allow_sudo=True))
-async def video_skullfile(event):
+async def video_marcusfile(event):
     reply = await event.get_reply_message()
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     if input_str:
@@ -221,10 +221,10 @@ async def video_skullfile(event):
                 f"`there is no such directory/file with the name {path} to upload`",
             )
             return
-        skullevent = await edit_or_reply(event, "`Converting to video note..........`")
+        marcusevent = await edit_or_reply(event, "`Converting to video note..........`")
         filename = os.path.basename(path)
-        skullfile = os.path.join("./temp", filename)
-        copyfile(path, skullfile)
+        marcusfile = os.path.join("./temp", filename)
+        copyfile(path, marcusfile)
     else:
         if not reply:
             await edit_delete(event, "`Reply to supported media`", 5)
@@ -232,21 +232,21 @@ async def video_skullfile(event):
         if not (reply and (reply.media)):
             await edit_delete(event, "`Reply to supported Media...`", 5)
             return
-        skullevent = await edit_or_reply(event, "`Converting to video note..........`")
-        skullfile = await reply.download_media(file="./temp/")
-    if not skullfile.endswith((".mp4", ".tgs", ".mp3", ".mov", ".gif", ".opus")):
-        os.remove(skullfile)
-        await edit_delete(skullevent, "```Supported Media not found...```", 5)
+        marcusevent = await edit_or_reply(event, "`Converting to video note..........`")
+        marcusfile = await reply.download_media(file="./temp/")
+    if not marcusfile.endswith((".mp4", ".tgs", ".mp3", ".mov", ".gif", ".opus")):
+        os.remove(marcusfile)
+        await edit_delete(marcusevent, "```Supported Media not found...```", 5)
         return
-    if skullfile.endswith((".mp4", ".tgs", ".mov", ".gif")):
-        if skullfile.endswith((".tgs")):
-            hmm = await make_gif(skullevent, skullfile)
+    if marcusfile.endswith((".mp4", ".tgs", ".mov", ".gif")):
+        if marcusfile.endswith((".tgs")):
+            hmm = await make_gif(marcusevent, marcusfile)
             if hmm.endswith(("@tgstogifbot")):
-                os.remove(skullfile)
-                return await skullevent.edit(hmm)
+                os.remove(marcusfile)
+                return await marcusevent.edit(hmm)
             os.rename(hmm, "./temp/circle.mp4")
-            skullfile = "./temp/circle.mp4"
-        media_info = MediaInfo.parse(skullfile)
+            marcusfile = "./temp/circle.mp4"
+        media_info = MediaInfo.parse(marcusfile)
         aspect_ratio = 1
         for track in media_info.tracks:
             if track.track_type == "Video":
@@ -255,49 +255,49 @@ async def video_skullfile(event):
                 width = track.width
         if aspect_ratio != 1:
             crop_by = width if (height > width) else height
-            await _skullutils.runcmd(
-                f'ffmpeg -i {skullfile} -vf "crop={crop_by}:{crop_by}" {PATH}'
+            await _marcusutils.runcmd(
+                f'ffmpeg -i {marcusfile} -vf "crop={crop_by}:{crop_by}" {PATH}'
             )
         else:
-            copyfile(skullfile, PATH)
-        if str(skullfile) != str(PATH):
-            os.remove(skullfile)
+            copyfile(marcusfile, PATH)
+        if str(marcusfile) != str(PATH):
+            os.remove(marcusfile)
     else:
         thumb_loc = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg")
-        skullthumb = None
+        marcusthumb = None
         try:
-            skullthumb = await reply.download_media(thumb=-1)
+            marcusthumb = await reply.download_media(thumb=-1)
         except Exception:
-            skullthumb = os.path.join("./temp", "thumb.jpg")
-            await thumb_from_audio(skullfile, skullthumb)
-        if skullthumb is None:
-            skullthumb = os.path.join("./temp", "thumb.jpg")
-            copyfile(thumb_loc, skullthumb)
+            marcusthumb = os.path.join("./temp", "thumb.jpg")
+            await thumb_from_audio(marcusfile, marcusthumb)
+        if marcusthumb is None:
+            marcusthumb = os.path.join("./temp", "thumb.jpg")
+            copyfile(thumb_loc, marcusthumb)
         if (
-            skullthumb is not None
-            and not os.path.exists(skullthumb)
+            marcusthumb is not None
+            and not os.path.exists(marcusthumb)
             and os.path.exists(thumb_loc)
         ):
-            skullthumb = os.path.join("./temp", "thumb.jpg")
-            copyfile(thumb_loc, skullthumb)
-        if skullthumb is not None and os.path.exists(skullthumb):
-            await _skullutils.runcmd(
-                f"ffmpeg -loop 1 -i {skullthumb} -i {skullfile} -c:v libx264 -tune stillimage -c:a aac -b:a 192k -vf \"scale='iw-mod (iw,2)':'ih-mod(ih,2)',format=yuv420p\" -shortest -movflags +faststart {PATH}"
+            marcusthumb = os.path.join("./temp", "thumb.jpg")
+            copyfile(thumb_loc, marcusthumb)
+        if marcusthumb is not None and os.path.exists(marcusthumb):
+            await _marcusutils.runcmd(
+                f"ffmpeg -loop 1 -i {marcusthumb} -i {marcusfile} -c:v libx264 -tune stillimage -c:a aac -b:a 192k -vf \"scale='iw-mod (iw,2)':'ih-mod(ih,2)',format=yuv420p\" -shortest -movflags +faststart {PATH}"
             )
-            os.remove(skullfile)
+            os.remove(marcusfile)
         else:
-            os.remove(skullfile)
+            os.remove(marcusfile)
             return await edit_delete(
-                skullevent, "`No thumb found to make it video note`", 5
+                marcusevent, "`No thumb found to make it video note`", 5
             )
     if os.path.exists(PATH):
-        skullid = event.reply_to_msg_id
+        marcusid = event.reply_to_msg_id
         c_time = time.time()
         await event.client.send_file(
             event.chat_id,
             PATH,
             allow_cache=False,
-            reply_to=skullid,
+            reply_to=marcusid,
             video_note=True,
             attributes=[
                 DocumentAttributeVideo(
@@ -309,11 +309,11 @@ async def video_skullfile(event):
                 )
             ],
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, skullevent, c_time, "Uploading...", PATH)
+                progress(d, t, marcusevent, c_time, "Uploading...", PATH)
             ),
         )
         os.remove(PATH)
-    await skullevent.delete()
+    await marcusevent.delete()
 
 
 CMD_HELP.update(

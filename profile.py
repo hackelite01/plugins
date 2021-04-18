@@ -82,15 +82,15 @@ async def _(event):
                     await event.edit("size must be less than 2 mb")
                     os.remove(photo)
                     return
-                skullpic = None
-                skullvideo = await event.client.upload_file(photo)
+                marcuspic = None
+                marcusvideo = await event.client.upload_file(photo)
             else:
-                skullpic = await event.client.upload_file(photo)
-                skullvideo = None
+                marcuspic = await event.client.upload_file(photo)
+                marcusvideo = None
             try:
                 await event.client(
                     functions.photos.UploadProfilePhotoRequest(
-                        file=skullpic, video=skullvideo, video_start_ts=0.01
+                        file=marcuspic, video=marcusvideo, video_start_ts=0.01
                     )
                 )
             except Exception as e:
