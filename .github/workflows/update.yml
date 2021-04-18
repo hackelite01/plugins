@@ -18,9 +18,9 @@ jobs:
 
         with:
 
-          find: "from userbot.skull"
+          find: "skull"
 
-          replace: "from marcus"
+          replace: "marcus"
 
       - name: Create Pull Request
 
@@ -32,7 +32,7 @@ jobs:
 
           commit_options: '--no-verify'
 
-          repository: https://github.com/hackelite01/plugins
+          repository: .
 
           commit_user_name: hackelite01
 
